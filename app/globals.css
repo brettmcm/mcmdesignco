@@ -3,31 +3,55 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --foreground-rgb: 28, 28, 28;
+  --background-rgb: 198, 198, 198;
+  --bright-rgb: 237, 237, 237;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    --foreground-rgb: 237, 237, 237;
+    --background-rgb: 28, 28, 28;
   }
 }
 
 body {
+  background: rgb(var(--background-rgb));
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+h1, h2, h3, p {
+  max-width: 1000px;
+  margin: 0;
+}
+
+h1 {
+  width: 80%;
+  font-family: 'scotch-display', serif;
+  font-size: clamp(1em, 5vw, 2.75em);
+  padding: 1em 0;
+}
+h2 {
+  width: 70%;
+  font-family: 'indivisible', sans-serif;
+  font-size: 1em;
+  padding: 0.5em 0;
+}
+h3 {
+  width: 70%;
+  font-family: 'scotch-display', serif;
+  font-size: clamp(1em, 4vw, 2.5em);
+  padding: 0.5em 0;
+}
+p {
+  width: 70%;
+  font-family: 'indivisible', sans-serif;
+  font-size: clamp(1.15em, 3vw, 1.35em);
+  font-weight: 400;
 }
