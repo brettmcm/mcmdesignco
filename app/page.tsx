@@ -20,14 +20,14 @@ export default function Home() {
       </section>
       <section className={styles.split}>
         <div className={styles.content}>
-          <p>Every detail becomes intentional and meaningful, leading to an inclusive sense of comfort and satisfaction.</p>
+          <p>Every detail becomes intentional and meaningful, leading to an inclusive sense of care and satisfaction.</p>
         </div>
         <img src="logo-animation.png" />
       </section>
       <section className={styles.split}>
         <img src="workin.jpg" />
         <div className={styles.content}>
-            <h3>01</h3>
+            <h2>01</h2>
             <p>Always learning and expanding, stretching into new areas to remain continuously challenged and inspired.</p>
         </div>
       </section>
