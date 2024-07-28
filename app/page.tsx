@@ -20,8 +20,7 @@ export default function Home() {
       </section>
       <section className={styles.split}>
         <div className={styles.content}>
-            <h3>McM Design Co.</h3>
-          <p>Creating designed solutions that are intuitive and inspiring. By applying design thinking to client challenges, every detail becomes intentional and meaningful, leading to an inclusive sense of comfort and satisfaction.</p>
+          <p>Every detail becomes intentional and meaningful, leading to an inclusive sense of comfort and satisfaction.</p>
         </div>
         <img src="logo-animation.png" />
       </section>

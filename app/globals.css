@@ -35,7 +35,7 @@ h1, h2, h3, p {
 h1 {
   width: 80%;
   font-family: 'scotch-display', serif;
-  font-size: clamp(1em, 5vw, 2.75em);
+  font-size: clamp(1.5em, 5vw, 2.75em);
   padding: 1em 0;
 }
 h2 {
