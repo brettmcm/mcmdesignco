@@ -5,7 +5,7 @@ export default function Home() {
     <main>
       <section className={styles.hero}>
         
-        <video autoPlay muted loop className={styles.bg}>         
+        <video loop={true} muted={true} autoPlay={true} playsInline={true} controls={false} className={styles.bg}>         
             <source src="leaves.mp4" type="video/mp4"/>       
         </video>
 
