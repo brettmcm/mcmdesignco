@@ -105,7 +105,7 @@
     align-items: center;
     padding: 10vw 1em;
     text-align: center;
-    gap: 10vw;
+    gap: calc(3em + 10vw);
 
     .case {
         display: flex;
