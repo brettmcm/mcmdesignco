@@ -74,13 +74,41 @@ ul {
   position: relative;
   font-size: 0.9em;
   margin: 1em 0 0 0;
+  opacity: 0.7;
+  line-height: 1.65;
 
   &:before {
     content: attr(aria-label);
-    line-height: 3em;
+    display: block;
   }
 
   li { 
-    opacity: 0.7;
+    display: inline;
+    opacity: 0.6;
+
+    &:not(:first-child){
+      text-transform: lowercase;
+    }
+
+    &:after {
+      content: ', ';
+    }
+    &:last-child:after {
+      content: '';
+    }
+  }
+}
+
+@media screen and (min-width: 980px) {
+  ul {
+    li {
+      display: block;
+      &:not(:first-child) {
+        text-transform: none;
+      }
+      &:after {
+        content: '';
+      }
+    }
   }
 }

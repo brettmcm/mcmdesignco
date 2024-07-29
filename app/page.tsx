@@ -80,8 +80,8 @@ export default function Home() {
             <h4>Experian</h4>
             <p>Always learning and expanding, stretching into new areas to remain continuously challenged and inspired.</p>
             <ul aria-label="Scope of work"> 
-                <li>Product design manager</li>
-                <li>Design system manager</li>
+                <li>Product design management</li>
+                <li>Design system management</li>
                 <li>Design operations</li>
             </ul>
           </aside>
