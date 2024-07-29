@@ -64,7 +64,7 @@ export default function Home() {
         <div className={styles.case}>
           <aside>
             <h4>Canary</h4>
-            <p>Always learning and expanding, stretching into new areas to remain continuously challenged and inspired.</p>
+            <p>A subversive, punk-rock ethos in the world of plastic-free, sustainable personal care products. An industry saturated with green-washed brands and minimal aesthetic.</p>
             <ul aria-label="Scope of work"> 
                 <li>Brand strategy</li>
                 <li>Visual identity</li>
@@ -74,10 +74,13 @@ export default function Home() {
             </ul>
           </aside>
           <div className={styles.gallery}>
-            <img src="canary/artcard.jpg" />
-            <img src="canary/cover2.jpg" />
             <img src="canary/logo.jpg" />
-            <img src="canary/kids.jpg" />
+            <video loop={true} muted={true} autoPlay={true} playsInline={true} controls={false} className={styles.half}>         
+                <source src="canary/brush.mp4" type="video/mp4"/>       
+            </video>
+            <img src="canary/kids.jpg" className={styles.half} />
+            <img src="canary/cover2.jpg" />
+            <img src="canary/hero.gif" />
           </div>
         </div>
         

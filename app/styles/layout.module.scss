@@ -148,6 +148,13 @@
             }
             .gallery {
                 width: 75%;
+                flex-direction: row;
+                flex-wrap: wrap;
+                align-items: stretch;
+                img {
+                    object-fit: cover;
+                }
+                .half { width: calc(50% - 0.5em); }
             }
         }
     }
