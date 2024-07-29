@@ -4,7 +4,7 @@
 
 :root {
   --foreground-rgb: 28, 28, 28;
-  --background-rgb: 198, 198, 198;
+  --background-rgb: 213, 213, 213;
   --bright-rgb: 237, 237, 237;
   --dark-rgb: 28, 28, 28;
 }
@@ -27,7 +27,7 @@ body {
   }
 }
 
-h1, h2, h3, p {
+h1, h2, h3, h4, p {
   max-width: 1000px;
   margin: 0;
 }
@@ -51,9 +51,21 @@ h3 {
   font-weight: 600;
   padding: 0.75em 0;
 }
-p {
+h4 {
+  font-family: 'indivisible', serif;
+  font-size: 1em;
+  font-weight: 600;
+  padding-bottom: 0.75em;
+}
+h5 {
   width: 70%;
   font-family: 'indivisible', sans-serif;
   font-size: clamp(1.15em, 2vw, 1.35em);
   font-weight: 400;
+}
+p {
+  font-family: 'indivisible', sans-serif;
+  font-size: 1em;
+  font-weight: 400;
+  opacity: 0.7;
 }
