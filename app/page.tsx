@@ -40,13 +40,21 @@ export default function Home() {
       <section className={styles.featured}>
         <h2>Selected works</h2>
 
+
         <div className={styles.case}>
           <aside>
-            <h4>Experian</h4>
+            <h4>Dusty Times</h4>
             <p>Always learning and expanding, stretching into new areas to remain continuously challenged and inspired.</p>
+            <ul aria-label="Scope of work"> 
+                <li>Design direction</li>
+                <li>Layout design</li>
+                <li>Illustration</li>
+                <li>Photo retouching</li>
+                <li>Copywriting</li>
+            </ul>
           </aside>
           <div className={styles.gallery}>
-            <img src="neonmoon.jpg" />
+            <img src="dtimes/dt-stack.jpg" />
           </div>
         </div>
 
@@ -54,19 +62,31 @@ export default function Home() {
           <aside>
             <h4>Canary</h4>
             <p>Always learning and expanding, stretching into new areas to remain continuously challenged and inspired.</p>
+            <ul aria-label="Scope of work"> 
+                <li>Brand strategy</li>
+                <li>Visual identity</li>
+                <li>Illustration</li>
+                <li>Art direction</li>
+                <li>Copywriting</li>
+            </ul>
           </aside>
           <div className={styles.gallery}>
-            <img src="method.jpg" />
+            <img src="canary/cover2.jpg" />
           </div>
         </div>
-
+        
         <div className={styles.case}>
           <aside>
-            <h4>Dusty Times</h4>
+            <h4>Experian</h4>
             <p>Always learning and expanding, stretching into new areas to remain continuously challenged and inspired.</p>
+            <ul aria-label="Scope of work"> 
+                <li>Product design manager</li>
+                <li>Design system manager</li>
+                <li>Design operations</li>
+            </ul>
           </aside>
           <div className={styles.gallery}>
-            <img src="workin.jpg" />
+            <img src="neonmoon.jpg" />
           </div>
         </div>
 
