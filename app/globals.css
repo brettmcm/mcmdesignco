@@ -48,13 +48,13 @@ h3 {
   width: 70%;
   font-family: 'indivisible', serif;
   font-size: clamp(1.15em, 2vw, 1.5em);
-  font-weight: 600;
+  font-weight: 500;
   padding: 0.75em 0;
 }
 h4 {
   font-family: 'indivisible', serif;
   font-size: 1em;
-  font-weight: 600;
+  font-weight: 500;
   padding-bottom: 0.75em;
 }
 h5 {
