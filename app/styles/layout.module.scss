@@ -110,7 +110,7 @@
     .case {
         display: flex;
         flex-direction: column;
-        gap: 3em;
+        gap: calc(1em + 2vw);
         aside {
             text-align: left;
             width: 100%;
