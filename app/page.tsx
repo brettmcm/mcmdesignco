@@ -18,16 +18,17 @@ export default function Home() {
 
 
       </section>
-      <section className={styles.split}>
+      <section className={`${styles.split} ${styles.flipped}`}>
+        <img src="logo-animation.png" />
         <div className={styles.content}>
           <p>Every detail becomes intentional and meaningful, leading to an inclusive sense of care and satisfaction.</p>
         </div>
-        <img src="logo-animation.png" />
       </section>
       <section className={styles.split}>
         <img src="workin.jpg" />
         <div className={styles.content}>
             <h2>01</h2>
+            <h3>Craftsmanship</h3>
             <p>Always learning and expanding, stretching into new areas to remain continuously challenged and inspired.</p>
         </div>
       </section>

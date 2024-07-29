@@ -31,6 +31,20 @@
         align-items: center;
     }
 
+    svg {
+        animation: 0.5s infinite alternate bounce;
+    }
+
+    @keyframes bounce {
+        from {
+            translate: 0 0;
+        }
+
+        to {
+            translate: 0 0.25em;
+        }
+    }
+
     .bg {
         position: absolute;
         top: 0;
@@ -70,6 +84,7 @@
 @media screen and (min-width: 980px) {
     .split {
         flex-direction: row;
+        &.flipped { flex-direction: row-reverse; }
         div, img {
             width: 50%;
         }
