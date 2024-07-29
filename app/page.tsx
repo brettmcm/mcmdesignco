@@ -97,7 +97,12 @@ export default function Home() {
             </ul>
           </aside>
           <div className={styles.gallery}>
-            <img src="neonmoon.jpg" />
+            <img src="experian/dash1.png" />
+            <img src="experian/dash2.png" />
+            <img src="experian/ds1.png" />
+            <img src="experian/ds2.png" />
+            <img src="experian/spec1.png" />
+            <img src="experian/spec2.png" />
           </div>
         </div>
 
