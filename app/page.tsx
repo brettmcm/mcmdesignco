@@ -55,6 +55,9 @@ export default function Home() {
           </aside>
           <div className={styles.gallery}>
             <img src="dtimes/dt-stack.jpg" />
+            <img src="dtimes/dt5-snake.jpg" />
+            <img src="dtimes/dt5-stack.jpg" />
+            <img src="dtimes/united-in-dirt.jpg" />
           </div>
         </div>
 
@@ -71,7 +74,10 @@ export default function Home() {
             </ul>
           </aside>
           <div className={styles.gallery}>
+            <img src="canary/artcard.jpg" />
             <img src="canary/cover2.jpg" />
+            <img src="canary/logo.jpg" />
+            <img src="canary/kids.jpg" />
           </div>
         </div>
         
