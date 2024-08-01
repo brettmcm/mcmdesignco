@@ -97,12 +97,25 @@ export default function Home() {
             </ul>
           </aside>
           <div className={styles.gallery}>
-            <img src="experian/dash1.png" />
-            <img src="experian/dash2.png" />
-            <img src="experian/ds1.png" />
-            <img src="experian/ds2.png" />
-            <img src="experian/spec1.png" />
-            <img src="experian/spec2.png" />
+            <img src="experian/01.jpg" />
+            <img src="experian/atlas.jpg" />
+          </div>
+        </div>
+        
+        <div className={styles.case}>
+          <aside>
+            <h4>Mocks</h4>
+            <p>Always learning and expanding, stretching into new areas to remain continuously challenged and inspired.</p>
+            <ul aria-label="Scope of work"> 
+                <li>Product design</li>
+                <li>SwiftUI development</li>
+            </ul>
+          </aside>
+          <div className={styles.gallery}>
+            <img src="moks/moks1.jpg" />
+            <img src="moks/moks-ani1.gif" className={styles.half} />
+            <img src="moks/moks-ani1.gif" className={styles.half} />
+            <img src="moks/moks2.jpg" />
           </div>
         </div>
 
