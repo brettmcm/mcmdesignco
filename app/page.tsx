@@ -9,7 +9,7 @@ export default function Home() {
             <source src="leaves.mp4" type="video/mp4"/>       
         </video>
 
-        <h1>Innovative visual design crafting intuitive, inspiring experiences with precision and passion</h1>
+        <h1>Innovative design crafting intuitive, inspiring experiences with precision and passion</h1>
 
         <svg width="24" height="24" fill="none" viewBox="0 0 24 24">
           <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M17.25 13.75L12 19.25L6.75 13.75"></path>
@@ -56,6 +56,7 @@ export default function Home() {
           <div className={styles.gallery}>
             <img src="dtimes/dt-stack.jpg" />
             <img src="dtimes/dt5-snake.jpg" />
+            <img src="dtimes/dtspreads.gif" />
             <img src="dtimes/dt5-stack.jpg" />
             <img src="dtimes/united-in-dirt.jpg" />
           </div>
@@ -88,6 +89,23 @@ export default function Home() {
         
         <div className={styles.case}>
           <aside>
+            <h4>Mocks</h4>
+            <p>Always learning and expanding, stretching into new areas to remain continuously challenged and inspired.</p>
+            <ul aria-label="Scope of work"> 
+                <li>Product design</li>
+                <li><span className="proper">SwiftUI</span> development</li>
+            </ul>
+          </aside>
+          <div className={styles.gallery}>
+            <img src="moks/moks1.jpg" />
+            <img src="moks/moks-ani1.gif" className={styles.half} />
+            <img src="moks/moks-ani2.gif" className={styles.half} />
+            <img src="moks/moks2.jpg" />
+          </div>
+        </div>
+        
+        {/* <div className={styles.case}>
+          <aside>
             <h4>Experian</h4>
             <p>Always learning and expanding, stretching into new areas to remain continuously challenged and inspired.</p>
             <ul aria-label="Scope of work"> 
@@ -100,24 +118,7 @@ export default function Home() {
             <img src="experian/01.jpg" />
             <img src="experian/atlas.jpg" />
           </div>
-        </div>
-        
-        <div className={styles.case}>
-          <aside>
-            <h4>Mocks</h4>
-            <p>Always learning and expanding, stretching into new areas to remain continuously challenged and inspired.</p>
-            <ul aria-label="Scope of work"> 
-                <li>Product design</li>
-                <li>SwiftUI development</li>
-            </ul>
-          </aside>
-          <div className={styles.gallery}>
-            <img src="moks/moks1.jpg" />
-            <img src="moks/moks-ani1.gif" className={styles.half} />
-            <img src="moks/moks-ani1.gif" className={styles.half} />
-            <img src="moks/moks2.jpg" />
-          </div>
-        </div>
+        </div> */}
 
       </section>
 

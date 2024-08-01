@@ -86,8 +86,11 @@ ul {
     display: inline;
     opacity: 0.6;
 
-    &:not(:first-child){
+    &:not(:first-child) {
       text-transform: lowercase;
+      .proper {
+        text-transform: none;
+      }
     }
 
     &:after {
