@@ -122,6 +122,68 @@ export default function Home() {
 
       </section>
 
+      <section className={styles.cv}>
+
+        <h5>Teams</h5>
+
+        <a href="http://radsmth.com" className={styles.row}>
+          <p>Radsmth</p>
+          <p className={styles.desc}>Founder</p>
+          <hr />
+          <p className={styles.desc}>Current</p>
+        </a>
+        <a href="http://experian.com" className={styles.row}>
+          <p>Experian</p>
+          <p className={styles.desc}>Product Design Manager</p>
+          <hr />
+          <p className={styles.desc}>Current</p>
+        </a>
+        <a href="http://dustytimes.com" className={styles.row}>
+          <p>Dusty Times</p>
+          <p className={styles.desc}>Design Director</p>
+          <hr />
+          <p className={styles.desc}>Current</p>
+        </a>
+        <a href="http://vuori.com" className={styles.row}>
+          <p>Vuori Clothing</p>
+          <p className={styles.desc}>UX Consultant</p>
+          <hr />
+          <p className={styles.desc}>2022</p>
+        </a>
+        <a href="http://onxmaps.com" className={styles.row}>
+          <p>onX Maps</p>
+          <p className={styles.desc}>Product Designer</p>
+          <hr />
+          <p className={styles.desc}>2022</p>
+        </a>
+        <a href="http://stance.com" className={styles.row}>
+          <p>Stance</p>
+          <p className={styles.desc}>UX Designer</p>
+          <hr />
+          <p className={styles.desc}>2016-2022</p>
+        </a>
+        <a href="http://oakley.com" className={styles.row}>
+          <p>Oakley</p>
+          <p className={styles.desc}>Interaction Designer</p>
+          <hr />
+          <p className={styles.desc}>2016</p>
+        </a>
+        <a href="http://fuseinteractive.com" className={styles.row}>
+          <p>Fuse</p>
+          <p className={styles.desc}>Assoc. Creative Director</p>
+          <hr />
+          <p className={styles.desc}>2011-2016</p>
+        </a>
+        <a href="http://nucontext.com" className={styles.row}>
+          <p>NuContext</p>
+          <p className={styles.desc}>Art Director</p>
+          <hr />
+          <p className={styles.desc}>2006-2011</p>
+        </a>
+
+
+    </section>
+
     </main>
   );
 }

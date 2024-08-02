@@ -4,21 +4,30 @@
 
 :root {
   --foreground-rgb: 28, 28, 28;
-  --background-rgb: 213, 213, 213;
+  --background-rgb: 224, 224, 224;
   --bright-rgb: 237, 237, 237;
   --dark-rgb: 28, 28, 28;
-}
+  --emphasis-rgb: 0, 0, 0;
+  }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 237, 237, 237;
     --background-rgb: 28, 28, 28;
+    --emphasis-rgb: 255, 255, 255;
   }
 }
 
 body {
   background: rgb(var(--background-rgb));
   color: rgb(var(--foreground-rgb));
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 @layer utilities {
@@ -100,6 +109,13 @@ ul {
       content: '';
     }
   }
+}
+
+hr {
+  flex: 1;
+  border: none;
+  border-top: 1px dotted rgba(107, 117, 127, 0.25);
+  transform: translateY(3px);
 }
 
 @media screen and (min-width: 980px) {
