@@ -186,7 +186,28 @@ export default function Home() {
 
 
 
-    </section>
+      </section>
+
+      <section className={styles.featured}>
+        <h2>Archive</h2>
+        
+        <div className={styles.case}>
+          <aside>
+            <h4>Experian</h4>
+            <p>Always learning and expanding, stretching into new areas to remain continuously challenged and inspired.</p>
+            <ul aria-label="Scope of work"> 
+                <li>Product design management</li>
+                <li>Design system management</li>
+                <li>Design operations</li>
+            </ul>
+          </aside>
+          <div className={styles.gallery}>
+            <img src="experian/01.jpg" />
+            <img src="experian/atlas.jpg" />
+          </div>
+        </div>
+
+      </section>
 
     </main>
   );

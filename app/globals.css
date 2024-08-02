@@ -30,6 +30,17 @@ main {
   align-items: center;
 }
 
+footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 3em 2em;
+  gap: 2em;
+  border-top: 1px dotted rgba(var(--foreground-rgb), 0.1);
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;

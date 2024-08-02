@@ -20,6 +20,38 @@ export default function RootLayout({
       <body className={inter.className}>
         <a href="mailto:brettmcm@me.com" className={styles.email}>Contact</a>
         {children}
+        <footer>
+          <div className={styles.brand}>
+            <picture>
+              <source srcSet="dark/m.svg" media="(prefers-color-scheme: dark)" />
+              <img src="light/m.svg" alt="" className={styles.logo} />
+            </picture>
+            <div className={styles.text}>
+              <h4>Brett McM Design</h4>
+              <p>Branding, Graphic Design, Product Design, Creative Consulting</p>
+            </div>
+          </div>
+          <div className={styles.network}>
+            <a href="https://layers.to/brett">
+              <picture>
+                <source srcSet="dark/layers.svg" media="(prefers-color-scheme: dark)" />
+                <img src="light/layers.svg" alt="" />
+              </picture>
+            </a>
+            <a href="https://read.cv/brettmcm">
+              <picture>
+                <source srcSet="dark/readcv.svg" media="(prefers-color-scheme: dark)" />
+                <img src="light/readcv.svg" alt="" />
+              </picture>
+            </a>
+            <a href="https://instagram.com/brettmcm">
+              <picture>
+                <source srcSet="dark/insta.svg" media="(prefers-color-scheme: dark)" />
+                <img src="light/insta.svg" alt="" />
+              </picture>
+            </a>
+          </div>
+        </footer>
       </body>
     </html>
   );

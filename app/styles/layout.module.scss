@@ -181,6 +181,46 @@
 
 }
 
+.brand {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5em;
+    width: 100%;
+    min-width: 300px;
+    max-width: fit-content;
+
+    .logo {
+        height: 2.3em;
+        margin: 0.25em 1.5em 0 0;
+    }
+
+    .text {
+        width: 100%;
+
+        h4,
+        p {
+            padding: 0;
+            margin: 0;
+        }
+
+        p {
+            font-size: 0.9em;
+        }
+    }
+}
+
+
+.network {
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+    flex-shrink: 0;
+    max-width: fit-content;
+
+    img {
+        height: 24px;
+    }
+}
 
 
 @media screen and (min-width: 980px) {
