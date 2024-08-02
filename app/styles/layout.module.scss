@@ -63,7 +63,7 @@
     flex-direction: column;
     justify-content: stretch;
 
-    .content, img {
+    .content, img, video {
         width: 100%;
         display: flex;
         flex-direction: column;
@@ -141,7 +141,7 @@
     width: 100%;
     padding: 10vw 1em;
 
-    h5 {
+    h4.title {
         margin-bottom: 2em;
     }
 
@@ -187,7 +187,7 @@
     .split {
         flex-direction: row;
         &.flipped { flex-direction: row-reverse; }
-        div, img {
+        div, img, video {
             width: 50%;
         }
     }

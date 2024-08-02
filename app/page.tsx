@@ -18,7 +18,10 @@ export default function Home() {
       </section>
 
       <section className={`${styles.split} ${styles.flipped}`}>
-        <img src="logo-animation.png" />
+        {/* <img src="logo-animation.png" /> */}
+        <video loop={true} muted={true} autoPlay={true} playsInline={true} controls={false} className={styles.half}>         
+            <source src="mcm-intro.mp4" type="video/mp4"/>       
+        </video>
         <div className={styles.content}>
           <h5>Every detail becomes intentional and meaningful, leading to an inclusive sense of care and satisfaction.</h5>
         </div>
@@ -124,7 +127,7 @@ export default function Home() {
 
       <section className={styles.cv}>
 
-        <h5>Teams</h5>
+        <h4 className={styles.title}>Teams</h4>
 
         <a href="http://radsmth.com" className={styles.row}>
           <p>Radsmth</p>
