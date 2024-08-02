@@ -124,10 +124,7 @@ export default function Home() {
 
       <section className={styles.cv}>
 
-        <div className={`${styles.row} ${styles.title}`}>
-          <h5>Teams</h5>
-          <a href="https://read.cv/brettmcm" className={styles.cvlink}>View full CV</a>
-         </div>
+        <h5>Teams</h5>
 
         <a href="http://radsmth.com" className={styles.row}>
           <p>Radsmth</p>
