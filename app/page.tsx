@@ -125,6 +125,28 @@ export default function Home() {
 
       </section>
 
+      <section className={styles.archive}>
+        <h2>Archive</h2>
+        
+        <div className={styles.gallery}>
+          <img src="archive/bloop-hands.jpg" />
+          <img src="archive/bloop-posters.jpg" />
+          <img src="archive/rally-hero.jpg" />
+          <img src="archive/exp-dash.jpg" />
+          <img src="archive/agenda.jpg" />
+          <img src="archive/care.jpg" />
+          <img src="archive/sendit.jpg" />
+          <img src="archive/imposter-wolf.jpg" />
+          <img src="archive/sequence.jpg" />
+          <img src="archive/idols.jpg" />
+          <img src="archive/teach.jpg" />
+          <img src="archive/blm.jpg" />
+          <img src="archive/settings.jpg" />
+          <img src="archive/outsider.jpg" />
+        </div>
+
+      </section>
+
       <section className={styles.cv}>
 
         <h4 className={styles.title}>Teams</h4>
@@ -185,27 +207,6 @@ export default function Home() {
         </a>
 
 
-
-      </section>
-
-      <section className={styles.featured}>
-        <h2>Archive</h2>
-        
-        <div className={styles.case}>
-          <aside>
-            <h4>Experian</h4>
-            <p>Always learning and expanding, stretching into new areas to remain continuously challenged and inspired.</p>
-            <ul aria-label="Scope of work"> 
-                <li>Product design management</li>
-                <li>Design system management</li>
-                <li>Design operations</li>
-            </ul>
-          </aside>
-          <div className={styles.gallery}>
-            <img src="experian/01.jpg" />
-            <img src="experian/atlas.jpg" />
-          </div>
-        </div>
 
       </section>
 

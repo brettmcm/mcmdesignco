@@ -131,6 +131,41 @@
     }
 }
 
+.archive {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10vw 1em;
+    text-align: center;
+    gap: calc(3em + 10vw);
+
+    .gallery {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: start;
+        align-items: stretch;
+        align-content: stretch;
+        gap: 1em;
+
+        &:after {
+            display: block;
+            content: "";
+            margin: 8px;
+            flex: 999 999 auto;
+        }
+
+        img {
+            flex: 1 1 auto;
+            width: calc(33% - 0.5em);
+            object-fit: cover;
+                // margin: 8px;
+        }
+    }
+}
+
 .cv {
     display: flex;
     flex-direction: column;
