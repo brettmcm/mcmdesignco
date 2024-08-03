@@ -21,16 +21,10 @@ export default function RootLayout({
         <a href="mailto:brettmcm@me.com" className={styles.email}>Contact</a>
         {children}
         <footer>
-          <div className={styles.brand}>
-            <picture>
-              <source srcSet="dark/m.svg" media="(prefers-color-scheme: dark)" />
-              <img src="light/m.svg" alt="" className={styles.logo} />
-            </picture>
-            <div className={styles.text}>
-              <h4>Brett McM Design</h4>
-              <p>Branding, Graphic Design, Product Design, Creative Consulting</p>
-            </div>
-          </div>
+          <picture>
+            <source srcSet="dark/m.svg" media="(prefers-color-scheme: dark)" />
+            <img src="light/m.svg" alt="" className={styles.logo} />
+          </picture>
           <div className={styles.network}>
             <a href="https://layers.to/brett">
               <picture>
@@ -50,6 +44,10 @@ export default function RootLayout({
                 <img src="light/insta.svg" alt="" />
               </picture>
             </a>
+          </div>
+          <div className={styles.brand}>
+            <h4>Brett McM Design</h4>
+            <p>Branding, Graphic Design, Product Design, Creative Consulting</p>
           </div>
         </footer>
       </body>

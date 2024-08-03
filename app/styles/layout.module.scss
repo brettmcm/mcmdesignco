@@ -216,32 +216,23 @@
 
 }
 
+.logo {
+    height: 2.3em;
+    order: 1;
+}
+
 .brand {
-    display: flex;
-    flex-direction: row;
-    gap: 0.5em;
     width: 100%;
-    min-width: 300px;
-    max-width: fit-content;
+    margin-top: 2em;
+    flex: auto;
+    order: 4;
 
-    .logo {
-        height: 2.3em;
-        margin: 0.25em 1.5em 0 0;
+    h4, p {
+        padding: 0;
+        margin: 0;
     }
 
-    .text {
-        width: 100%;
-
-        h4,
-        p {
-            padding: 0;
-            margin: 0;
-        }
-
-        p {
-            font-size: 0.9em;
-        }
-    }
+    p { font-size: 0.9em; }
 }
 
 
@@ -251,9 +242,10 @@
     gap: 1em;
     flex-shrink: 0;
     max-width: fit-content;
+    order: 3;
 
     img {
-        height: 24px;
+        height: 2.3em;
     }
 }
 
@@ -288,5 +280,12 @@
 
     .cv {
         padding: 10vw calc(1em + 25% + 2vw);
+    }
+
+    .brand {
+        width: auto;
+        flex: 1;
+        margin-top: 0;
+        order: 2;
     }
 }
