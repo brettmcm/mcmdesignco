@@ -41,7 +41,7 @@ export default function Home() {
       </section>
 
       <section className={styles.featured}>
-        <h2>Selected works</h2>
+        <h2>Selected work</h2>
 
 
         <div className={styles.case}>
@@ -125,8 +125,11 @@ export default function Home() {
 
       </section>
 
-      <section className={styles.archive}>
-        <h2>Archive</h2>
+      {/* <section className={styles.archive}>
+        <div>
+          <h2>Archive</h2>
+          <p>Work done from 294 to present</p>
+        </div>
         
         <div className={styles.gallery}>
           <img src="archive/bloop-hands.jpg" />
@@ -145,7 +148,7 @@ export default function Home() {
           <img src="archive/outsider.jpg" />
         </div>
 
-      </section>
+      </section> */}
 
       <section className={styles.cv}>
 
