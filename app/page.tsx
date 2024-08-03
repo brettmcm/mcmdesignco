@@ -37,7 +37,9 @@ export default function Home() {
       </section>
 
       <section className={styles.disrupt}>
-        {/* <img src="neonmoon.jpg" /> */}
+        <video loop={true} muted={true} autoPlay={true} playsInline={true} controls={false} className={styles.half}>         
+            <source src="pattern.mp4" type="video/mp4"/>       
+        </video>
       </section>
 
       <section className={styles.featured}>
@@ -196,7 +198,7 @@ export default function Home() {
           <hr />
           <p className={styles.desc}>2016</p>
         </a>
-        <a href="http://fuseinteractive.com" className={styles.row}>
+        <a href="http://gofuse.com" className={styles.row}>
           <p>Fuse</p>
           <p className={styles.desc}>Assoc. Creative Director</p>
           <hr />
