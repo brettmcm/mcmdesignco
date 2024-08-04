@@ -84,6 +84,7 @@ h5 {
   font-family: 'indivisible', sans-serif;
   font-size: clamp(1.15em, 2vw, 1.35em);
   font-weight: 400;
+  max-width: 700px;
 }
 p {
   font-family: 'indivisible', sans-serif;

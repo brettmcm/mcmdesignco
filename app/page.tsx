@@ -6,7 +6,7 @@ export default function Home() {
 
       <section className={styles.hero}>
         <video loop={true} muted={true} autoPlay={true} playsInline={true} controls={false} className={styles.bg}>         
-            <source src="pattern.mp4" type="video/mp4"/>       
+            <source src="leaves.mp4" type="video/mp4"/>       
         </video>
 
         <h1>Innovative design crafting intuitive, inspiring experiences with precision and passion</h1>
@@ -37,7 +37,7 @@ export default function Home() {
 
       <section className={styles.disrupt}>
         <video loop={true} muted={true} autoPlay={true} playsInline={true} controls={false} className={styles.half}>         
-            <source src="pattern2.mp4" type="video/mp4"/>       
+            <source src="pattern.mp4" type="video/mp4"/>       
         </video>
       </section>
 

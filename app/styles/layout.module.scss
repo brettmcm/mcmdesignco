@@ -62,16 +62,18 @@
     display: flex;
     flex-direction: column;
     justify-content: stretch;
+    width: 100%;
 
     .content, img, video {
         width: 100%;
+        max-height: 70vh;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         object-fit: cover;
-        aspect-ratio: 5/4;
         text-align: center;
+        aspect-ratio: 5/4;
 
         &.invert {
             background: rgb(var(--foreground-rgb));
@@ -254,7 +256,7 @@
     .split {
         flex-direction: row;
         &.flipped { flex-direction: row-reverse; }
-        div, img, video {
+        div.content, img, video {
             width: 50%;
         }
     }
