@@ -38,10 +38,12 @@ footer {
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  padding: 3em 2em;
+  padding: 2em 1em;
   gap: 1em;
   border-top: 1px dotted rgba(var(--foreground-rgb), 0.1);
 }
+
+
 
 @layer utilities {
   .text-balance {
@@ -133,6 +135,9 @@ hr {
 }
 
 @media screen and (min-width: 980px) {
+  footer {
+    padding: calc(2em + 1vw) calc(1em + 1vw);
+  }
   ul {
     li {
       display: block;

@@ -28,10 +28,22 @@ export default function Home() {
 
       <section className={styles.split}>
         <img src="workin.jpg" />
-        <div className={styles.content}>
+        <div className={`${styles.content} ${styles.carousel}`}>
+          <div className={styles.carouselContent}>
             <h2>01</h2>
             <h3>Craftsmanship</h3>
             <h5>Always learning and expanding, stretching into new areas to remain continuously challenged and inspired.</h5>
+          </div>
+          <div className={styles.carouselContent}>
+            <h2>02</h2>
+            <h3>Craftsmanship</h3>
+            <h5>Always learning and expanding, stretching into new areas to remain continuously challenged and inspired.</h5>
+          </div>
+          <div className={styles.carouselContent}>
+            <h2>03</h2>
+            <h3>Craftsmanship</h3>
+            <h5>Always learning and expanding, stretching into new areas to remain continuously challenged and inspired.</h5>
+          </div>
         </div>
       </section>
 

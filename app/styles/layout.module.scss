@@ -74,10 +74,41 @@
         object-fit: cover;
         text-align: center;
         aspect-ratio: 5/4;
+        overflow: hidden;
+
 
         &.invert {
             background: rgb(var(--foreground-rgb));
             color: rgb(var(--background-rgb));
+        }
+
+        &.carousel {
+            overflow-x: auto;
+            white-space: nowrap;
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            flex-wrap: nowrap;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+
+            &::-webkit-scrollbar {
+                display: none;
+            }
+
+            .carouselContent {
+                width: 100%;
+                scroll-snap-align: center;
+                flex-shrink: 0;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                white-space: wrap;
+            }
         }
 
     }
