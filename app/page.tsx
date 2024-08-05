@@ -28,22 +28,47 @@ export default function Home() {
 
       <section className={styles.split}>
         <img src="workin.jpg" />
-        <div className={`${styles.content} ${styles.carousel}`}>
-          <div className={styles.carouselContent}>
-            <h2>01</h2>
-            <h3>Craftsmanship</h3>
-            <h5>Always learning and expanding, stretching into new areas to remain continuously challenged and inspired.</h5>
+        <div className={styles.content}>
+          <div className={styles.carousel}>
+            <div className={styles.carouselContent}>
+              <h2>01</h2>
+              <h3>Craftsmanship</h3>
+              <h5>Always learning and expanding, stretching into new areas to remain continuously challenged and inspired.</h5>
+            </div>
+            <div className={styles.carouselContent}>
+              <h2>02</h2>
+              <h3>Curiosity</h3>
+              <h5>Always learning and expanding, stretching into new areas to remain continuously challenged and inspired.</h5>
+            </div>
+            <div className={styles.carouselContent}>
+              <h2>03</h2>
+              <h3>Empathy</h3>
+              <h5>Always learning and expanding, stretching into new areas to remain continuously challenged and inspired.</h5>
+            </div>
           </div>
-          <div className={styles.carouselContent}>
-            <h2>02</h2>
-            <h3>Craftsmanship</h3>
-            <h5>Always learning and expanding, stretching into new areas to remain continuously challenged and inspired.</h5>
+
+          <div className={styles.carouselControls}>
+            <a href="#" className={styles.prev}>
+              <svg width="24" height="24" fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M17.25 13.75L12 19.25L6.75 13.75"></path>
+                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M12 18.25V4.75"></path>
+              </svg>
+            </a>
+            <a href="#" className={styles.next}>
+              <svg width="24" height="24" fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M17.25 13.75L12 19.25L6.75 13.75"></path>
+                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M12 18.25V4.75"></path>
+              </svg>
+            </a>
           </div>
-          <div className={styles.carouselContent}>
-            <h2>03</h2>
-            <h3>Craftsmanship</h3>
-            <h5>Always learning and expanding, stretching into new areas to remain continuously challenged and inspired.</h5>
+
+          <div className={styles.dots}>
+            <div className={styles.dot} />
+            <div className={styles.dot} />
+            <div className={styles.dot} />
           </div>
+
+
         </div>
       </section>
 

@@ -65,6 +65,7 @@
     width: 100%;
 
     .content, img, video {
+        position: relative;
         width: 100%;
         max-height: 70vh;
         display: flex;
@@ -82,7 +83,9 @@
             color: rgb(var(--background-rgb));
         }
 
-        &.carousel {
+        .carousel {
+            width: 100%;
+            height: 100%;
             overflow-x: auto;
             white-space: nowrap;
             display: flex;
@@ -108,9 +111,61 @@
                 justify-content: center;
                 align-items: center;
                 white-space: wrap;
+                user-select: none;
             }
         }
+        .carouselControls {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+            justify-content: space-between;
+            align-items: center;
+            pointer-events: none;
+            padding: 2vw;
 
+            .prev, .next {
+                transform-origin: 50% 50%;
+                opacity: 0.2;
+                transition: opacity 0.15s ease-in-out;
+                pointer-events: all;
+                
+                &:hover {
+                    opacity: 1;
+                }
+
+                svg {
+                    width: 32px;
+                    height: 32px;
+                }
+            }
+
+            .prev { transform: rotate(90deg); }
+            .next { transform: rotate(-90deg); }
+        }
+
+        .dots {
+            position: absolute;
+            bottom: calc(1em + 2vw);
+            left: 50%;
+            transform: translateX(-50%);
+
+            display: flex;
+            gap: 4px;
+
+            .dot {
+                width: 24px;
+                height: 2px;
+                background: rgb(var(--foreground-rgb));
+                opacity: 0.1;
+
+                &:first-child {
+                    opacity: 1;
+                }
+            }
+        }
     }
 }
 
@@ -289,6 +344,12 @@
         &.flipped { flex-direction: row-reverse; }
         div.content, img, video {
             width: 50%;
+            .carouselControls {
+                display: flex;
+            }
+            .dots {
+                display: none;
+            }
         }
     }
 
