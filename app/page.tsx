@@ -1,6 +1,100 @@
+'use client'
+
+import { useRef, useState, useEffect } from "react";
 import styles from './styles/layout.module.scss'
 
-export default function Home() {
+
+
+  
+
+export default function Home(props: any) {
+
+  // const [scrollPosition, setScrollPosition] = useState({ scrollTop: 0, scrollLeft: 0 });
+  // const carouselRef = useRef<null | HTMLDivElement>(null);
+
+  // useEffect(() => {
+  //   if (carouselRef.current) {
+  //     const carousel = carouselRef.current;
+  //     carousel.scrollLeft = carousel.clientWidth; // Start at the first duplicated item
+  //   }
+  // }, []);
+
+  // function scrollCarousel(e: React.MouseEvent<HTMLButtonElement>, direction: 'next' | 'prev') {
+  //   e.preventDefault();
+  //   if (!carouselRef.current) return;
+
+  //   const carousel = carouselRef.current;
+  //   const scrollAmount = carousel.clientWidth; // Adjust this value as needed
+  //   const targetScrollLeft = direction === 'next' 
+  //     ? carousel.scrollLeft + scrollAmount 
+  //     : carousel.scrollLeft - scrollAmount;
+  //   const duration = 500; // duration in ms
+  //   const startTime = performance.now();
+
+  //   function animateScroll(currentTime: number) {
+  //     const elapsedTime = currentTime - startTime;
+  //     const progress = Math.min(elapsedTime / duration, 1);
+  //     const easeInOutQuad = (t: number) => t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+  //     const easedProgress = easeInOutQuad(progress);
+
+  //     carousel.scrollLeft = scrollPosition.scrollLeft + (targetScrollLeft - scrollPosition.scrollLeft) * easedProgress;
+
+  //     if (progress < 1) {
+  //       requestAnimationFrame(animateScroll);
+  //     } else {
+  //       // Ensure the final position aligns with the snap point
+  //       carousel.scrollLeft = targetScrollLeft;
+  //       setScrollPosition({
+  //         scrollTop: 0,
+  //         scrollLeft: targetScrollLeft
+  //       });
+
+  //       // Handle infinite scroll wrapping
+  //       if (direction === 'next' && targetScrollLeft >= carousel.scrollWidth - carousel.clientWidth) {
+  //         carousel.scrollLeft = carousel.clientWidth;
+  //         setScrollPosition({
+  //           scrollTop: 0,
+  //           scrollLeft: carousel.clientWidth
+  //         });
+  //       } else if (direction === 'prev' && targetScrollLeft <= 0) {
+  //         carousel.scrollLeft = carousel.scrollWidth - 2 * carousel.clientWidth;
+  //         setScrollPosition({
+  //           scrollTop: 0,
+  //           scrollLeft: carousel.scrollWidth - 2 * carousel.clientWidth
+  //         });
+  //       }
+  //     }
+  //   }
+
+  //   requestAnimationFrame(animateScroll);
+  // }
+
+
+  const [currentPage, setCurrentPage] = useState(0);
+  const totalPages = 3; // Adjust this based on the number of pages in your carousel
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const carousel = document.getElementById('carousel');
+      if (carousel) {
+        const pageWidth = carousel.clientWidth;
+        const newPage = Math.round(carousel.scrollLeft / pageWidth);
+        setCurrentPage(newPage);
+      }
+    };
+
+    const carousel = document.getElementById('carousel');
+    if (carousel) {
+      carousel.addEventListener('scroll', handleScroll);
+    }
+
+    return () => {
+      if (carousel) {
+        carousel.removeEventListener('scroll', handleScroll);
+      }
+    };
+  }, []);
+
   return (
     <main>
 
@@ -29,7 +123,7 @@ export default function Home() {
       <section className={styles.split}>
         <img src="workin.jpg" />
         <div className={styles.content}>
-          <div className={styles.carousel}>
+          <div className={styles.carousel} id="carousel">
             <div className={styles.carouselContent}>
               <h2>01</h2>
               <h3>Craftsmanship</h3>
@@ -48,24 +142,28 @@ export default function Home() {
           </div>
 
           <div className={styles.carouselControls}>
-            <a href="#" className={styles.prev}>
+            <button  className={styles.prev}>
               <svg width="24" height="24" fill="none" viewBox="0 0 24 24">
                 <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M17.25 13.75L12 19.25L6.75 13.75"></path>
                 <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M12 18.25V4.75"></path>
               </svg>
-            </a>
-            <a href="#" className={styles.next}>
+            </button>
+            <button  className={styles.next}>
               <svg width="24" height="24" fill="none" viewBox="0 0 24 24">
                 <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M17.25 13.75L12 19.25L6.75 13.75"></path>
                 <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M12 18.25V4.75"></path>
               </svg>
-            </a>
+            </button>
           </div>
 
           <div className={styles.dots}>
-            <div className={styles.dot} />
-            <div className={styles.dot} />
-            <div className={styles.dot} />
+            {Array.from({ length: totalPages }).map((_, index) => (
+            <div
+              key={index}
+              className={styles.dot}
+              style={{ opacity: currentPage === index ? 1 : 0.1 }}
+            />
+          ))}
           </div>
 
 

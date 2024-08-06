@@ -124,7 +124,6 @@
             justify-content: space-between;
             align-items: center;
             pointer-events: none;
-            padding: 2vw;
             gap: 2em;
 
             .prev, .next {
@@ -149,7 +148,6 @@
 
         .dots {
             position: relative;
-
             display: flex;
             gap: 4px;
 
