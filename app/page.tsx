@@ -95,6 +95,32 @@ export default function Home(props: any) {
     };
   }, []);
 
+  const handlePrevClick = () => {
+    const carousel = document.getElementById('carousel');
+    if (carousel) {
+      const pageWidth = carousel.clientWidth;
+      const newPage = Math.max(currentPage - 1, 0);
+      carousel.scrollTo({
+        left: newPage * pageWidth,
+        behavior: 'smooth',
+      });
+      setCurrentPage(newPage);
+    }
+  };
+
+  const handleNextClick = () => {
+    const carousel = document.getElementById('carousel');
+    if (carousel) {
+      const pageWidth = carousel.clientWidth;
+      const newPage = Math.min(currentPage + 1, totalPages - 1);
+      carousel.scrollTo({
+        left: newPage * pageWidth,
+        behavior: 'smooth',
+      });
+      setCurrentPage(newPage);
+    }
+  };
+
   return (
     <main>
 
@@ -142,13 +168,13 @@ export default function Home(props: any) {
           </div>
 
           <div className={styles.carouselControls}>
-            <button  className={styles.prev}>
-              <svg width="24" height="24" fill="none" viewBox="0 0 24 24">
-                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M17.25 13.75L12 19.25L6.75 13.75"></path>
-                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M12 18.25V4.75"></path>
-              </svg>
+            <button className={styles.prev} onClick={handlePrevClick}>
+                <svg width="24" height="24" fill="none" viewBox="0 0 24 24">
+                  <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M17.25 13.75L12 19.25L6.75 13.75"></path>
+                  <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M12 18.25V4.75"></path>
+                </svg>
             </button>
-            <button  className={styles.next}>
+            <button className={styles.next} onClick={handleNextClick}>
               <svg width="24" height="24" fill="none" viewBox="0 0 24 24">
                 <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M17.25 13.75L12 19.25L6.75 13.75"></path>
                 <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M12 18.25V4.75"></path>
