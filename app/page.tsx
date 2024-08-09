@@ -153,7 +153,7 @@ export default function Home(props: any) {
             <div className={styles.carouselContent}>
               <h2>01</h2>
               <h3>Craftsmanship</h3>
-              <h5>Always learning and expanding, stretching into new areas to remain continuously challenged and inspired.</h5>
+              <h5>Consumed by the details and the meditative practice of craft where aesthetic meets function.</h5>
             </div>
             <div className={styles.carouselContent}>
               <h2>02</h2>
@@ -163,7 +163,7 @@ export default function Home(props: any) {
             <div className={styles.carouselContent}>
               <h2>03</h2>
               <h3>Empathy</h3>
-              <h5>Always learning and expanding, stretching into new areas to remain continuously challenged and inspired.</h5>
+              <h5>Listen first and chose words wisely. Know you can always understand others better than you do today.</h5>
             </div>
           </div>
 
