@@ -163,7 +163,7 @@ export default function Home(props: any) {
             <div className={styles.carouselContent}>
               <h2>03</h2>
               <h3>Empathy</h3>
-              <h5>Listen first and chose words wisely. Know you can always understand others better than you do today.</h5>
+              <h5>Listen first and choose words wisely. Know you can always understand others better than you do today.</h5>
             </div>
           </div>
 
