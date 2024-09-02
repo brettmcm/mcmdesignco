@@ -251,6 +251,29 @@ export default function Home(props: any) {
             <img src="canary/hero.gif" />
           </div>
         </div>
+
+        <div className={styles.case}>
+          <aside>
+            <h4>Bloop</h4>
+            <p>Small-batch, all-natural laundry soap that is free of both harmful chemicals <i>and</i> typical hippy scents. Their products are safe for both the environment and your household, featuring refreshing scents and a commitment to cruelty-free practices.</p>
+            <ul aria-label="Scope of work"> 
+                <li>Brand strategy</li>
+                <li>Visual identity</li>
+                <li>Illustration</li>
+                <li>Art direction</li>
+                <li>Copywriting</li>
+            </ul>
+          </aside>
+          <div className={styles.gallery}>
+            <img src="bloop/bloop-suds.jpg" />
+            <img src="bloop/bloop-hands.jpg" />
+            <img src="bloop/bloop-product.jpg" className={styles.half} />
+            <video loop={true} muted={true} autoPlay={true} playsInline={true} controls={false} className={styles.half}>         
+                <source src="bloop/bloop-vibe.mp4" type="video/mp4"/>       
+            </video>
+            <img src="bloop/bloop-posters.jpg" />
+          </div>
+        </div>
         
         <div className={styles.case}>
           <aside>
