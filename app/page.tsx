@@ -265,7 +265,9 @@ export default function Home(props: any) {
             </ul>
           </aside>
           <div className={styles.gallery}>
-            <img src="bloop/bloop-suds.jpg" />
+            <video loop={true} muted={true} autoPlay={true} playsInline={true} controls={false}>         
+                <source src="bloop/bloop-suds.mp4" type="video/mp4"/>       
+            </video>
             <img src="bloop/bloop-hands.jpg" />
             <img src="bloop/bloop-product.jpg" className={styles.half} />
             <video loop={true} muted={true} autoPlay={true} playsInline={true} controls={false} className={styles.half}>         
