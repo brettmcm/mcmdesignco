@@ -203,12 +203,12 @@ export default function Home(props: any) {
       </section>
 
       <section className={styles.featured}>
-        <h2>Selected work</h2>
+        {/* <h2>Selected work</h2> */}
 
 
         <div className={styles.case}>
           <aside>
-            <h4>Dusty Times</h4>
+            <h2>Dusty Times</h2>
             <p>Embrace the thrill of off-road with Dusty Times—an annual lifestyle journal celebrating the world of desert racing and overlanding. Spotlighting the spirit of adventure, resilience, and the relentless pursuit of victory.</p>
             <ul aria-label="Scope of work"> 
                 <li>Design direction</li>
@@ -229,7 +229,7 @@ export default function Home(props: any) {
 
         <div className={styles.case}>
           <aside>
-            <h4>Canary</h4>
+            <h2>Canary</h2>
             <p>A subversive, punk-rock ethos in the world of plastic-free, sustainable personal care products. An industry saturated with green-washed brands and minimal aesthetic.</p>
             <ul aria-label="Scope of work"> 
                 <li>Brand strategy</li>
@@ -254,7 +254,7 @@ export default function Home(props: any) {
 
         <div className={styles.case}>
           <aside>
-            <h4>Bloop</h4>
+            <h2>Bloop</h2>
             <p>Small-batch, all-natural laundry soap that is free of both harmful chemicals <i>and</i> typical hippy scents. Their products are safe for both the environment and your household, featuring refreshing scents and a commitment to cruelty-free practices.</p>
             <ul aria-label="Scope of work"> 
                 <li>Brand strategy</li>
@@ -276,10 +276,27 @@ export default function Home(props: any) {
             <img src="bloop/bloop-posters.jpg" />
           </div>
         </div>
+
+        <div className={styles.case}>
+          <aside>
+            <h2>McM Sound</h2>
+            <p>Boutique sound studio servicing enterprise clients in TV and film.</p>
+            <ul aria-label="Scope of work"> 
+                <li>Visual identity</li>
+                <li>Website design</li>
+                <li>Website development</li>
+            </ul>
+          </aside>
+          <div className={styles.gallery}>
+            <img src="mcmsound/mcms-icon.jpg" />
+            <img src="mcmsound/mcms-phone2.jpg" className={styles.half} />
+            <img src="mcmsound/mcms-interface.jpg" className={styles.half} />
+          </div>
+        </div>
         
         <div className={styles.case}>
           <aside>
-            <h4>Mocks</h4>
+            <h2>Mocks</h2>
             <p>A fast and intuitive mobile device mockup maker for mobile makers.</p>
             <ul aria-label="Scope of work"> 
                 <li>Product design</li>
@@ -293,49 +310,9 @@ export default function Home(props: any) {
             <img src="moks/moks2.jpg" />
           </div>
         </div>
-        
-        {/* <div className={styles.case}>
-          <aside>
-            <h4>Experian</h4>
-            <p>Always learning and expanding, stretching into new areas to remain continuously challenged and inspired.</p>
-            <ul aria-label="Scope of work"> 
-                <li>Product design management</li>
-                <li>Design system management</li>
-                <li>Design operations</li>
-            </ul>
-          </aside>
-          <div className={styles.gallery}>
-            <img src="experian/01.jpg" />
-            <img src="experian/atlas.jpg" />
-          </div>
-        </div> */}
 
       </section>
 
-      {/* <section className={styles.archive}>
-        <div>
-          <h2>Archive</h2>
-          <p>Work done from 294 to present</p>
-        </div>
-        
-        <div className={styles.gallery}>
-          <img src="archive/bloop-hands.jpg" />
-          <img src="archive/bloop-posters.jpg" />
-          <img src="archive/rally-hero.jpg" />
-          <img src="archive/exp-dash.jpg" />
-          <img src="archive/agenda.jpg" />
-          <img src="archive/care.jpg" />
-          <img src="archive/sendit.jpg" />
-          <img src="archive/imposter-wolf.jpg" />
-          <img src="archive/sequence.jpg" />
-          <img src="archive/idols.jpg" />
-          <img src="archive/teach.jpg" />
-          <img src="archive/blm.jpg" />
-          <img src="archive/settings.jpg" />
-          <img src="archive/outsider.jpg" />
-        </div>
-
-      </section> */}
 
       <section className={styles.cv}>
 
