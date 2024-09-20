@@ -206,26 +206,7 @@ export default function Home(props: any) {
         {/* <h2>Selected work</h2> */}
 
 
-        <div className={styles.case}>
-          <aside>
-            <h2>Dusty Times</h2>
-            <p>Embrace the thrill of off-road with Dusty Times—an annual lifestyle journal celebrating the world of desert racing and overlanding. Spotlighting the spirit of adventure, resilience, and the relentless pursuit of victory.</p>
-            <ul aria-label="Scope of work"> 
-                <li>Design direction</li>
-                <li>Layout design</li>
-                <li>Illustration</li>
-                <li>Photo retouching</li>
-                <li>Copywriting</li>
-            </ul>
-          </aside>
-          <div className={styles.gallery}>
-            <img src="dtimes/dt-stack.jpg" />
-            <img src="dtimes/dt5-snake.jpg" />
-            <img src="dtimes/dtspreads.gif" />
-            <img src="dtimes/dt5-stack.jpg" />
-            <img src="dtimes/united-in-dirt.jpg" />
-          </div>
-        </div>
+
 
         <div className={styles.case}>
           <aside>
@@ -274,6 +255,27 @@ export default function Home(props: any) {
                 <source src="bloop/bloop-vibe.mp4" type="video/mp4"/>       
             </video>
             <img src="bloop/bloop-posters.jpg" />
+          </div>
+        </div>
+
+        <div className={styles.case}>
+          <aside>
+            <h2>Dusty Times</h2>
+            <p>Embrace the thrill of off-road with Dusty Times—an annual lifestyle journal celebrating the world of desert racing and overlanding. Spotlighting the spirit of adventure, resilience, and the relentless pursuit of victory.</p>
+            <ul aria-label="Scope of work"> 
+                <li>Design direction</li>
+                <li>Layout design</li>
+                <li>Illustration</li>
+                <li>Photo retouching</li>
+                <li>Copywriting</li>
+            </ul>
+          </aside>
+          <div className={styles.gallery}>
+            <img src="dtimes/dt-stack.jpg" />
+            <img src="dtimes/dt5-snake.jpg" />
+            <img src="dtimes/dtspreads.gif" />
+            <img src="dtimes/dt5-stack.jpg" />
+            <img src="dtimes/united-in-dirt.jpg" />
           </div>
         </div>
 
