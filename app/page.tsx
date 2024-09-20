@@ -291,6 +291,9 @@ export default function Home(props: any) {
             <img src="mcmsound/mcms-icon.jpg" />
             <img src="mcmsound/mcms-phone2.jpg" className={styles.half} />
             <img src="mcmsound/mcms-interface.jpg" className={styles.half} />
+            <img src="mcmsound/mcms-vinyl.jpg" />
+            <img src="mcmsound/mcms-radio.gif" className={styles.half} />
+            <img src="mcmsound/mcms-laptop.jpg" className={styles.half} />
           </div>
         </div>
         
