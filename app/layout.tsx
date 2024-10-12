@@ -18,7 +18,7 @@ export default function RootLayout({
     <html lang="en">
       <head><link rel="stylesheet" href="https://use.typekit.net/shq4xoc.css" /></head>
       <body className={inter.className}>
-            <a href="/" className={styles.email}>
+            <a href="mailto:brettmcm@me.com" className={styles.email}>
               Contact
             </a>
         {children}
