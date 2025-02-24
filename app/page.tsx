@@ -211,7 +211,7 @@ export default function Home(props: any) {
         <div className={styles.case}>
           <aside>
             <h2>Canary</h2>
-            <p>A subversive, punk-rock ethos in the world of plastic-free, sustainable personal care products. An industry saturated with green-washed brands and minimal aesthetic.</p>
+            <p>Finding the subversive space in an industry saturated with green-washed, minimal brands presenting tired monotony.</p>
             <ul aria-label="Scope of work"> 
                 <li>Brand strategy</li>
                 <li>Visual identity</li>
@@ -236,7 +236,7 @@ export default function Home(props: any) {
         <div className={styles.case}>
           <aside>
             <h2>Bloop</h2>
-            <p>Small-batch, all-natural laundry soap that is free of both harmful chemicals <i>and</i> typical hippy scents. Their products are safe for both the environment and your household, featuring refreshing scents and a commitment to cruelty-free practices.</p>
+            <p>Transforming a once-hidden chore into a household celebration with small-batch, all-natural laundry soap that is free of both harmful chemicals <i>and</i> typical hippy scents.</p>
             <ul aria-label="Scope of work"> 
                 <li>Brand strategy</li>
                 <li>Visual identity</li>
@@ -261,7 +261,7 @@ export default function Home(props: any) {
         <div className={styles.case}>
           <aside>
             <h2>Dusty Times</h2>
-            <p>Embrace the thrill of off-road with Dusty Times—an annual lifestyle journal celebrating the world of desert racing and overlanding. Spotlighting the spirit of adventure, resilience, and the relentless pursuit of victory.</p>
+            <p>An annual lifestyle journal celebrating the world of desert racing and overlanding. Spotlighting the spirit of adventure, resilience, and the relentless pursuit of victory by highlighting the stories on the fringes of the spotlight.</p>
             <ul aria-label="Scope of work"> 
                 <li>Design direction</li>
                 <li>Layout design</li>
