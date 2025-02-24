@@ -226,6 +226,7 @@ export default function Home(props: any) {
                 <source src="canary/brush.mp4" type="video/mp4"/>       
             </video>
             <img src="canary/icon.png" className={styles.half} />
+            <img src="canary/guide.jpg" />
             <img src="canary/cover2.jpg" />
             <img src="canary/kids.jpg" className={styles.half} />
             <img src="canary/skate.png" className={styles.half} />
