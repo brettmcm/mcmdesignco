@@ -192,19 +192,41 @@ export default function Home(props: any) {
     }, 200);
 
     // Capture user interaction to unlock autoplay (mobile browsers require this)
-    const handleUserInteraction = async () => {
+    const handleUserInteraction = async (e?: Event) => {
+      // Prioritize hero video - play it immediately on first interaction
+      if (heroVideoRef.current && heroVideoRef.current.paused) {
+        try {
+          // Play hero video immediately and synchronously if possible
+          const playPromise = heroVideoRef.current.play();
+          if (playPromise !== undefined) {
+            playPromise.catch(() => {
+              // If it fails, try again
+              setTimeout(() => {
+                if (heroVideoRef.current && heroVideoRef.current.paused) {
+                  heroVideoRef.current.play().catch(() => {});
+                }
+              }, 50);
+            });
+          }
+        } catch (error) {
+          // Silently fail
+        }
+      }
+      
       if (!userInteracted) {
         setUserInteracted(true);
       }
-      // Always try playing videos on interaction (not just first time)
+      // Always try playing all videos on interaction
       await playAllVideos();
     };
 
-    // Listen for various user interactions - try multiple times for mobile
-    const events = ['touchstart', 'touchend', 'click', 'scroll', 'pointerdown'];
-    events.forEach(event => {
-      document.addEventListener(event, handleUserInteraction, { passive: true });
-    });
+    // Listen for various user interactions - prioritize touch events for mobile
+    // Use capture phase for touchstart to catch it early
+    document.addEventListener('touchstart', handleUserInteraction, { passive: true, capture: true });
+    document.addEventListener('touchend', handleUserInteraction, { passive: true });
+    document.addEventListener('click', handleUserInteraction, { passive: true });
+    document.addEventListener('scroll', handleUserInteraction, { passive: true });
+    document.addEventListener('pointerdown', handleUserInteraction, { passive: true });
 
     // Also try playing when page becomes visible (handles tab switching)
     const handleVisibilityChange = () => {
@@ -220,9 +242,11 @@ export default function Home(props: any) {
       clearTimeout(timer2);
       clearTimeout(observeTimer);
       document.removeEventListener('visibilitychange', handleVisibilityChange);
-      events.forEach(event => {
-        document.removeEventListener(event, handleUserInteraction);
-      });
+      document.removeEventListener('touchstart', handleUserInteraction, { capture: true } as any);
+      document.removeEventListener('touchend', handleUserInteraction);
+      document.removeEventListener('click', handleUserInteraction);
+      document.removeEventListener('scroll', handleUserInteraction);
+      document.removeEventListener('pointerdown', handleUserInteraction);
       observer.disconnect();
       // Clean up video event listeners
       videoRefs.forEach((ref) => {
@@ -286,7 +310,40 @@ export default function Home(props: any) {
   return (
     <main>
 
-      <section className={styles.hero}>
+      <section 
+        className={styles.hero}
+        onTouchStart={(e) => {
+          // Immediately try to play hero video on touch - this unlocks autoplay on mobile
+          const video = heroVideoRef.current;
+          if (video) {
+            // Ensure video is ready
+            if (video.readyState >= 2) {
+              // Video has enough data, play immediately
+              video.play().catch(() => {});
+            } else {
+              // Wait for video to be ready, then play
+              const playWhenReady = () => {
+                if (video.readyState >= 2 && video.paused) {
+                  video.play().catch(() => {});
+                  video.removeEventListener('canplay', playWhenReady);
+                }
+              };
+              video.addEventListener('canplay', playWhenReady);
+              // Also try immediately in case it's already ready
+              if (video.readyState >= 1) {
+                video.play().catch(() => {});
+              }
+            }
+          }
+        }}
+        onClick={(e) => {
+          // Also handle click for desktop
+          const video = heroVideoRef.current;
+          if (video && video.paused) {
+            video.play().catch(() => {});
+          }
+        }}
+      >
         <video 
           ref={heroVideoRef}
           loop 
