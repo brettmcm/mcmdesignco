@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import styles from './styles/layout.module.scss'
+import Header from './components/Header'
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,39 +22,37 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml" />
       </head>
       <body className={inter.className}>
-            <a href="mailto:hello@brettmcm.com?subject=Hello there!" className={styles.email}>
-              Contact
-            </a>
+        <Header />
         {children}
         <footer>
-          <picture>
-            <source srcSet="dark/m.svg" media="(prefers-color-scheme: dark)" />
-            <img src="light/m.svg" alt="" className={styles.logo} />
-          </picture>
-          <div className={styles.network}>
-            <a href="https://layers.to/brett">
-              <picture>
-                <source srcSet="dark/layers.svg" media="(prefers-color-scheme: dark)" />
-                <img src="light/layers.svg" alt="" />
-              </picture>
-            </a>
-            <a href="https://read.cv/brettmcm">
-              <picture>
-                <source srcSet="dark/readcv.svg" media="(prefers-color-scheme: dark)" />
-                <img src="light/readcv.svg" alt="" />
-              </picture>
-            </a>
-            <a href="https://instagram.com/brettmcm">
-              <picture>
-                <source srcSet="dark/insta.svg" media="(prefers-color-scheme: dark)" />
-                <img src="light/insta.svg" alt="" />
-              </picture>
-            </a>
-          </div>
-          <div className={styles.brand}>
-            <h4>Brett McM Design</h4>
-            <p>Branding, Graphic Design, Product Design, Creative Consulting</p>
-          </div>
+            <picture>
+              <source srcSet="dark/m.svg" media="(prefers-color-scheme: dark)" />
+              <img src="light/m.svg" alt="" className={styles.logo} />
+            </picture>
+            <div className={styles.network}>
+              <a href="https://layers.to/brett">
+                <picture>
+                  <source srcSet="dark/layers.svg" media="(prefers-color-scheme: dark)" />
+                  <img src="light/layers.svg" alt="" />
+                </picture>
+              </a>
+              <a href="https://read.cv/brettmcm">
+                <picture>
+                  <source srcSet="dark/readcv.svg" media="(prefers-color-scheme: dark)" />
+                  <img src="light/readcv.svg" alt="" />
+                </picture>
+              </a>
+              <a href="https://instagram.com/brettmcm">
+                <picture>
+                  <source srcSet="dark/insta.svg" media="(prefers-color-scheme: dark)" />
+                  <img src="light/insta.svg" alt="" />
+                </picture>
+              </a>
+            </div>
+            <div className={styles.brand}>
+              <h4>Brett McM Design</h4>
+              <p>Branding, Graphic Design, Product Design, Creative Consulting</p>
+            </div>
         </footer>
       </body>
     </html>

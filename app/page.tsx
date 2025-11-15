@@ -9,66 +9,6 @@ import styles from './styles/layout.module.scss'
 
 export default function Home(props: any) {
 
-  // const [scrollPosition, setScrollPosition] = useState({ scrollTop: 0, scrollLeft: 0 });
-  // const carouselRef = useRef<null | HTMLDivElement>(null);
-
-  // useEffect(() => {
-  //   if (carouselRef.current) {
-  //     const carousel = carouselRef.current;
-  //     carousel.scrollLeft = carousel.clientWidth; // Start at the first duplicated item
-  //   }
-  // }, []);
-
-  // function scrollCarousel(e: React.MouseEvent<HTMLButtonElement>, direction: 'next' | 'prev') {
-  //   e.preventDefault();
-  //   if (!carouselRef.current) return;
-
-  //   const carousel = carouselRef.current;
-  //   const scrollAmount = carousel.clientWidth; // Adjust this value as needed
-  //   const targetScrollLeft = direction === 'next' 
-  //     ? carousel.scrollLeft + scrollAmount 
-  //     : carousel.scrollLeft - scrollAmount;
-  //   const duration = 500; // duration in ms
-  //   const startTime = performance.now();
-
-  //   function animateScroll(currentTime: number) {
-  //     const elapsedTime = currentTime - startTime;
-  //     const progress = Math.min(elapsedTime / duration, 1);
-  //     const easeInOutQuad = (t: number) => t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
-  //     const easedProgress = easeInOutQuad(progress);
-
-  //     carousel.scrollLeft = scrollPosition.scrollLeft + (targetScrollLeft - scrollPosition.scrollLeft) * easedProgress;
-
-  //     if (progress < 1) {
-  //       requestAnimationFrame(animateScroll);
-  //     } else {
-  //       // Ensure the final position aligns with the snap point
-  //       carousel.scrollLeft = targetScrollLeft;
-  //       setScrollPosition({
-  //         scrollTop: 0,
-  //         scrollLeft: targetScrollLeft
-  //       });
-
-  //       // Handle infinite scroll wrapping
-  //       if (direction === 'next' && targetScrollLeft >= carousel.scrollWidth - carousel.clientWidth) {
-  //         carousel.scrollLeft = carousel.clientWidth;
-  //         setScrollPosition({
-  //           scrollTop: 0,
-  //           scrollLeft: carousel.clientWidth
-  //         });
-  //       } else if (direction === 'prev' && targetScrollLeft <= 0) {
-  //         carousel.scrollLeft = carousel.scrollWidth - 2 * carousel.clientWidth;
-  //         setScrollPosition({
-  //           scrollTop: 0,
-  //           scrollLeft: carousel.scrollWidth - 2 * carousel.clientWidth
-  //         });
-  //       }
-  //     }
-  //   }
-
-  //   requestAnimationFrame(animateScroll);
-  // }
-
 
   const [currentPage, setCurrentPage] = useState(0);
   const totalPages = 3; // Adjust this based on the number of pages in your carousel
@@ -126,7 +66,7 @@ export default function Home(props: any) {
 
       <section className={styles.hero}>
         <video loop={true} muted={true} autoPlay={true} playsInline={true} controls={false} className={styles.bg}>         
-            <source src="leaves.mp4" type="video/mp4"/>       
+            <source src="sky.mp4" type="video/mp4"/>       
         </video>
 
         <h1>Innovative design crafting intuitive, inspiring experiences with precision and passion</h1>

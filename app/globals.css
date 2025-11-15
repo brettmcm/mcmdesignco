@@ -39,7 +39,7 @@ footer {
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  padding: 2em 1em;
+  padding: 3em 1.5em;
   gap: 1em;
   border-top: 1px dotted rgba(var(--foreground-rgb), 0.1);
 }
