@@ -112,11 +112,45 @@ export default function Home(props: any) {
       });
     };
 
-    // Initial setup
+    // Initial setup - try immediately and with delays
+    const tryPlayHeroVideo = () => {
+      if (heroVideoRef.current && heroVideoRef.current.paused) {
+        playVideo(heroVideoRef.current);
+      }
+    };
+    
+    // Try immediately
+    tryPlayHeroVideo();
+    
     const timer = setTimeout(() => {
       setupVideos();
       playAllVideos();
+      
+      // Specifically handle hero video - it's always visible on load
+      if (heroVideoRef.current) {
+        const heroVideo = heroVideoRef.current;
+        // Force play the hero video multiple times to ensure it starts
+        const tryPlayHero = async () => {
+          if (heroVideo.paused) {
+            try {
+              await heroVideo.play();
+            } catch (error) {
+              // Retry after a short delay
+              setTimeout(tryPlayHero, 200);
+            }
+          }
+        };
+        tryPlayHero();
+        // Also try after video loads
+        heroVideo.addEventListener('canplay', tryPlayHero, { once: true });
+        heroVideo.addEventListener('loadeddata', tryPlayHero, { once: true });
+      }
     }, 100);
+    
+    // Try again after a longer delay
+    const timer2 = setTimeout(() => {
+      tryPlayHeroVideo();
+    }, 500);
 
     // Intersection Observer to play videos when they enter viewport
     const observer = new IntersectionObserver(
@@ -140,6 +174,21 @@ export default function Home(props: any) {
           observer.observe(ref.current);
         }
       });
+      
+      // Specifically check hero video immediately since it's always visible
+      if (heroVideoRef.current) {
+        // Use a small delay to ensure observer has processed
+        setTimeout(() => {
+          // Check if hero video is intersecting (it should be)
+          const rect = heroVideoRef.current?.getBoundingClientRect();
+          if (rect && rect.top < window.innerHeight && rect.bottom > 0) {
+            // Hero video is in viewport, try playing it
+            if (heroVideoRef.current && heroVideoRef.current.paused) {
+              playVideo(heroVideoRef.current);
+            }
+          }
+        }, 50);
+      }
     }, 200);
 
     // Capture user interaction to unlock autoplay (mobile browsers require this)
@@ -168,6 +217,7 @@ export default function Home(props: any) {
 
     return () => {
       clearTimeout(timer);
+      clearTimeout(timer2);
       clearTimeout(observeTimer);
       document.removeEventListener('visibilitychange', handleVisibilityChange);
       events.forEach(event => {
@@ -247,6 +297,18 @@ export default function Home(props: any) {
           className={styles.bg}
           preload="auto"
           onLoadedData={(e) => {
+            const video = e.currentTarget;
+            if (video.paused) {
+              video.play().catch(() => {});
+            }
+          }}
+          onCanPlay={(e) => {
+            const video = e.currentTarget;
+            if (video.paused) {
+              video.play().catch(() => {});
+            }
+          }}
+          onLoadedMetadata={(e) => {
             const video = e.currentTarget;
             if (video.paused) {
               video.play().catch(() => {});
