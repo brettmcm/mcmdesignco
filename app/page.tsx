@@ -9,9 +9,87 @@ import styles from './styles/layout.module.scss'
 
 export default function Home(props: any) {
 
+  // Refs for all video elements
+  const heroVideoRef = useRef<HTMLVideoElement>(null);
+  const introVideoRef = useRef<HTMLVideoElement>(null);
+  const patternVideoRef = useRef<HTMLVideoElement>(null);
+  const brushVideoRef = useRef<HTMLVideoElement>(null);
+  const sudsVideoRef = useRef<HTMLVideoElement>(null);
+  const vibeVideoRef = useRef<HTMLVideoElement>(null);
 
   const [currentPage, setCurrentPage] = useState(0);
   const totalPages = 3; // Adjust this based on the number of pages in your carousel
+
+  // Function to play video with error handling
+  const playVideo = async (videoRef: React.RefObject<HTMLVideoElement>) => {
+    if (videoRef.current) {
+      try {
+        await videoRef.current.play();
+      } catch (error) {
+        // Autoplay was prevented, which is fine - user interaction may be required
+        console.log('Video autoplay prevented:', error);
+      }
+    }
+  };
+
+  // Play all videos on mount and when they become visible
+  useEffect(() => {
+    const videoRefs = [
+      heroVideoRef,
+      introVideoRef,
+      patternVideoRef,
+      brushVideoRef,
+      sudsVideoRef,
+      vibeVideoRef,
+    ];
+
+    const playAllVideos = async () => {
+      await Promise.all(videoRefs.map(ref => playVideo(ref)));
+    };
+
+    // Small delay to ensure DOM is ready
+    const timer = setTimeout(playAllVideos, 100);
+
+    // Intersection Observer to play videos when they enter viewport
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && entry.target instanceof HTMLVideoElement) {
+            const video = entry.target;
+            if (video.paused) {
+              playVideo({ current: video } as React.RefObject<HTMLVideoElement>);
+            }
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    // Observe all video elements (with a small delay to ensure refs are set)
+    const observeTimer = setTimeout(() => {
+      videoRefs.forEach((ref) => {
+        if (ref.current) {
+          observer.observe(ref.current);
+        }
+      });
+    }, 200);
+
+    // Also try playing when page becomes visible (handles tab switching)
+    const handleVisibilityChange = () => {
+      if (!document.hidden) {
+        playAllVideos();
+      }
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
+    return () => {
+      clearTimeout(timer);
+      clearTimeout(observeTimer);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      observer.disconnect();
+    };
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -65,7 +143,16 @@ export default function Home(props: any) {
     <main>
 
       <section className={styles.hero}>
-        <video loop={true} muted={true} autoPlay={true} playsInline={true} controls={false} className={styles.bg}>         
+        <video 
+          ref={heroVideoRef}
+          loop 
+          muted 
+          autoPlay 
+          playsInline 
+          controls={false} 
+          className={styles.bg}
+          preload="auto"
+        >         
             <source src="sky.mp4" type="video/mp4"/>       
         </video>
 
@@ -78,7 +165,16 @@ export default function Home(props: any) {
       </section>
 
       <section className={`${styles.split} ${styles.flipped}`}>
-        <video loop={true} muted={true} autoPlay={true} playsInline={true} controls={false} className={styles.half}>         
+        <video 
+          ref={introVideoRef}
+          loop 
+          muted 
+          autoPlay 
+          playsInline 
+          controls={false} 
+          className={styles.half}
+          preload="auto"
+        >         
             <source src="mcm-intro.mp4" type="video/mp4"/>       
         </video>
         <div className={styles.content}>
@@ -137,7 +233,16 @@ export default function Home(props: any) {
       </section>
 
       <section className={styles.disrupt}>
-        <video loop={true} muted={true} autoPlay={true} playsInline={true} controls={false} className={styles.half}>         
+        <video 
+          ref={patternVideoRef}
+          loop 
+          muted 
+          autoPlay 
+          playsInline 
+          controls={false} 
+          className={styles.half}
+          preload="auto"
+        >         
             <source src="pattern.mp4" type="video/mp4"/>       
         </video>
       </section>
@@ -162,7 +267,16 @@ export default function Home(props: any) {
           </aside>
           <div className={styles.gallery}>
             <img src="canary/logo.jpg" />
-            <video loop={true} muted={true} autoPlay={true} playsInline={true} controls={false} className={styles.half}>         
+            <video 
+              ref={brushVideoRef}
+              loop 
+              muted 
+              autoPlay 
+              playsInline 
+              controls={false} 
+              className={styles.half}
+              preload="auto"
+            >         
                 <source src="canary/brush.mp4" type="video/mp4"/>       
             </video>
             <img src="canary/icon.png" className={styles.half} />
@@ -187,12 +301,29 @@ export default function Home(props: any) {
             </ul>
           </aside>
           <div className={styles.gallery}>
-            <video loop={true} muted={true} autoPlay={true} playsInline={true} controls={false}>         
+            <video 
+              ref={sudsVideoRef}
+              loop 
+              muted 
+              autoPlay 
+              playsInline 
+              controls={false}
+              preload="auto"
+            >         
                 <source src="bloop/bloop-suds.mp4" type="video/mp4"/>       
             </video>
             <img src="bloop/bloop-hands.jpg" />
             <img src="bloop/bloop-product.jpg" className={styles.half} />
-            <video loop={true} muted={true} autoPlay={true} playsInline={true} controls={false} className={styles.half}>         
+            <video 
+              ref={vibeVideoRef}
+              loop 
+              muted 
+              autoPlay 
+              playsInline 
+              controls={false} 
+              className={styles.half}
+              preload="auto"
+            >         
                 <source src="bloop/bloop-vibe.mp4" type="video/mp4"/>       
             </video>
             <img src="bloop/bloop-posters.jpg" />
