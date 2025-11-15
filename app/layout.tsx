@@ -16,7 +16,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head><link rel="stylesheet" href="https://use.typekit.net/shq4xoc.css" /></head>
+      <head>
+        <link rel="stylesheet" href="https://use.typekit.net/shq4xoc.css" />
+        <link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml" />
+      </head>
       <body className={inter.className}>
             <a href="mailto:hello@brettmcm.com?subject=Hello there!" className={styles.email}>
               Contact
