@@ -20,15 +20,36 @@ export default function Home(props: any) {
   const [currentPage, setCurrentPage] = useState(0);
   const totalPages = 3; // Adjust this based on the number of pages in your carousel
 
+  // Track if user has interacted (required for mobile autoplay)
+  const [userInteracted, setUserInteracted] = useState(false);
+
   // Function to play video with error handling
-  const playVideo = async (videoRef: React.RefObject<HTMLVideoElement>) => {
-    if (videoRef.current) {
+  const playVideo = async (video: HTMLVideoElement) => {
+    if (!video) return;
+    
+    // Ensure video is muted and has playsInline (required for mobile)
+    video.muted = true;
+    video.setAttribute('playsinline', 'true');
+    video.setAttribute('webkit-playsinline', 'true');
+    
+    // Wait for video to be ready
+    if (video.readyState >= 2) {
       try {
-        await videoRef.current.play();
+        await video.play();
       } catch (error) {
-        // Autoplay was prevented, which is fine - user interaction may be required
-        console.log('Video autoplay prevented:', error);
+        // Silently fail - will retry on user interaction
       }
+    } else {
+      // Wait for video to load
+      const handleCanPlay = async () => {
+        try {
+          await video.play();
+        } catch (error) {
+          // Silently fail
+        }
+        video.removeEventListener('canplay', handleCanPlay);
+      };
+      video.addEventListener('canplay', handleCanPlay);
     }
   };
 
@@ -44,11 +65,58 @@ export default function Home(props: any) {
     ];
 
     const playAllVideos = async () => {
-      await Promise.all(videoRefs.map(ref => playVideo(ref)));
+      videoRefs.forEach((ref) => {
+        if (ref.current) {
+          playVideo(ref.current);
+        }
+      });
     };
 
-    // Small delay to ensure DOM is ready
-    const timer = setTimeout(playAllVideos, 100);
+    // Set up video load handlers
+    const setupVideos = () => {
+      videoRefs.forEach((ref) => {
+        if (ref.current) {
+          const video = ref.current;
+          video.muted = true;
+          video.setAttribute('playsinline', 'true');
+          video.setAttribute('webkit-playsinline', 'true');
+          
+          // Try to play when video can play
+          const handleCanPlay = async () => {
+            if (!video.paused) return; // Already playing
+            try {
+              await video.play();
+            } catch (error) {
+              // Will retry on user interaction
+            }
+          };
+          
+          // Try to play when enough data is loaded
+          const handleLoadedData = async () => {
+            if (!video.paused) return;
+            try {
+              await video.play();
+            } catch (error) {
+              // Will retry on user interaction
+            }
+          };
+
+          video.addEventListener('canplay', handleCanPlay);
+          video.addEventListener('loadeddata', handleLoadedData);
+          
+          // If video is already loaded, try playing immediately
+          if (video.readyState >= 2) {
+            playVideo(video);
+          }
+        }
+      });
+    };
+
+    // Initial setup
+    const timer = setTimeout(() => {
+      setupVideos();
+      playAllVideos();
+    }, 100);
 
     // Intersection Observer to play videos when they enter viewport
     const observer = new IntersectionObserver(
@@ -57,7 +125,7 @@ export default function Home(props: any) {
           if (entry.isIntersecting && entry.target instanceof HTMLVideoElement) {
             const video = entry.target;
             if (video.paused) {
-              playVideo({ current: video } as React.RefObject<HTMLVideoElement>);
+              playVideo(video);
             }
           }
         });
@@ -65,7 +133,7 @@ export default function Home(props: any) {
       { threshold: 0.1 }
     );
 
-    // Observe all video elements (with a small delay to ensure refs are set)
+    // Observe all video elements
     const observeTimer = setTimeout(() => {
       videoRefs.forEach((ref) => {
         if (ref.current) {
@@ -73,6 +141,21 @@ export default function Home(props: any) {
         }
       });
     }, 200);
+
+    // Capture user interaction to unlock autoplay (mobile browsers require this)
+    const handleUserInteraction = async () => {
+      if (!userInteracted) {
+        setUserInteracted(true);
+      }
+      // Always try playing videos on interaction (not just first time)
+      await playAllVideos();
+    };
+
+    // Listen for various user interactions - try multiple times for mobile
+    const events = ['touchstart', 'touchend', 'click', 'scroll', 'pointerdown'];
+    events.forEach(event => {
+      document.addEventListener(event, handleUserInteraction, { passive: true });
+    });
 
     // Also try playing when page becomes visible (handles tab switching)
     const handleVisibilityChange = () => {
@@ -87,9 +170,20 @@ export default function Home(props: any) {
       clearTimeout(timer);
       clearTimeout(observeTimer);
       document.removeEventListener('visibilitychange', handleVisibilityChange);
+      events.forEach(event => {
+        document.removeEventListener(event, handleUserInteraction);
+      });
       observer.disconnect();
+      // Clean up video event listeners
+      videoRefs.forEach((ref) => {
+        if (ref.current) {
+          const video = ref.current;
+          video.removeEventListener('canplay', () => {});
+          video.removeEventListener('loadeddata', () => {});
+        }
+      });
     };
-  }, []);
+  }, [userInteracted]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -152,8 +246,14 @@ export default function Home(props: any) {
           controls={false} 
           className={styles.bg}
           preload="auto"
+          onLoadedData={(e) => {
+            const video = e.currentTarget;
+            if (video.paused) {
+              video.play().catch(() => {});
+            }
+          }}
         >         
-            <source src="sky.mp4" type="video/mp4"/>       
+            <source src="/sky.mp4" type="video/mp4"/>       
         </video>
 
         <h1>Innovative design crafting intuitive, inspiring experiences with precision and passion</h1>
@@ -174,8 +274,14 @@ export default function Home(props: any) {
           controls={false} 
           className={styles.half}
           preload="auto"
+          onLoadedData={(e) => {
+            const video = e.currentTarget;
+            if (video.paused) {
+              video.play().catch(() => {});
+            }
+          }}
         >         
-            <source src="mcm-intro.mp4" type="video/mp4"/>       
+            <source src="/mcm-intro.mp4" type="video/mp4"/>       
         </video>
         <div className={styles.content}>
           <h5>Every detail becomes intentional and meaningful, leading to an inclusive sense of care and satisfaction.</h5>
@@ -242,8 +348,14 @@ export default function Home(props: any) {
           controls={false} 
           className={styles.half}
           preload="auto"
+          onLoadedData={(e) => {
+            const video = e.currentTarget;
+            if (video.paused) {
+              video.play().catch(() => {});
+            }
+          }}
         >         
-            <source src="pattern.mp4" type="video/mp4"/>       
+            <source src="/pattern.mp4" type="video/mp4"/>       
         </video>
       </section>
 
@@ -276,8 +388,14 @@ export default function Home(props: any) {
               controls={false} 
               className={styles.half}
               preload="auto"
+              onLoadedData={(e) => {
+                const video = e.currentTarget;
+                if (video.paused) {
+                  video.play().catch(() => {});
+                }
+              }}
             >         
-                <source src="canary/brush.mp4" type="video/mp4"/>       
+                <source src="/canary/brush.mp4" type="video/mp4"/>       
             </video>
             <img src="canary/icon.png" className={styles.half} />
             <img src="canary/guide.jpg" />
@@ -309,8 +427,14 @@ export default function Home(props: any) {
               playsInline 
               controls={false}
               preload="auto"
+              onLoadedData={(e) => {
+                const video = e.currentTarget;
+                if (video.paused) {
+                  video.play().catch(() => {});
+                }
+              }}
             >         
-                <source src="bloop/bloop-suds.mp4" type="video/mp4"/>       
+                <source src="/bloop/bloop-suds.mp4" type="video/mp4"/>       
             </video>
             <img src="bloop/bloop-hands.jpg" />
             <img src="bloop/bloop-product.jpg" className={styles.half} />
@@ -323,8 +447,14 @@ export default function Home(props: any) {
               controls={false} 
               className={styles.half}
               preload="auto"
+              onLoadedData={(e) => {
+                const video = e.currentTarget;
+                if (video.paused) {
+                  video.play().catch(() => {});
+                }
+              }}
             >         
-                <source src="bloop/bloop-vibe.mp4" type="video/mp4"/>       
+                <source src="/bloop/bloop-vibe.mp4" type="video/mp4"/>       
             </video>
             <img src="bloop/bloop-posters.jpg" />
           </div>
