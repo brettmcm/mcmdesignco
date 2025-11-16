@@ -411,66 +411,6 @@ export default function Home(props: any) {
           }
         }}
       >
-        {/* SVG filter for animated noise distortion and texture */}
-        <svg width="0" height="0" style={{ position: 'absolute' }}>
-          <defs>
-            <filter id="noise-distortion" x="0%" y="0%" width="100%" height="100%">
-              {/* Distortion noise */}
-              <feTurbulence
-                type="fractalNoise"
-                baseFrequency="1"
-                numOctaves="2"
-                result="noise"
-              >
-                <animate
-                  attributeName="baseFrequency"
-                  values="1;1.1;1"
-                  dur="3s"
-                  repeatCount="indefinite"
-                />
-              </feTurbulence>
-              <feDisplacementMap
-                in="SourceGraphic"
-                in2="noise"
-                scale="2"
-                xChannelSelector="R"
-                yChannelSelector="G"
-                result="distorted"
-              />
-              
-              {/* Animated noise texture overlay */}
-              <feTurbulence
-                type="fractalNoise"
-                baseFrequency="0.8"
-                numOctaves="2"
-                result="noiseTexture"
-              >
-                <animate
-                  attributeName="baseFrequency"
-                  values="0.8;1.0;0.8"
-                  dur="5s"
-                  repeatCount="indefinite"
-                />
-              </feTurbulence>
-              <feColorMatrix
-                in="noiseTexture"
-                type="saturate"
-                values="0"
-                result="grayscaleNoise"
-              />
-              <feComponentTransfer in="grayscaleNoise" result="subtleNoise">
-                <feFuncA type="linear" slope="0.15" intercept="0"/>
-              </feComponentTransfer>
-              <feComposite
-                in="distorted"
-                in2="subtleNoise"
-                operator="overlay"
-                result="final"
-              />
-            </filter>
-          </defs>
-        </svg>
-
         <video 
           ref={heroVideoRef}
           loop 
@@ -510,8 +450,7 @@ export default function Home(props: any) {
             transform: `scale(${logoScale})`,
             transformOrigin: 'center center',
             transition: 'opacity 0.1s ease-out',
-            willChange: 'transform, opacity',
-            filter: 'url(#noise-distortion)'
+            willChange: 'transform, opacity'
           }}
         />
 
