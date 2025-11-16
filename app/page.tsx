@@ -838,8 +838,7 @@ export default function Home(props: any) {
 
       </section>
 
-      
-
+    
 
       <section className={styles.cv}>
 
