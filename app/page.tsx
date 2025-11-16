@@ -581,7 +581,8 @@ export default function Home(props: any) {
         <h1>Branding. Visual Identity. Graphic Design.</h1>
       </section>
 
-      <section className={`${styles.split} ${styles.flipped} ${styles.intro}`}>
+      <section className={`${styles.split} ${styles.intro}`}>
+        <img src="workin.jpg" />
         <video 
           ref={introVideoRef}
           loop 
@@ -600,7 +601,6 @@ export default function Home(props: any) {
         >         
             <source src="/mcm-intro.mp4" type="video/mp4"/>       
         </video>
-        <img src="workin.jpg" />
       </section>
       
       {/* 
