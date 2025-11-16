@@ -23,6 +23,30 @@ export default function Home(props: any) {
   // Track if user has interacted (required for mobile autoplay)
   const [userInteracted, setUserInteracted] = useState(false);
 
+  // Logo cycling state
+  const [currentLogoIndex, setCurrentLogoIndex] = useState(0);
+  const [logoOpacity, setLogoOpacity] = useState(1);
+  const [logoScale, setLogoScale] = useState(1);
+  const logos = [
+    "/logos/apeak-dark.svg",
+    "/logos/hmtbc-dark.svg",
+    "/logos/island-dwell-dark.svg",
+    "/logos/island-dwell-icon-dark.svg",
+    "/logos/marends-dark.svg",
+    "/logos/mcm-dark.svg",
+    "/logos/millercove-dark.svg",
+    "/logos/mosaic-dark.svg",
+    "/logos/neon-moon-dark.svg",
+    "/logos/neon-moon-icon-dark.svg",
+    "/logos/rally-dark.svg",
+    "/logos/swamptone-dark.svg",
+    "/logos/the-beer-house-dark.svg",
+    "/logos/yoga-for-alex-dark.svg",
+    "/logos/stir-dark.svg",
+    "/logos/canary-dark.svg",
+    "/logos/bloop-dark.svg",
+  ];
+
   // Function to play video with error handling
   const playVideo = async (video: HTMLVideoElement) => {
     if (!video) return;
@@ -281,6 +305,49 @@ export default function Home(props: any) {
     };
   }, []);
 
+  // Cycle through logos every 100ms
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentLogoIndex((prevIndex) => (prevIndex + 1) % logos.length);
+    }, 125);
+
+    return () => clearInterval(interval);
+  }, [logos.length]);
+
+  // Fade and scale logo based on scroll position
+  useEffect(() => {
+    let rafId: number | null = null;
+    
+    const handleScroll = () => {
+      if (rafId) return; // Skip if already scheduled
+      
+      rafId = requestAnimationFrame(() => {
+        const scrollY = window.scrollY;
+        const viewportHeight = window.innerHeight;
+        const scrollProgress = Math.min(1, scrollY / viewportHeight);
+        
+        // Calculate opacity: 1.0 at scroll 0, 0.0 at scroll 100vh
+        const opacity = 1 - scrollProgress;
+        setLogoOpacity(opacity);
+        
+        // Calculate scale: 1.0 at scroll 0, 0.9 at scroll 100vh
+        const scale = Math.max(0, 1 - (scrollProgress * 0.1));
+        setLogoScale(scale);
+        
+        rafId = null;
+      });
+    };
+
+    // Set initial values
+    handleScroll();
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (rafId) cancelAnimationFrame(rafId);
+    };
+  }, []);
+
   const handlePrevClick = () => {
     const carousel = document.getElementById('carousel');
     if (carousel) {
@@ -344,6 +411,66 @@ export default function Home(props: any) {
           }
         }}
       >
+        {/* SVG filter for animated noise distortion and texture */}
+        <svg width="0" height="0" style={{ position: 'absolute' }}>
+          <defs>
+            <filter id="noise-distortion" x="0%" y="0%" width="100%" height="100%">
+              {/* Distortion noise */}
+              <feTurbulence
+                type="fractalNoise"
+                baseFrequency="1"
+                numOctaves="2"
+                result="noise"
+              >
+                <animate
+                  attributeName="baseFrequency"
+                  values="1;1.1;1"
+                  dur="3s"
+                  repeatCount="indefinite"
+                />
+              </feTurbulence>
+              <feDisplacementMap
+                in="SourceGraphic"
+                in2="noise"
+                scale="2"
+                xChannelSelector="R"
+                yChannelSelector="G"
+                result="distorted"
+              />
+              
+              {/* Animated noise texture overlay */}
+              <feTurbulence
+                type="fractalNoise"
+                baseFrequency="0.8"
+                numOctaves="2"
+                result="noiseTexture"
+              >
+                <animate
+                  attributeName="baseFrequency"
+                  values="0.8;1.0;0.8"
+                  dur="5s"
+                  repeatCount="indefinite"
+                />
+              </feTurbulence>
+              <feColorMatrix
+                in="noiseTexture"
+                type="saturate"
+                values="0"
+                result="grayscaleNoise"
+              />
+              <feComponentTransfer in="grayscaleNoise" result="subtleNoise">
+                <feFuncA type="linear" slope="0.15" intercept="0"/>
+              </feComponentTransfer>
+              <feComposite
+                in="distorted"
+                in2="subtleNoise"
+                operator="overlay"
+                result="final"
+              />
+            </filter>
+          </defs>
+        </svg>
+
         <video 
           ref={heroVideoRef}
           loop 
@@ -375,7 +502,18 @@ export default function Home(props: any) {
             <source src="/sky.mp4" type="video/mp4"/>       
         </video>
 
-        <h1>Innovative design crafting intuitive, inspiring experiences with precision and passion</h1>
+        <img 
+          src={logos[currentLogoIndex]} 
+          key={currentLogoIndex} 
+          style={{ 
+            opacity: logoOpacity, 
+            transform: `scale(${logoScale})`,
+            transformOrigin: 'center center',
+            transition: 'opacity 0.1s ease-out',
+            willChange: 'transform, opacity',
+            filter: 'url(#noise-distortion)'
+          }}
+        />
 
         <svg width="24" height="24" fill="none" viewBox="0 0 24 24">
           <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M17.25 13.75L12 19.25L6.75 13.75"></path>
@@ -383,7 +521,7 @@ export default function Home(props: any) {
         </svg>
       </section>
 
-      <section className={`${styles.split} ${styles.flipped}`}>
+      {/* <section className={`${styles.split} ${styles.flipped} ${styles.intro}`}>
         <video 
           ref={introVideoRef}
           loop 
@@ -403,7 +541,9 @@ export default function Home(props: any) {
             <source src="/mcm-intro.mp4" type="video/mp4"/>       
         </video>
         <div className={styles.content}>
-          <h5>Every detail becomes intentional and meaningful, leading to an inclusive sense of care and satisfaction.</h5>
+          <p>Product. Graphic. Branding. Product. Graphic. Branding.</p>
+          <p>Graphic. Branding. Product. Graphic. Branding. Product.</p>
+          <p>Branding. Product. Graphic. Branding. Product. Graphic.</p>
         </div>
       </section>
 
@@ -456,7 +596,6 @@ export default function Home(props: any) {
 
         </div>
       </section>
-
       <section className={styles.disrupt}>
         <video 
           ref={patternVideoRef}
@@ -477,6 +616,9 @@ export default function Home(props: any) {
             <source src="/pattern.mp4" type="video/mp4"/>       
         </video>
       </section>
+
+       */}
+
 
       <section className={styles.featured}>
         {/* <h2>Selected work</h2> */}

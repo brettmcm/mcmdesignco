@@ -5,17 +5,17 @@
 @import "~slick-carousel/slick/slick-theme.css";
 
 :root {
-  --foreground-rgb: 28, 28, 28;
+  --foreground-rgb: 12, 12, 12;
   --background-rgb: 235, 235, 235;
   --bright-rgb: 237, 237, 237;
-  --dark-rgb: 28, 28, 28;
+  --dark-rgb: 12, 12, 12;
   --emphasis-rgb: 0, 0, 0;
   }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 237, 237, 237;
-    --background-rgb: 28, 28, 28;
+    --background-rgb: 12, 12, 12;
     --emphasis-rgb: 255, 255, 255;
   }
 }
@@ -24,6 +24,11 @@ body {
   background: rgb(var(--background-rgb));
   color: rgb(var(--foreground-rgb));
   overflow-x: none;
+}
+
+section {
+  z-index: 5;
+  background: rgb(var(--background-rgb));
 }
 
 main {

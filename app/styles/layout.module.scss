@@ -1,7 +1,7 @@
 .header {
     position:fixed;
     width: 100vw;
-    z-index: 3;
+    z-index: 10;
     background: transparent;
     overflow: hidden;
 
@@ -44,12 +44,18 @@
 }
 
 .email {
-    padding: 0.5em 1em;
-    border-radius: 0.5em;
-    background: rgb(var(--bright-rgb));
-    color: rgb(var(--dark-rgb));
+    padding: 0.4em 0.8em;
+    border-radius: 4px;
+    color: rgb(var(--bright-rgb));
+    border: 2px solid rgb(var(--bright-rgb));
     font-family: 'indivisible', sans-serif;
     font-weight: 500;
+
+
+    &:hover {
+        background: rgb(var(--bright-rgb));
+        color: rgb(var(--dark-rgb));
+    }
 }
 
 .hero {
@@ -62,6 +68,7 @@
     height: 100vh;
     text-align: center;
     padding: 5vw 0;
+    z-index: 1;
 
     color: rgb(var(--bright-rgb));
 
@@ -71,7 +78,15 @@
         align-items: center;
     }
 
+    img {
+        position: fixed;
+        width: 80vw;
+        max-width: 500px;
+    }
+
     svg {
+        position: fixed;
+        bottom: 5vw;
         animation: 0.5s infinite alternate bounce;
     }
 
@@ -97,12 +112,18 @@
     }
 }
 
+.intro {
+    margin: -5em 1.5em 0 1.5em;
+    width: calc(100% - 3em);
+    max-width: calc(1400px - 3em);
+    justify-self: center;
+}
+
 .split {
     position: relative;
     display: flex;
     flex-direction: column;
     justify-content: stretch;
-    width: 100%;
 
     .content, img, video {
         position: relative;
@@ -116,8 +137,17 @@
         text-align: center;
         aspect-ratio: 5/4;
         overflow: hidden;
-
+        background: rgb(var(--background-rgb));
+        color: rgb(var(--foreground-rgb));
         gap: 2em;
+
+        p { 
+            width: 110%;
+            font-family: 'scotch-display', serif;
+            font-size: clamp(1em, 5vw, 2.5em);
+            white-space: nowrap;
+            line-height: 50%;
+        }
 
 
         &.invert {
