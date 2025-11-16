@@ -16,6 +16,8 @@ export default function Home(props: any) {
   const brushVideoRef = useRef<HTMLVideoElement>(null);
   const sudsVideoRef = useRef<HTMLVideoElement>(null);
   const vibeVideoRef = useRef<HTMLVideoElement>(null);
+  const heroSvgRef = useRef<SVGSVGElement>(null);
+  const pauseTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const [currentPage, setCurrentPage] = useState(0);
   const totalPages = 3; // Adjust this based on the number of pages in your carousel
@@ -28,6 +30,8 @@ export default function Home(props: any) {
   const [logoOpacity, setLogoOpacity] = useState(1);
   const [logoScale, setLogoScale] = useState(1);
   const [imagesLoaded, setImagesLoaded] = useState(false);
+  const [carouselPaused, setCarouselPaused] = useState(false);
+  const [svgOpacity, setSvgOpacity] = useState(1);
   const logos = [
     "/logos/apeak-dark.svg",
     "/logos/hmtbc-dark.svg",
@@ -333,16 +337,25 @@ export default function Home(props: any) {
     preloadImages();
   }, [logos]);
 
-  // Cycle through logos every 125ms
+  // Cycle through logos every 100ms
   useEffect(() => {
-    if (!imagesLoaded) return;
+    if (!imagesLoaded || carouselPaused) return;
     
     const interval = setInterval(() => {
       setCurrentLogoIndex((prevIndex) => (prevIndex + 1) % logos.length);
-    }, 125);
+    }, 100);
 
     return () => clearInterval(interval);
-  }, [logos.length, imagesLoaded]);
+  }, [logos.length, imagesLoaded, carouselPaused]);
+
+  // Cleanup pause timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (pauseTimeoutRef.current) {
+        clearTimeout(pauseTimeoutRef.current);
+      }
+    };
+  }, []);
 
   // Fade and scale logo based on scroll position
   useEffect(() => {
@@ -363,6 +376,36 @@ export default function Home(props: any) {
         // Calculate scale: 1.0 at scroll 0, 0.9 at scroll 100vh
         const scale = Math.max(0, 1 - (scrollProgress * 0.1));
         setLogoScale(scale);
+        
+        rafId = null;
+      });
+    };
+
+    // Set initial values
+    handleScroll();
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (rafId) cancelAnimationFrame(rafId);
+    };
+  }, []);
+
+  // Fade SVG based on scroll position
+  useEffect(() => {
+    let rafId: number | null = null;
+    
+    const handleScroll = () => {
+      if (rafId) return; // Skip if already scheduled
+      
+      rafId = requestAnimationFrame(() => {
+        const scrollY = window.scrollY;
+        const viewportHeight = window.innerHeight;
+        const scrollProgress = Math.min(1, scrollY / viewportHeight);
+        
+        // Calculate opacity: 1.0 at scroll 0, 0.0 at scroll 100vh
+        const opacity = 1 - scrollProgress;
+        setSvgOpacity(opacity);
         
         rafId = null;
       });
@@ -404,12 +447,39 @@ export default function Home(props: any) {
     }
   };
 
+  // Helper functions for delayed pause
+  const startPauseDelay = () => {
+    // Clear any existing timeout
+    if (pauseTimeoutRef.current) {
+      clearTimeout(pauseTimeoutRef.current);
+    }
+    // Set a new timeout to pause after 300ms
+    pauseTimeoutRef.current = setTimeout(() => {
+      setCarouselPaused(true);
+      pauseTimeoutRef.current = null;
+    }, 150);
+  };
+
+  const cancelPauseDelay = () => {
+    if (pauseTimeoutRef.current) {
+      clearTimeout(pauseTimeoutRef.current);
+      pauseTimeoutRef.current = null;
+    }
+    setCarouselPaused(false);
+  };
+
   return (
     <main>
 
       <section 
         className={styles.hero}
+        onMouseDown={startPauseDelay}
+        onMouseUp={cancelPauseDelay}
+        onMouseLeave={cancelPauseDelay}
         onTouchStart={(e) => {
+          // Start delayed pause on touch (300ms delay)
+          startPauseDelay();
+          
           // Immediately try to play hero video on touch - this unlocks autoplay on mobile
           const video = heroVideoRef.current;
           if (video) {
@@ -433,6 +503,8 @@ export default function Home(props: any) {
             }
           }
         }}
+        onTouchEnd={cancelPauseDelay}
+        onTouchCancel={cancelPauseDelay}
         onClick={(e) => {
           // Also handle click for desktop
           const video = heroVideoRef.current;
@@ -488,13 +560,28 @@ export default function Home(props: any) {
           />
         ))}
 
-        <svg width="24" height="24" fill="none" viewBox="0 0 24 24">
+        <svg 
+          ref={heroSvgRef}
+          width="24" 
+          height="24" 
+          fill="none" 
+          viewBox="0 0 24 24"
+          style={{ 
+            opacity: svgOpacity,
+            willChange: 'opacity',
+            transition: 'opacity 0.1s ease-out'
+          }}
+        >
           <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M17.25 13.75L12 19.25L6.75 13.75"></path>
           <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M12 18.25V4.75"></path>
         </svg>
       </section>
 
-      {/* <section className={`${styles.split} ${styles.flipped} ${styles.intro}`}>
+      <section className={styles.services}>
+        <h1>Branding. Visual Identity. Graphic Design.</h1>
+      </section>
+
+      <section className={`${styles.split} ${styles.flipped} ${styles.intro}`}>
         <video 
           ref={introVideoRef}
           loop 
@@ -513,13 +600,10 @@ export default function Home(props: any) {
         >         
             <source src="/mcm-intro.mp4" type="video/mp4"/>       
         </video>
-        <div className={styles.content}>
-          <p>Product. Graphic. Branding. Product. Graphic. Branding.</p>
-          <p>Graphic. Branding. Product. Graphic. Branding. Product.</p>
-          <p>Branding. Product. Graphic. Branding. Product. Graphic.</p>
-        </div>
+        <img src="workin.jpg" />
       </section>
-
+      
+      {/* 
       <section className={styles.split}>
         <img src="workin.jpg" />
         <div className={styles.content}>
@@ -715,7 +799,7 @@ export default function Home(props: any) {
           </div>
         </div>
 
-        <div className={styles.case}>
+        {/* <div className={styles.case}>
           <aside>
             <h2>McM Sound</h2>
             <p>Boutique sound studio servicing enterprise clients in TV and film.</p>
@@ -733,9 +817,9 @@ export default function Home(props: any) {
             <img src="mcmsound/mcms-radio.gif" className={styles.half} />
             <img src="mcmsound/mcms-laptop.jpg" className={styles.half} />
           </div>
-        </div>
+        </div> */}
         
-        <div className={styles.case}>
+        {/* <div className={styles.case}>
           <aside>
             <h2>Mocks</h2>
             <p>A fast and intuitive mobile device mockup maker for mobile makers.</p>
@@ -750,9 +834,11 @@ export default function Home(props: any) {
             <img src="moks/moks-ani2.gif" className={styles.half} />
             <img src="moks/moks2.jpg" />
           </div>
-        </div>
+        </div> */}
 
       </section>
+
+      
 
 
       <section className={styles.cv}>
@@ -816,6 +902,27 @@ export default function Home(props: any) {
 
 
 
+      </section>
+
+      <section className={styles.disrupt}>
+        <video 
+          ref={patternVideoRef}
+          loop 
+          muted 
+          autoPlay 
+          playsInline 
+          controls={false} 
+          className={styles.half}
+          preload="auto"
+          onLoadedData={(e) => {
+            const video = e.currentTarget;
+            if (video.paused) {
+              video.play().catch(() => {});
+            }
+          }}
+        >         
+            <source src="/pattern.mp4" type="video/mp4"/>       
+        </video>
       </section>
 
     </main>

@@ -36,6 +36,7 @@ main {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  z-index: 1;
 }
 
 footer {
@@ -47,6 +48,7 @@ footer {
   padding: 3em 1.5em;
   gap: 1em;
   border-top: 1px dotted rgba(var(--foreground-rgb), 0.1);
+  background: rgb(var(--background-rgb));
 }
 
 
