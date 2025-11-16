@@ -27,6 +27,7 @@ export default function Home(props: any) {
   const [currentLogoIndex, setCurrentLogoIndex] = useState(0);
   const [logoOpacity, setLogoOpacity] = useState(1);
   const [logoScale, setLogoScale] = useState(1);
+  const [imagesLoaded, setImagesLoaded] = useState(false);
   const logos = [
     "/logos/apeak-dark.svg",
     "/logos/hmtbc-dark.svg",
@@ -305,14 +306,43 @@ export default function Home(props: any) {
     };
   }, []);
 
-  // Cycle through logos every 100ms
+  // Preload all logo images
   useEffect(() => {
+    let loadedCount = 0;
+    const totalImages = logos.length;
+    
+    const preloadImages = () => {
+      logos.forEach((src) => {
+        const img = new Image();
+        img.onload = () => {
+          loadedCount++;
+          if (loadedCount === totalImages) {
+            setImagesLoaded(true);
+          }
+        };
+        img.onerror = () => {
+          loadedCount++;
+          if (loadedCount === totalImages) {
+            setImagesLoaded(true);
+          }
+        };
+        img.src = src;
+      });
+    };
+
+    preloadImages();
+  }, [logos]);
+
+  // Cycle through logos every 125ms
+  useEffect(() => {
+    if (!imagesLoaded) return;
+    
     const interval = setInterval(() => {
       setCurrentLogoIndex((prevIndex) => (prevIndex + 1) % logos.length);
     }, 125);
 
     return () => clearInterval(interval);
-  }, [logos.length]);
+  }, [logos.length, imagesLoaded]);
 
   // Fade and scale logo based on scroll position
   useEffect(() => {
@@ -442,17 +472,21 @@ export default function Home(props: any) {
             <source src="/sky.mp4" type="video/mp4"/>       
         </video>
 
-        <img 
-          src={logos[currentLogoIndex]} 
-          key={currentLogoIndex} 
-          style={{ 
-            opacity: logoOpacity, 
-            transform: `scale(${logoScale})`,
-            transformOrigin: 'center center',
-            transition: 'opacity 0.1s ease-out',
-            willChange: 'transform, opacity'
-          }}
-        />
+        {logos.map((src, index) => (
+          <img 
+            key={src}
+            src={src}
+            alt=""
+            style={{ 
+              opacity: index === currentLogoIndex ? logoOpacity : 0,
+              transform: `scale(${logoScale})`,
+              transformOrigin: 'center center',
+              willChange: 'transform, opacity',
+              pointerEvents: index === currentLogoIndex ? 'auto' : 'none'
+            }}
+            loading="eager"
+          />
+        ))}
 
         <svg width="24" height="24" fill="none" viewBox="0 0 24 24">
           <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M17.25 13.75L12 19.25L6.75 13.75"></path>
