@@ -30,7 +30,7 @@ export default function RootLayout({
               <img src="light/m.svg" alt="" className={styles.logo} />
             </picture>
             <div className={styles.network}>
-              <a href="https://layers.to/brett">
+              {/* <a href="https://layers.to/brett">
                 <picture>
                   <source srcSet="dark/layers.svg" media="(prefers-color-scheme: dark)" />
                   <img src="light/layers.svg" alt="" />
@@ -41,7 +41,7 @@ export default function RootLayout({
                   <source srcSet="dark/readcv.svg" media="(prefers-color-scheme: dark)" />
                   <img src="light/readcv.svg" alt="" />
                 </picture>
-              </a>
+              </a> */}
               <a href="https://instagram.com/brettmcm">
                 <picture>
                   <source srcSet="dark/insta.svg" media="(prefers-color-scheme: dark)" />
