@@ -845,15 +845,15 @@ export default function Home(props: any) {
 
         <h4 className={styles.title}>Teams</h4>
 
-        <a href="http://radsmth.com" className={styles.row}>
-          <p>Radsmth</p>
-          <p className={styles.desc}>Founder</p>
+        <a href="http://figma.com" className={styles.row}>
+          <p>Figma</p>
+          <p className={styles.desc}>Designer Advocate</p>
           <hr />
           <p className={styles.desc}>Current</p>
         </a>
-        <a href="http://experian.com" className={styles.row}>
-          <p>Experian</p>
-          <p className={styles.desc}>Product Design Manager</p>
+        <a href="http://radsmth.com" className={styles.row}>
+          <p>Radsmth</p>
+          <p className={styles.desc}>Founder</p>
           <hr />
           <p className={styles.desc}>Current</p>
         </a>
@@ -863,23 +863,29 @@ export default function Home(props: any) {
           <hr />
           <p className={styles.desc}>Current</p>
         </a>
+        <a href="http://experian.com" className={styles.row}>
+          <p>Experian</p>
+          <p className={styles.desc}>Product Design Manager</p>
+          <hr />
+          <p className={styles.desc}>2020-2025</p>
+        </a>
         <a href="http://vuori.com" className={styles.row}>
           <p>Vuori Clothing</p>
           <p className={styles.desc}>UX Consultant</p>
           <hr />
-          <p className={styles.desc}>2022</p>
+          <p className={styles.desc}>2020</p>
         </a>
         <a href="http://onxmaps.com" className={styles.row}>
           <p>onX Maps</p>
           <p className={styles.desc}>Product Designer</p>
           <hr />
-          <p className={styles.desc}>2022</p>
+          <p className={styles.desc}>2020</p>
         </a>
         <a href="http://stance.com" className={styles.row}>
           <p>Stance</p>
           <p className={styles.desc}>UX Designer</p>
           <hr />
-          <p className={styles.desc}>2016-2022</p>
+          <p className={styles.desc}>2016-2020</p>
         </a>
         <a href="http://oakley.com" className={styles.row}>
           <p>Oakley</p>
