@@ -42,6 +42,7 @@ export default function RootLayout({
                   <img src="light/readcv.svg" alt="" />
                 </picture>
               </a> */}
+              
               <a href="https://instagram.com/brettmcm">
                 <picture>
                   <source srcSet="dark/insta.svg" media="(prefers-color-scheme: dark)" />
