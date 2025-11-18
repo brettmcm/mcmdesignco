@@ -578,7 +578,7 @@ export default function Home(props: any) {
       </section>
 
       <section className={styles.services}>
-        <h1>Branding. Visual Identity. Graphic Design.</h1>
+        <h1>Branding. Design Systems. Graphic Design.</h1>
       </section>
 
       <section className={`${styles.split} ${styles.intro}`}>
