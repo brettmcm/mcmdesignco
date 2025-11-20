@@ -16,9 +16,9 @@
         z-index: -1;
         mix-blend-mode: normal;
 
-        @media (prefers-color-scheme: dark) {
-            background: rgb(var(--dark-rgb));
-        }
+        // @media (prefers-color-scheme: dark) {
+        //     background: rgb(var(--dark-rgb));
+        // }
     }
 
     .content {
@@ -33,9 +33,9 @@
         justify-self: center;
         position: relative;
         z-index: 1;
-        @media (prefers-color-scheme: light) {
+        // @media (prefers-color-scheme: light) {
             mix-blend-mode: difference;    
-        }
+        // }
 
         .logo {
             width: 2em;

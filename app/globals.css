@@ -12,13 +12,13 @@
   --emphasis-rgb: 0, 0, 0;
   }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 237, 237, 237;
     --background-rgb: 12, 12, 12;
     --emphasis-rgb: 255, 255, 255;
   }
-}
+} */
 
 body {
   background: rgb(var(--background-rgb));
@@ -49,9 +49,13 @@ footer {
   gap: 1em;
   border-top: 1px dotted rgba(var(--foreground-rgb), 0.1);
   background: rgb(var(--background-rgb));
+
+  p {
+    span {
+      padding-right: 0.75em;
+    }
+  }
 }
-
-
 
 @layer utilities {
   .text-balance {

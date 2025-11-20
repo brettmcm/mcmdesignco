@@ -26,7 +26,7 @@ export default function RootLayout({
         {children}
         <footer>
             <picture>
-              <source srcSet="dark/m.svg" media="(prefers-color-scheme: dark)" />
+              <source srcSet="light/m.svg" media="(prefers-color-scheme: dark)" />
               <img src="light/m.svg" alt="" className={styles.logo} />
             </picture>
             <div className={styles.network}>
@@ -42,17 +42,17 @@ export default function RootLayout({
                   <img src="light/readcv.svg" alt="" />
                 </picture>
               </a> */}
-              
+
               <a href="https://instagram.com/brettmcm">
                 <picture>
-                  <source srcSet="dark/insta.svg" media="(prefers-color-scheme: dark)" />
+                  <source srcSet="light/insta.svg" media="(prefers-color-scheme: dark)" />
                   <img src="light/insta.svg" alt="" />
                 </picture>
               </a>
             </div>
             <div className={styles.brand}>
               <h4>Brett McM Design</h4>
-              <p>Branding, Graphic Design, Product Design, Creative Consulting</p>
+              <p><span>Branding</span><span>Design Systems</span><span>Graphic Design</span></p>
             </div>
         </footer>
       </body>
