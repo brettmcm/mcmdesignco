@@ -578,7 +578,8 @@ export default function Home(props: any) {
       </section>
 
       <section className={styles.services}>
-        <h1>Branding. Design Systems. Graphic Design.</h1>
+        <h4>Creative services</h4>
+        <ol><li>Branding</li><li>Design Systems</li><li>Graphic Design</li></ol>
       </section>
 
       <section className={`${styles.split} ${styles.intro}`}>
@@ -685,7 +686,7 @@ export default function Home(props: any) {
 
         <div className={styles.case}>
           <aside>
-            <h2>Canary</h2>
+            <h4>Canary</h4>
             <p>Finding the subversive space in an industry saturated with green-washed, minimal brands presenting tired monotony.</p>
             <ul aria-label="Scope of work"> 
                 <li>Brand strategy</li>
@@ -726,7 +727,7 @@ export default function Home(props: any) {
 
         <div className={styles.case}>
           <aside>
-            <h2>Bloop</h2>
+            <h4>Bloop</h4>
             <p>Transforming a once-hidden chore into a household celebration with small-batch, all-natural laundry soap that is free of both harmful chemicals <i>and</i> typical hippy scents.</p>
             <ul aria-label="Scope of work"> 
                 <li>Brand strategy</li>
@@ -780,7 +781,7 @@ export default function Home(props: any) {
 
         <div className={styles.case}>
           <aside>
-            <h2>Dusty Times</h2>
+            <h4>Dusty Times</h4>
             <p>An annual lifestyle journal celebrating the world of desert racing and overlanding. Spotlighting the spirit of adventure, resilience, and the relentless pursuit of victory by highlighting the stories on the fringes of the spotlight.</p>
             <ul aria-label="Scope of work"> 
                 <li>Design direction</li>
@@ -801,7 +802,7 @@ export default function Home(props: any) {
 
         {/* <div className={styles.case}>
           <aside>
-            <h2>McM Sound</h2>
+            <h4>McM Sound</h4>
             <p>Boutique sound studio servicing enterprise clients in TV and film.</p>
             <ul aria-label="Scope of work"> 
                 <li>Visual identity</li>
@@ -821,7 +822,7 @@ export default function Home(props: any) {
         
         {/* <div className={styles.case}>
           <aside>
-            <h2>Mocks</h2>
+            <h4>Mocks</h4>
             <p>A fast and intuitive mobile device mockup maker for mobile makers.</p>
             <ul aria-label="Scope of work"> 
                 <li>Product design</li>
