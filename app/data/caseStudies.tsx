@@ -66,36 +66,5 @@ export const CASE_STUDIES: CaseStudyData[] = [
       { type: 'image', src: 'dtimes/united-in-dirt.jpg' }
     ]
   }
-  // {
-  //   title: "McM Sound",
-  //   description: "Boutique sound studio servicing enterprise clients in TV and film.",
-  //   scope: [
-  //     "Visual identity",
-  //     "Website design",
-  //     "Website development"
-  //   ],
-  //   galleryItems: [
-  //     { type: 'image', src: 'mcmsound/mcms-icon.jpg' },
-  //     { type: 'image', src: 'mcmsound/mcms-phone2.jpg', className: 'half' },
-  //     { type: 'image', src: 'mcmsound/mcms-interface.jpg', className: 'half' },
-  //     { type: 'image', src: 'mcmsound/mcms-vinyl.jpg' },
-  //     { type: 'image', src: 'mcmsound/mcms-radio.gif', className: 'half' },
-  //     { type: 'image', src: 'mcmsound/mcms-laptop.jpg', className: 'half' }
-  //   ]
-  // },
-  // {
-  //   title: "Mocks",
-  //   description: "A fast and intuitive mobile device mockup maker for mobile makers.",
-  //   scope: [
-  //     "Product design",
-  //     <><span className="proper">SwiftUI</span> development</>
-  //   ],
-  //   galleryItems: [
-  //     { type: 'image', src: 'moks/moks1.jpg' },
-  //     { type: 'image', src: 'moks/moks-ani1.gif', className: 'half' },
-  //     { type: 'image', src: 'moks/moks-ani2.gif', className: 'half' },
-  //     { type: 'image', src: 'moks/moks2.jpg' }
-  //   ]
-  // }
 ];
 
