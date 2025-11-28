@@ -88,7 +88,10 @@ export const CASE_STUDIES: CaseStudyData[] = [
     description: "A fast and intuitive mobile device mockup maker for mobile makers.",
     scope: [
       "Product design",
-      <><span className="proper">SwiftUI</span> development</>
+      React.createElement(React.Fragment, null,
+        React.createElement('span', { className: 'proper' }, 'SwiftUI'),
+        ' development'
+      )
     ],
     galleryItems: [
       { type: 'image', src: 'moks/moks1.jpg' },
