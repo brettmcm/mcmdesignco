@@ -1,8 +1,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import "~slick-carousel/slick/slick.css";
-@import "~slick-carousel/slick/slick-theme.css";
 
 :root {
   --foreground-rgb: 12, 12, 12;
@@ -70,13 +68,18 @@ h1, h2, h3, h4, p {
 
 h1 {
   width: 80%;
-  font-family: 'scotch-display', serif;
-  font-size: clamp(1.5em, 5vw, 2.75em);
-  padding: 1em 0;
+  /* font-family: 'scotch-display', serif; */
+  font-family: 'indivisible', serif;
+  font-weight: 500;
+  font-size: clamp(2em, 5vw, 2.75em);
+  line-height: 100%;
+  letter-spacing: -1.5px;
+  margin-bottom: 0.25em;
 }
 h2 {
   width: 70%;
-  font-family: 'scotch-display', serif;
+  /* font-family: 'scotch-display', serif; */
+  font-family: 'indivisible', serif;
   font-size: clamp(2em, 4vw, 4em);
   line-height: 0.9em;
   padding: 0 0 0.5em 0;

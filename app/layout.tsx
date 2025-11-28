@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import styles from './styles/layout.module.scss'
 import Header from './components/Header'
+import SocialLinks from './components/SocialLinks'
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -29,27 +32,12 @@ export default function RootLayout({
               <source srcSet="light/m.svg" media="(prefers-color-scheme: dark)" />
               <img src="light/m.svg" alt="" className={styles.logo} />
             </picture>
-            <div className={styles.network}>
-              {/* <a href="https://layers.to/brett">
-                <picture>
-                  <source srcSet="dark/layers.svg" media="(prefers-color-scheme: dark)" />
-                  <img src="light/layers.svg" alt="" />
-                </picture>
-              </a>
-              <a href="https://read.cv/brettmcm">
-                <picture>
-                  <source srcSet="dark/readcv.svg" media="(prefers-color-scheme: dark)" />
-                  <img src="light/readcv.svg" alt="" />
-                </picture>
-              </a> */}
-
-              <a href="https://instagram.com/brettmcm">
-                <picture>
-                  <source srcSet="light/insta.svg" media="(prefers-color-scheme: dark)" />
-                  <img src="light/insta.svg" alt="" />
-                </picture>
-              </a>
-            </div>
+            <SocialLinks 
+              links={[
+                { href: 'https://instagram.com/brettmcm', iconName: 'insta', alt: 'Instagram' },
+                { href: 'https://x.com/brettmcmillin', iconName: 'x', alt: 'X' }
+              ]} 
+            />
             <div className={styles.brand}>
               <h4>Brett McM Design</h4>
               <p><span>Branding</span><span>Design Systems</span><span>Graphic Design</span></p>

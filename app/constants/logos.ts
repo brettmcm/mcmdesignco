@@ -1,0 +1,20 @@
+export const LOGOS = [
+  "/logos/apeak-dark.svg",
+  "/logos/hmtbc-dark.svg",
+  "/logos/island-dwell-dark.svg",
+  "/logos/island-dwell-icon-dark.svg",
+  "/logos/marends-dark.svg",
+  "/logos/mcm-dark.svg",
+  "/logos/millercove-dark.svg",
+  "/logos/mosaic-dark.svg",
+  "/logos/neon-moon-dark.svg",
+  "/logos/neon-moon-icon-dark.svg",
+  "/logos/rally-dark.svg",
+  "/logos/swamptone-dark.svg",
+  "/logos/the-beer-house-dark.svg",
+  "/logos/yoga-for-alex-dark.svg",
+  "/logos/stir-dark.svg",
+  "/logos/canary-dark.svg",
+  "/logos/bloop-dark.svg",
+] as const;
+
