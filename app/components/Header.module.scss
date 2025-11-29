@@ -1,0 +1,55 @@
+.header {
+    position: fixed;
+    width: 100vw;
+    z-index: 10;
+    background: transparent;
+    overflow: hidden;
+    display: grid;
+    place-content: center;
+
+    .headerBackground {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgb(var(--background-rgb));
+        z-index: -1;
+        mix-blend-mode: normal;
+    }
+
+    .content {
+        top: 0;
+        width: 100vw;
+        padding: 2em 1.5em;
+        max-width: 1400px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        justify-self: center;
+        position: relative;
+        z-index: 1;
+        mix-blend-mode: difference;
+
+        .logo {
+            width: 2em;
+        }
+    }
+}
+
+.email {
+    padding: 0.4em 0.8em;
+    border-radius: 4px;
+    color: rgb(var(--bright-rgb));
+    border: 2px solid rgb(var(--bright-rgb));
+    font-family: 'indivisible', sans-serif;
+    font-weight: 300;
+    transition: all 0.1s;
+
+    &:hover {
+        background: rgb(var(--bright-rgb));
+        color: rgb(var(--dark-rgb));
+    }
+}
+

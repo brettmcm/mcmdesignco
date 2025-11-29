@@ -67,19 +67,25 @@ h1, h2, h3, h4, p {
 }
 
 h1 {
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "kern";
+  -webkit-font-smoothing: antialiased;
   width: 80%;
   /* font-family: 'scotch-display', serif; */
-  font-family: 'indivisible', serif;
-  font-weight: 500;
-  font-size: clamp(2em, 5vw, 2.75em);
+  font-family: 'indivisible', var(--font-ibm-plex-sans), sans-serif;
+  font-weight: 700;
+  font-size: clamp(2em, 8vw, 8em);
   line-height: 100%;
-  letter-spacing: -1.5px;
+  letter-spacing: -0.07em;
   margin-bottom: 0.25em;
+  margin-left: -0.07em;
+  filter: blur(3px);
 }
 h2 {
   width: 70%;
   /* font-family: 'scotch-display', serif; */
-  font-family: 'indivisible', serif;
+  font-family: 'indivisible', var(--font-ibm-plex-sans), sans-serif;
+  font-weight: 400;
   font-size: clamp(2em, 4vw, 4em);
   line-height: 0.9em;
   padding: 0 0 0.5em 0;

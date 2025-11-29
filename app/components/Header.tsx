@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import styles from '../styles/layout.module.scss'
+import styles from '../styles/Header.module.scss'
 
 export default function Header() {
   const [translateY, setTranslateY] = useState(-100)

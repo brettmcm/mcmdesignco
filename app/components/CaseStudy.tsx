@@ -1,7 +1,7 @@
 'use client'
 
 import { useRef } from 'react';
-import styles from '../styles/layout.module.scss';
+import styles from '../styles/CaseStudy.module.scss';
 
 export interface GalleryItem {
   type: 'image' | 'video';
@@ -42,6 +42,7 @@ export default function CaseStudy({ title, description, scope, galleryItems }: C
       </aside>
       <div className={styles.gallery}>
         {galleryItems.map((item, index) => {
+          const itemClassName = item.className === 'half' ? styles.half : item.className;
           if (item.type === 'video') {
             return (
               <video
@@ -52,7 +53,7 @@ export default function CaseStudy({ title, description, scope, galleryItems }: C
                 autoPlay
                 playsInline
                 controls={false}
-                className={item.className}
+                className={itemClassName}
                 preload="auto"
                 onLoadedData={(e) => {
                   const video = e.currentTarget;
@@ -69,7 +70,7 @@ export default function CaseStudy({ title, description, scope, galleryItems }: C
               <img
                 key={index}
                 src={item.src}
-                className={item.className}
+                className={itemClassName}
                 alt=""
               />
             );

@@ -2,7 +2,7 @@
 
 import CaseStudy from './CaseStudy';
 import { CASE_STUDIES } from '../data/caseStudies';
-import styles from '../styles/layout.module.scss';
+import styles from '../styles/Featured.module.scss';
 
 /**
  * Featured case studies section
@@ -19,8 +19,8 @@ export default function Featured() {
           scope={caseStudy.scope}
           galleryItems={caseStudy.galleryItems.map(item => ({
             ...item,
-            // Map className string to actual style class if needed
-            className: item.className === 'half' ? styles.half : item.className
+            // Keep className as string - CaseStudy will handle the mapping
+            className: item.className
           }))}
         />
       ))}

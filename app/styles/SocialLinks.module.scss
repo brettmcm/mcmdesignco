@@ -1,0 +1,13 @@
+.network {
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+    flex-shrink: 0;
+    max-width: fit-content;
+    order: 3;
+
+    img {
+        height: 2.3em;
+    }
+}
+

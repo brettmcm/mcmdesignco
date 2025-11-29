@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, IBM_Plex_Sans } from "next/font/google";
 import "./globals.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -8,6 +8,11 @@ import Header from './components/Header'
 import SocialLinks from './components/SocialLinks'
 
 const inter = Inter({ subsets: ["latin"] });
+const ibmPlexSans = IBM_Plex_Sans({ 
+  subsets: ["latin"], 
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-ibm-plex-sans"
+});
 
 export const metadata: Metadata = {
   title: "Brett McMillin | Designer",
@@ -24,7 +29,7 @@ export default function RootLayout({
         <link rel="stylesheet" href="https://use.typekit.net/shq4xoc.css" />
         <link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml" />
       </head>
-      <body className={inter.className}>
+      <body className={`${inter.className} ${ibmPlexSans.variable}`}>
         <Header />
         {children}
         <footer>

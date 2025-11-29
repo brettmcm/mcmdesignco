@@ -1,6 +1,6 @@
 'use client'
 
-import styles from '../styles/layout.module.scss'
+import styles from '../styles/Teams.module.scss'
 
 export interface Team {
   name: string

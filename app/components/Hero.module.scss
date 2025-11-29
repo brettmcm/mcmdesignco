@@ -1,0 +1,66 @@
+.hero {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    text-align: center;
+    z-index: 1;
+    overflow: hidden;
+
+    color: rgb(var(--bright-rgb));
+    
+    // Disable user selection, especially on mobile
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: transparent;
+
+    h1 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    img {
+        position: fixed;
+        width: 80vw;
+        max-width: 500px;
+        user-select: none;
+        -webkit-user-select: none;
+        -webkit-user-drag: none;
+    }
+
+    svg {
+        position: fixed;
+        bottom: 5vw;
+        width: clamp(1.5em, 2vw, 5em);
+        height: clamp(1.5em, 2vw, 5em);
+        animation: 0.5s infinite alternate bounce;
+    }
+
+    @keyframes bounce {
+        from {
+            translate: 0 0;
+        }
+
+        to {
+            translate: 0 0.25em;
+        }
+    }
+
+    .bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: -1;
+    }
+}
+

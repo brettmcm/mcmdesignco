@@ -1,0 +1,49 @@
+.case {
+    display: flex;
+    flex-direction: column;
+    gap: calc(1em + 2vw);
+    
+    aside {
+        text-align: left;
+        width: 100%;
+    }
+    
+    .gallery {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5em;
+        width: 100%;
+
+        img {
+            width: 100%;
+        }
+    }
+}
+
+.half {
+    width: 100%;
+}
+
+@media screen and (min-width: 980px) {
+    .case {
+        flex-direction: row;
+        aside {
+            width: 25%;
+        }
+        .gallery {
+            width: 75%;
+            flex-direction: row;
+            flex-wrap: wrap;
+            align-items: stretch;
+            img {
+                object-fit: cover;
+            }
+            .half { 
+                width: calc(50% - 0.25em); 
+            }
+        }
+    }
+}
+

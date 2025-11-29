@@ -1,7 +1,7 @@
 'use client'
 
 import { useRef } from 'react';
-import styles from '../styles/layout.module.scss';
+import styles from '../styles/Hero.module.scss';
 import { LOGOS } from '../constants/logos';
 import { useLogoCycling } from '../hooks/useLogoCycling';
 import { useScrollEffects } from '../hooks/useScrollEffects';
@@ -87,7 +87,7 @@ export default function Hero({ heroVideoRef }: HeroProps) {
         onCanPlay={handleVideoLoaded}
         onLoadedMetadata={handleVideoLoaded}
       >         
-        <source src="/sky.mp4" type="video/mp4"/>       
+        <source src="/static.mp4" type="video/mp4"/>       
       </video>
 
       {LOGOS.map((src, index) => (

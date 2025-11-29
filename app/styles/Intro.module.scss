@@ -1,0 +1,138 @@
+.split {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+    width: 100%;
+
+    img {
+        object-position: center 10%;
+    }
+
+    .content, img, video {
+        position: relative;
+        width: 100%;
+        max-height: 70vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        object-fit: cover;
+        text-align: center;
+        overflow: hidden;
+        background: rgb(var(--background-rgb));
+        color: rgb(var(--foreground-rgb));
+        gap: 2em;
+
+        p { 
+            width: 110%;
+            font-family: 'scotch-display', serif;
+            font-size: clamp(1em, 5vw, 2.5em);
+            white-space: nowrap;
+            line-height: 50%;
+        }
+
+        &.invert {
+            background: rgb(var(--foreground-rgb));
+            color: rgb(var(--background-rgb));
+        }
+
+        .carousel {
+            width: 100%;
+            overflow-x: auto;
+            white-space: nowrap;
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            flex-wrap: nowrap;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+
+            &::-webkit-scrollbar {
+                display: none;
+            }
+
+            .carouselContent {
+                width: 100%;
+                scroll-snap-align: center;
+                flex-shrink: 0;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                white-space: wrap;
+                user-select: none;
+            }
+        }
+        .carouselControls {
+            position: relative;
+            top: 0;
+            left: 0;
+            display: none;
+            justify-content: space-between;
+            align-items: center;
+            pointer-events: none;
+            gap: 2em;
+
+            .prev, .next {
+                transform-origin: 50% 50%;
+                opacity: 0.2;
+                transition: opacity 0.15s ease-in-out;
+                pointer-events: all;
+                
+                &:hover {
+                    opacity: 1;
+                }
+
+                svg {
+                    width: 32px;
+                    height: 32px;
+                }
+            }
+
+            .prev { transform: rotate(90deg); }
+            .next { transform: rotate(-90deg); }
+        }
+
+        .dots {
+            position: relative;
+            display: flex;
+            gap: 4px;
+
+            .dot {
+                width: 24px;
+                height: 2px;
+                background: rgb(var(--foreground-rgb));
+                opacity: 0.1;
+
+                &:first-child {
+                    opacity: 1;
+                }
+            }
+        }
+    }
+}
+
+.half {
+    width: 100%;
+}
+
+@media screen and (min-width: 980px) {
+    .split {
+        flex-direction: row;
+        &.flipped { flex-direction: row-reverse; }
+        div.content, img, video {
+            width: 50%;
+            .carouselControls {
+                display: flex;
+            }
+            .dots {
+                display: none;
+            }
+        }
+    }
+}
+

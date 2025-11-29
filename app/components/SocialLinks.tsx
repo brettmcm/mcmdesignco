@@ -1,4 +1,4 @@
-import styles from '../styles/layout.module.scss'
+import styles from '../styles/SocialLinks.module.scss'
 
 export interface SocialLink {
   href: string

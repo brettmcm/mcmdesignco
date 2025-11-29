@@ -1,7 +1,7 @@
 'use client'
 
 import { useRef } from 'react';
-import styles from '../styles/layout.module.scss';
+import styles from '../styles/Intro.module.scss';
 
 interface IntroProps {
   introVideoRef: React.RefObject<HTMLVideoElement>;
@@ -10,7 +10,7 @@ interface IntroProps {
 
 export default function Intro({ 
   introVideoRef,
-  imageSrc = 'workin.jpg'
+  imageSrc = 'portrait.jpg'
 }: IntroProps) {
   const handleVideoLoaded = (e: React.SyntheticEvent<HTMLVideoElement>) => {
     const video = e.currentTarget;
@@ -20,7 +20,7 @@ export default function Intro({
   };
 
   return (
-    <section className={`${styles.split} ${styles.intro}`}>
+    <section className={styles.split}>
       <img src={imageSrc} alt="" />
       <video 
         ref={introVideoRef}

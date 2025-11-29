@@ -1,7 +1,7 @@
 'use client'
 
 import { useRef } from 'react';
-import styles from '../styles/layout.module.scss';
+import styles from '../styles/PatternVideo.module.scss';
 
 interface PatternVideoProps {
   patternVideoRef: React.RefObject<HTMLVideoElement>;
@@ -12,7 +12,7 @@ interface PatternVideoProps {
 export default function PatternVideo({ 
   patternVideoRef,
   videoSrc = '/pattern.mp4',
-  className = styles.half
+  className
 }: PatternVideoProps) {
   const handleVideoLoaded = (e: React.SyntheticEvent<HTMLVideoElement>) => {
     const video = e.currentTarget;
