@@ -79,7 +79,7 @@ h1 {
   letter-spacing: -0.07em;
   margin-bottom: 0.25em;
   margin-left: -0.07em;
-  filter: blur(3px);
+  filter: blur(0.25vw);
 }
 h2 {
   width: 70%;

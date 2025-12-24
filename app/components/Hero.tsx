@@ -87,7 +87,7 @@ export default function Hero({ heroVideoRef }: HeroProps) {
         onCanPlay={handleVideoLoaded}
         onLoadedMetadata={handleVideoLoaded}
       >         
-        <source src="/static.mp4" type="video/mp4"/>       
+        <source src="/sky.mp4" type="video/mp4"/>       
       </video>
 
       {LOGOS.map((src, index) => (
