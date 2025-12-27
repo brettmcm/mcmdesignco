@@ -12,6 +12,7 @@
     "next": "16.1.0-canary.19",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "resend": "^6.6.0",
     "sass": "^1.77.8",
     "slick-carousel": "^1.8.1"
   },
