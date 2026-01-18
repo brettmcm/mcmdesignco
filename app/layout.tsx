@@ -31,6 +31,7 @@ export default function RootLayout({
         <link rel="micropub" href="/api/micropub" />
         <link rel="authorization_endpoint" href="https://indieauth.com/auth" />
         <link rel="token_endpoint" href="https://tokens.indieauth.com/token" />
+        <link href="https://x.com/brettmcmillin" rel="me"></link>
 
         
       </head>
