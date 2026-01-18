@@ -63,6 +63,64 @@ function verifyToken(authHeader: string | null): boolean {
   return token === expectedToken
 }
 
+// Helper function to parse form data into Micropub format
+function parseFormDataToMicropub(formObj: Record<string, any>): any {
+  if (formObj.h || formObj['h']) {
+    const hType = String(formObj.h || formObj['h'] || 'entry')
+    const properties: Record<string, string[]> = {}
+    
+    // Parse properties[content][], properties[published], etc.
+    for (const [key, value] of Object.entries(formObj)) {
+      // Handle properties[content][] format
+      const propertiesMatch = key.match(/^properties\[(.+?)\](?:\[\])?$/)
+      if (propertiesMatch) {
+        const propName = propertiesMatch[1]
+        if (!properties[propName]) {
+          properties[propName] = []
+        }
+        if (Array.isArray(value)) {
+          properties[propName].push(...value.map(v => String(v)))
+        } else {
+          properties[propName].push(String(value))
+        }
+      }
+      // Handle direct properties like 'content', 'name', etc. (iA Writer format)
+      else if (key !== 'h' && key !== 'action' && !key.startsWith('properties[')) {
+        if (!properties[key]) {
+          properties[key] = []
+        }
+        if (Array.isArray(value)) {
+          properties[key].push(...value.map(v => String(v)))
+        } else {
+          properties[key].push(String(value))
+        }
+      }
+    }
+    
+    return { 
+      type: [`h-${hType}`], 
+      properties,
+      action: formObj.action || 'create'
+    }
+  } else {
+    // Fallback: treat form data as-is, but try to extract content
+    const result: any = {
+      ...formObj,
+      properties: formObj.properties || {},
+      action: formObj.action || 'create'
+    }
+    
+    // If content is directly in formObj, add it to properties
+    if (formObj.content && !formObj.properties) {
+      result.properties = {
+        content: Array.isArray(formObj.content) ? formObj.content : [formObj.content]
+      }
+    }
+    
+    return result
+  }
+}
+
 // CORS headers helper
 function corsHeaders() {
   return {
@@ -139,85 +197,163 @@ export async function POST(request: NextRequest) {
   }
 
   const contentType = request.headers.get('content-type') || ''
+  const contentTypeLower = contentType.toLowerCase()
+  console.log('Micropub POST - Content-Type:', contentType)
   
   let data: any
   
-  if (contentType.includes('application/json')) {
-    data = await request.json()
-  } else if (contentType.includes('application/x-www-form-urlencoded') || contentType.includes('multipart/form-data')) {
-    const formData = await request.formData()
-    const formObj: Record<string, any> = {}
-    
-    // Convert FormData to object, handling arrays
-    for (const [key, value] of formData.entries()) {
-      if (formObj[key]) {
-        // Convert to array if multiple values
-        if (Array.isArray(formObj[key])) {
-          formObj[key].push(value)
-        } else {
-          formObj[key] = [formObj[key], value]
-        }
-      } else {
-        formObj[key] = value
-      }
-    }
-    
-    // Parse Micropub format
-    if (formObj.h) {
-      // Handle h-entry format
-      const hType = formObj.h
-      const properties: Record<string, string[]> = {}
+  try {
+    if (contentTypeLower.includes('application/json')) {
+      data = await request.json()
+    } else if (contentTypeLower.includes('application/x-www-form-urlencoded')) {
+      // Parse form-urlencoded data manually
+      const text = await request.text()
+      const formObj: Record<string, any> = {}
+      const params = new URLSearchParams(text)
       
-      // Parse properties[content], properties[published], etc.
-      for (const [key, value] of Object.entries(formObj)) {
-        const match = key.match(/^properties\[(.+)\]$/)
-        if (match) {
-          const propName = match[1]
-          if (!properties[propName]) {
-            properties[propName] = []
-          }
-          if (Array.isArray(value)) {
-            properties[propName].push(...value.map(v => String(v)))
+      for (const [key, value] of params.entries()) {
+        if (formObj[key]) {
+          // Convert to array if multiple values
+          if (Array.isArray(formObj[key])) {
+            formObj[key].push(value)
           } else {
-            properties[propName].push(String(value))
+            formObj[key] = [formObj[key], value]
           }
+        } else {
+          formObj[key] = value
         }
       }
       
-      data = { type: [`h-${hType}`], properties }
+      // Parse Micropub format
+      data = parseFormDataToMicropub(formObj)
+    } else if (contentTypeLower.includes('multipart/form-data')) {
+      const formData = await request.formData()
+      const formObj: Record<string, any> = {}
+      
+      // Convert FormData to object, handling arrays
+      for (const [key, value] of formData.entries()) {
+        if (formObj[key]) {
+          if (Array.isArray(formObj[key])) {
+            formObj[key].push(value)
+          } else {
+            formObj[key] = [formObj[key], value]
+          }
+        } else {
+          formObj[key] = value
+        }
+      }
+      
+      // Parse Micropub format
+      data = parseFormDataToMicropub(formObj)
     } else {
-      // Fallback: treat form data as-is
-      data = formObj
+      // Try to parse as form-urlencoded even if content-type header is missing/malformed
+      try {
+        const text = await request.text()
+        const formObj: Record<string, any> = {}
+        const params = new URLSearchParams(text)
+        
+        for (const [key, value] of params.entries()) {
+          formObj[key] = value
+        }
+        
+        // Handle iA Writer format: h=entry&content=...
+        if (formObj.h || formObj.content) {
+          const hType = String(formObj.h || 'entry')
+          const properties: Record<string, string[]> = {}
+          for (const [key, value] of Object.entries(formObj)) {
+            if (key !== 'h' && key !== 'action') {
+              properties[key] = Array.isArray(value) ? value.map(v => String(v)) : [String(value)]
+            }
+          }
+          data = {
+            type: [`h-${hType}`],
+            properties,
+            action: formObj.action || 'create'
+          }
+        } else {
+          data = formObj
+        }
+      } catch (e) {
+        return NextResponse.json(
+          { error: 'Unsupported content type', details: contentType },
+          { 
+            status: 400,
+            headers: corsHeaders(),
+          }
+        )
+      }
     }
-  } else {
+  } catch (error: any) {
+    console.error('Error parsing request:', error)
+    console.error('Error stack:', error.stack)
     return NextResponse.json(
-      { error: 'Unsupported content type' },
+      { error: 'Invalid request', details: error.message },
       { 
         status: 400,
         headers: corsHeaders(),
       }
     )
   }
+  
+  console.log('Parsed data:', JSON.stringify(data, null, 2))
 
   // Handle Micropub create action
   if (data.action === 'create' || !data.action) {
-    let contentValue = data.properties?.content?.[0] || data.content || ''
-    const published = data.properties?.published?.[0] || new Date().toISOString()
+    // Try multiple ways to extract content
+    let contentValue: any = null
+    
+    // Try properties.content first (standard Micropub format)
+    if (data.properties?.content) {
+      contentValue = Array.isArray(data.properties.content) 
+        ? data.properties.content[0] 
+        : data.properties.content
+    }
+    // Try direct content property (iA Writer format)
+    else if (data.content) {
+      contentValue = Array.isArray(data.content) ? data.content[0] : data.content
+    }
+    // Try properties['content']
+    else if (data.properties && typeof data.properties === 'object') {
+      for (const [key, value] of Object.entries(data.properties)) {
+        if (key.toLowerCase() === 'content') {
+          contentValue = Array.isArray(value) ? value[0] : value
+          break
+        }
+      }
+    }
+    
+    const published = data.properties?.published?.[0] 
+      || data.properties?.published 
+      || data.published 
+      || new Date().toISOString()
     
     // Extract content from various formats
     let content = ''
-    if (typeof contentValue === 'string') {
+    if (contentValue === null || contentValue === undefined) {
+      content = ''
+    } else if (typeof contentValue === 'string') {
       content = contentValue
     } else if (typeof contentValue === 'object') {
       // Handle content object with html/text properties
-      content = contentValue.html || contentValue.text || String(contentValue)
+      content = contentValue.html || contentValue.text || contentValue.value || String(contentValue)
     } else {
       content = String(contentValue)
     }
     
     if (!content || content.trim() === '') {
+      console.error('No content found in request')
+      console.error('Data structure:', JSON.stringify(data, null, 2))
+      console.error('Data keys:', Object.keys(data))
+      if (data.properties) {
+        console.error('Properties keys:', Object.keys(data.properties))
+      }
       return NextResponse.json(
-        { error: 'Content is required' },
+        { 
+          error: 'Content is required', 
+          received: Object.keys(data),
+          properties: data.properties ? Object.keys(data.properties) : null,
+          debug: process.env.NODE_ENV === 'development' ? data : undefined
+        },
         { 
           status: 400,
           headers: corsHeaders(),
