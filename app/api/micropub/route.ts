@@ -65,59 +65,47 @@ function verifyToken(authHeader: string | null): boolean {
 
 // Helper function to parse form data into Micropub format
 function parseFormDataToMicropub(formObj: Record<string, any>): any {
-  if (formObj.h || formObj['h']) {
-    const hType = String(formObj.h || formObj['h'] || 'entry')
-    const properties: Record<string, string[]> = {}
+  // Default to h-entry if h is not specified (per Micropub spec)
+  const hType = String(formObj.h || formObj['h'] || 'entry')
+  const properties: Record<string, string[]> = {}
+  
+  // Parse properties[content][], properties[published], etc.
+  for (const [key, value] of Object.entries(formObj)) {
+    // Skip reserved parameters
+    if (key === 'h' || key === 'action' || key === 'access_token' || key === 'url' || key.startsWith('mp-')) {
+      continue
+    }
     
-    // Parse properties[content][], properties[published], etc.
-    for (const [key, value] of Object.entries(formObj)) {
-      // Handle properties[content][] format
-      const propertiesMatch = key.match(/^properties\[(.+?)\](?:\[\])?$/)
-      if (propertiesMatch) {
-        const propName = propertiesMatch[1]
-        if (!properties[propName]) {
-          properties[propName] = []
-        }
-        if (Array.isArray(value)) {
-          properties[propName].push(...value.map(v => String(v)))
-        } else {
-          properties[propName].push(String(value))
-        }
+    // Handle properties[content][] format
+    const propertiesMatch = key.match(/^properties\[(.+?)\](?:\[\])?$/)
+    if (propertiesMatch) {
+      const propName = propertiesMatch[1]
+      if (!properties[propName]) {
+        properties[propName] = []
       }
-      // Handle direct properties like 'content', 'name', etc. (iA Writer format)
-      else if (key !== 'h' && key !== 'action' && !key.startsWith('properties[')) {
-        if (!properties[key]) {
-          properties[key] = []
-        }
-        if (Array.isArray(value)) {
-          properties[key].push(...value.map(v => String(v)))
-        } else {
-          properties[key].push(String(value))
-        }
+      if (Array.isArray(value)) {
+        properties[propName].push(...value.map(v => String(v)))
+      } else {
+        properties[propName].push(String(value))
       }
     }
-    
-    return { 
-      type: [`h-${hType}`], 
-      properties,
-      action: formObj.action || 'create'
-    }
-  } else {
-    // Fallback: treat form data as-is, but try to extract content
-    const result: any = {
-      ...formObj,
-      properties: formObj.properties || {},
-      action: formObj.action || 'create'
-    }
-    
-    // If content is directly in formObj, add it to properties
-    if (formObj.content && !formObj.properties) {
-      result.properties = {
-        content: Array.isArray(formObj.content) ? formObj.content : [formObj.content]
+    // Handle direct properties like 'content', 'name', etc. (iA Writer format)
+    else if (!key.startsWith('properties[')) {
+      if (!properties[key]) {
+        properties[key] = []
+      }
+      if (Array.isArray(value)) {
+        properties[key].push(...value.map(v => String(v)))
+      } else {
+        properties[key].push(String(value))
       }
     }
-    
-    return result
+  }
+  
+  return { 
+    type: [`h-${hType}`], 
+    properties,
+    action: formObj.action || 'create'
   }
 }
 
@@ -199,6 +187,7 @@ export async function POST(request: NextRequest) {
   const contentType = request.headers.get('content-type') || ''
   const contentTypeLower = contentType.toLowerCase()
   console.log('Micropub POST - Content-Type:', contentType)
+  console.log('Micropub POST - Headers:', Object.fromEntries(request.headers.entries()))
   
   let data: any
   
@@ -208,6 +197,7 @@ export async function POST(request: NextRequest) {
     } else if (contentTypeLower.includes('application/x-www-form-urlencoded')) {
       // Parse form-urlencoded data manually
       const text = await request.text()
+      console.log('Raw form data:', text)
       const formObj: Record<string, any> = {}
       const params = new URLSearchParams(text)
       
@@ -224,6 +214,7 @@ export async function POST(request: NextRequest) {
         }
       }
       
+      console.log('Parsed form object:', formObj)
       // Parse Micropub format
       data = parseFormDataToMicropub(formObj)
     } else if (contentTypeLower.includes('multipart/form-data')) {
@@ -243,12 +234,14 @@ export async function POST(request: NextRequest) {
         }
       }
       
+      console.log('Parsed form object:', formObj)
       // Parse Micropub format
       data = parseFormDataToMicropub(formObj)
     } else {
       // Try to parse as form-urlencoded even if content-type header is missing/malformed
       try {
         const text = await request.text()
+        console.log('Raw data (fallback):', text)
         const formObj: Record<string, any> = {}
         const params = new URLSearchParams(text)
         
@@ -256,26 +249,13 @@ export async function POST(request: NextRequest) {
           formObj[key] = value
         }
         
-        // Handle iA Writer format: h=entry&content=...
-        if (formObj.h || formObj.content) {
-          const hType = String(formObj.h || 'entry')
-          const properties: Record<string, string[]> = {}
-          for (const [key, value] of Object.entries(formObj)) {
-            if (key !== 'h' && key !== 'action') {
-              properties[key] = Array.isArray(value) ? value.map(v => String(v)) : [String(value)]
-            }
-          }
-          data = {
-            type: [`h-${hType}`],
-            properties,
-            action: formObj.action || 'create'
-          }
-        } else {
-          data = formObj
-        }
-      } catch (e) {
+        console.log('Parsed form object (fallback):', formObj)
+        // Parse Micropub format
+        data = parseFormDataToMicropub(formObj)
+      } catch (e: any) {
+        console.error('Failed to parse request:', e)
         return NextResponse.json(
-          { error: 'Unsupported content type', details: contentType },
+          { error: 'invalid_request', error_description: `Unsupported content type: ${contentType}` },
           { 
             status: 400,
             headers: corsHeaders(),
@@ -287,7 +267,7 @@ export async function POST(request: NextRequest) {
     console.error('Error parsing request:', error)
     console.error('Error stack:', error.stack)
     return NextResponse.json(
-      { error: 'Invalid request', details: error.message },
+      { error: 'invalid_request', error_description: error.message },
       { 
         status: 400,
         headers: corsHeaders(),
@@ -299,25 +279,60 @@ export async function POST(request: NextRequest) {
 
   // Handle Micropub create action
   if (data.action === 'create' || !data.action) {
-    // Try multiple ways to extract content
+    // Per Micropub spec: must have at least one of content, summary, or photo
+    const hasContent = data.properties?.content && data.properties.content.length > 0
+    const hasSummary = data.properties?.summary && data.properties.summary.length > 0
+    const hasPhoto = data.properties?.photo && data.properties.photo.length > 0
+    
+    if (!hasContent && !hasSummary && !hasPhoto) {
+      console.error('No content, summary, or photo found in request')
+      console.error('Data structure:', JSON.stringify(data, null, 2))
+      console.error('Data keys:', Object.keys(data))
+      if (data.properties) {
+        console.error('Properties keys:', Object.keys(data.properties))
+      }
+      return NextResponse.json(
+        { 
+          error: 'invalid_request',
+          error_description: 'At least one of content, summary, or photo is required',
+          received: Object.keys(data),
+          properties: data.properties ? Object.keys(data.properties) : null,
+        },
+        { 
+          status: 400,
+          headers: corsHeaders(),
+        }
+      )
+    }
+    
+    // Extract content (prefer content, fallback to summary)
     let contentValue: any = null
     
     // Try properties.content first (standard Micropub format)
-    if (data.properties?.content) {
+    if (data.properties?.content && data.properties.content.length > 0) {
       contentValue = Array.isArray(data.properties.content) 
         ? data.properties.content[0] 
         : data.properties.content
+    }
+    // Try summary if no content
+    else if (data.properties?.summary && data.properties.summary.length > 0) {
+      contentValue = Array.isArray(data.properties.summary) 
+        ? data.properties.summary[0] 
+        : data.properties.summary
     }
     // Try direct content property (iA Writer format)
     else if (data.content) {
       contentValue = Array.isArray(data.content) ? data.content[0] : data.content
     }
-    // Try properties['content']
+    // Try properties['content'] or properties['summary']
     else if (data.properties && typeof data.properties === 'object') {
       for (const [key, value] of Object.entries(data.properties)) {
-        if (key.toLowerCase() === 'content') {
-          contentValue = Array.isArray(value) ? value[0] : value
-          break
+        if (key.toLowerCase() === 'content' || key.toLowerCase() === 'summary') {
+          const arrValue = Array.isArray(value) ? value : [value]
+          if (arrValue.length > 0 && arrValue[0]) {
+            contentValue = arrValue[0]
+            break
+          }
         }
       }
     }
@@ -330,7 +345,8 @@ export async function POST(request: NextRequest) {
     // Extract content from various formats
     let content = ''
     if (contentValue === null || contentValue === undefined) {
-      content = ''
+      // If we have photo but no content/summary, use empty content
+      content = hasPhoto ? '' : ''
     } else if (typeof contentValue === 'string') {
       content = contentValue
     } else if (typeof contentValue === 'object') {
@@ -340,19 +356,14 @@ export async function POST(request: NextRequest) {
       content = String(contentValue)
     }
     
-    if (!content || content.trim() === '') {
-      console.error('No content found in request')
+    // Allow empty content if we have photo
+    if (!hasPhoto && (!content || content.trim() === '')) {
+      console.error('No valid content found in request')
       console.error('Data structure:', JSON.stringify(data, null, 2))
-      console.error('Data keys:', Object.keys(data))
-      if (data.properties) {
-        console.error('Properties keys:', Object.keys(data.properties))
-      }
       return NextResponse.json(
         { 
-          error: 'Content is required', 
-          received: Object.keys(data),
-          properties: data.properties ? Object.keys(data.properties) : null,
-          debug: process.env.NODE_ENV === 'development' ? data : undefined
+          error: 'invalid_request',
+          error_description: 'Content is required when no photo is provided',
         },
         { 
           status: 400,
@@ -391,7 +402,7 @@ export async function POST(request: NextRequest) {
 
   // Handle other actions (update, delete) if needed
   return NextResponse.json(
-    { error: 'Unsupported action' },
+    { error: 'invalid_request', error_description: `Unsupported action: ${data.action}` },
     { 
       status: 400,
       headers: corsHeaders(),
