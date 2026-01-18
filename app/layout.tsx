@@ -28,7 +28,7 @@ export default function RootLayout({
       <head>
         <link rel="stylesheet" href="https://use.typekit.net/shq4xoc.css" />
         <link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml" />
-        <link rel="micropub" href="https://www.brettmcm.com" />
+        <link rel="micropub" href="https://www.brettmcm.com/api/micropub" />
         <link rel="authorization_endpoint" href="https://indieauth.com/auth" />
         <link rel="token_endpoint" href="https://tokens.indieauth.com/token" />
         <link href="https://x.com/brettmcmillin" rel="me"></link>

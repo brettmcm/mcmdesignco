@@ -63,6 +63,22 @@ function verifyToken(authHeader: string | null): boolean {
   return token === expectedToken
 }
 
+// CORS headers helper
+function corsHeaders() {
+  return {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+  }
+}
+
+export async function OPTIONS() {
+  return new NextResponse(null, {
+    status: 200,
+    headers: corsHeaders(),
+  })
+}
+
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url)
   const q = searchParams.get('q')
@@ -72,6 +88,8 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({
       'media-endpoint': `${request.nextUrl.origin}/api/micropub/media`,
       'syndicate-to': []
+    }, {
+      headers: corsHeaders(),
     })
   }
 
@@ -88,15 +106,22 @@ export async function GET(request: NextRequest) {
             content: [note.content],
             published: [note.published]
           }
+        }, {
+          headers: corsHeaders(),
         })
       }
     }
-    return NextResponse.json({ error: 'Not found' }, { status: 404 })
+    return NextResponse.json({ error: 'Not found' }, { 
+      status: 404,
+      headers: corsHeaders(),
+    })
   }
 
   // Default: return endpoint info
   return NextResponse.json({
     'media-endpoint': `${request.nextUrl.origin}/api/micropub/media`
+  }, {
+    headers: corsHeaders(),
   })
 }
 
@@ -106,7 +131,10 @@ export async function POST(request: NextRequest) {
   if (!verifyToken(authHeader)) {
     return NextResponse.json(
       { error: 'Unauthorized' },
-      { status: 401 }
+      { 
+        status: 401,
+        headers: corsHeaders(),
+      }
     )
   }
 
@@ -164,7 +192,10 @@ export async function POST(request: NextRequest) {
   } else {
     return NextResponse.json(
       { error: 'Unsupported content type' },
-      { status: 400 }
+      { 
+        status: 400,
+        headers: corsHeaders(),
+      }
     )
   }
 
@@ -187,7 +218,10 @@ export async function POST(request: NextRequest) {
     if (!content || content.trim() === '') {
       return NextResponse.json(
         { error: 'Content is required' },
-        { status: 400 }
+        { 
+          status: 400,
+          headers: corsHeaders(),
+        }
       )
     }
 
@@ -212,7 +246,8 @@ export async function POST(request: NextRequest) {
       {
         status: 201,
         headers: {
-          Location: url
+          Location: url,
+          ...corsHeaders(),
         }
       }
     )
@@ -221,7 +256,10 @@ export async function POST(request: NextRequest) {
   // Handle other actions (update, delete) if needed
   return NextResponse.json(
     { error: 'Unsupported action' },
-    { status: 400 }
+    { 
+      status: 400,
+      headers: corsHeaders(),
+    }
   )
 }
 
