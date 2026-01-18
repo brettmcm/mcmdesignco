@@ -3,7 +3,10 @@ import { readFile, writeFile, mkdir } from 'fs/promises'
 import { existsSync } from 'fs'
 import { join } from 'path'
 
-const NOTES_FILE = join(process.cwd(), 'data', 'notes.json')
+// Use /tmp in serverless environments (Vercel, AWS Lambda, etc.), otherwise use project data directory
+const isServerless = process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME || process.env.NEXT_RUNTIME === 'nodejs'
+const DATA_DIR = isServerless ? '/tmp/data' : join(process.cwd(), 'data')
+const NOTES_FILE = join(DATA_DIR, 'notes.json')
 
 interface Note {
   id: string
@@ -14,12 +17,17 @@ interface Note {
 
 // Initialize notes file if it doesn't exist
 async function ensureNotesFile() {
-  const dataDir = join(process.cwd(), 'data')
-  if (!existsSync(dataDir)) {
-    await mkdir(dataDir, { recursive: true })
-  }
-  if (!existsSync(NOTES_FILE)) {
-    await writeFile(NOTES_FILE, JSON.stringify({ notes: [] }, null, 2))
+  try {
+    if (!existsSync(DATA_DIR)) {
+      await mkdir(DATA_DIR, { recursive: true })
+    }
+    if (!existsSync(NOTES_FILE)) {
+      await writeFile(NOTES_FILE, JSON.stringify({ notes: [] }, null, 2))
+    }
+  } catch (error: any) {
+    console.error('Error ensuring notes file:', error.message)
+    // In serverless, /tmp should always be writable, but handle gracefully
+    throw new Error(`Failed to initialize notes storage: ${error.message}`)
   }
 }
 
@@ -36,10 +44,15 @@ async function getNotes(): Promise<Note[]> {
 }
 
 async function saveNote(note: Note) {
-  await ensureNotesFile()
-  const notes = await getNotes()
-  notes.unshift(note) // Add to beginning
-  await writeFile(NOTES_FILE, JSON.stringify({ notes }, null, 2))
+  try {
+    await ensureNotesFile()
+    const notes = await getNotes()
+    notes.unshift(note) // Add to beginning
+    await writeFile(NOTES_FILE, JSON.stringify({ notes }, null, 2))
+  } catch (error: any) {
+    console.error('Error saving note:', error.message)
+    throw new Error(`Failed to save note: ${error.message}`)
+  }
 }
 
 // Verify Bearer token (you should replace this with your actual token verification)
@@ -546,9 +559,24 @@ export async function POST(request: NextRequest) {
       url
     }
 
-    await saveNote(note)
-    
-    console.log(`[${requestId}] Note saved successfully:`, url)
+    try {
+      await saveNote(note)
+      console.log(`[${requestId}] Note saved successfully:`, url)
+    } catch (error: any) {
+      console.error(`[${requestId}] Failed to save note:`, error.message)
+      console.error(`[${requestId}] Error stack:`, error.stack)
+      return NextResponse.json(
+        { 
+          error: 'server_error',
+          error_description: `Failed to save note: ${error.message}`,
+          request_id: requestId
+        },
+        { 
+          status: 500,
+          headers: corsHeaders(),
+        }
+      )
+    }
 
     return NextResponse.json(
       {

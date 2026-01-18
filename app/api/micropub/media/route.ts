@@ -3,7 +3,10 @@ import { writeFile, mkdir } from 'fs/promises'
 import { existsSync } from 'fs'
 import { join } from 'path'
 
-const MEDIA_DIR = join(process.cwd(), 'public', 'media')
+// Use /tmp in serverless environments (Vercel, AWS Lambda, etc.), otherwise use project public directory
+// Note: In serverless, files in /tmp won't be accessible via URL - consider using cloud storage (S3, etc.)
+const isServerless = process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME || process.env.NEXT_RUNTIME === 'nodejs'
+const MEDIA_DIR = isServerless ? '/tmp/media' : join(process.cwd(), 'public', 'media')
 
 // Verify Bearer token
 function verifyToken(authHeader: string | null): boolean {
