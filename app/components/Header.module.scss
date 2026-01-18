@@ -32,9 +32,33 @@
         z-index: 1;
         mix-blend-mode: difference;
 
-        .logo {
-            width: 2em;
+        a {
+            display: block;
+            
+            .logo {
+                width: 2em;
+            }
         }
+    }
+}
+
+.nav {
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+    align-items: center;
+}
+
+.navLink {
+    color: rgb(var(--bright-rgb));
+    font-family: 'indivisible', sans-serif;
+    font-weight: 300;
+    text-decoration: none;
+    transition: opacity 0.1s;
+    opacity: 0.8;
+
+    &:hover {
+        opacity: 1;
     }
 }
 

@@ -33,10 +33,12 @@ export default function Header() {
         }}
       />
       <div className={styles.content}>
-        <picture>
-          <source srcSet="dark/m.svg" media="(prefers-color-scheme: dark)" />
-          <img src="dark/m.svg" alt="" className={styles.logo} />
-        </picture>
+        <a href="/">
+          <picture>
+            <source srcSet="dark/m.svg" media="(prefers-color-scheme: dark)" />
+            <img src="dark/m.svg" alt="" className={styles.logo} />
+          </picture>
+        </a>
         <a href="https://brettmcmillin.notion.site/2d68a4592f37800fb111c6c03ba8d549?pvs=105" className={styles.email}>
           Contact
         </a>
