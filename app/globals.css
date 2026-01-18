@@ -172,3 +172,92 @@ hr {
     }
   }
 }
+
+/* Notes section - RSS feed content styling */
+.notesContent {
+  p {
+    margin-bottom: 1.5em;
+    opacity: 0.9;
+  }
+  
+  h2, h3, h4 {
+    margin-top: 2em;
+    margin-bottom: 1em;
+    font-weight: 600;
+  }
+  
+  h2 {
+    font-size: 1.5em;
+  }
+  
+  h3 {
+    font-size: 1.3em;
+  }
+  
+  h4 {
+    font-size: 1.1em;
+  }
+  
+  img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    margin: 2em 0;
+  }
+  
+  a {
+    color: inherit;
+    text-decoration: underline;
+    opacity: 0.8;
+    
+    &:hover {
+      opacity: 1;
+    }
+  }
+  
+  ul, ol {
+    margin: 1.5em 0;
+    padding-left: 2em;
+    
+    li {
+      margin-bottom: 0.5em;
+      opacity: 0.9;
+      display: list-item;
+    }
+  }
+  
+  blockquote {
+    border-left: 3px solid rgba(var(--foreground-rgb), 0.2);
+    padding-left: 1.5em;
+    margin: 2em 0;
+    font-style: italic;
+    opacity: 0.8;
+  }
+  
+  code {
+    background: rgba(var(--foreground-rgb), 0.1);
+    padding: 0.2em 0.4em;
+    border-radius: 3px;
+    font-size: 0.9em;
+  }
+  
+  pre {
+    background: rgba(var(--foreground-rgb), 0.05);
+    padding: 1em;
+    border-radius: 4px;
+    overflow-x: auto;
+    margin: 2em 0;
+    
+    code {
+      background: none;
+      padding: 0;
+    }
+  }
+  
+  /* Hide subscription widgets and other Substack-specific elements */
+  .subscription-widget-wrap-editor,
+  .subscription-widget,
+  [class*="subscription"] {
+    display: none;
+  }
+}
