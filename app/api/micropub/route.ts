@@ -241,54 +241,115 @@ export async function POST(request: NextRequest) {
       }
     } else if (contentTypeLower.includes('application/x-www-form-urlencoded')) {
       // Parse form-urlencoded data manually
-      rawBody = await request.text()
-      console.log(`[${requestId}] Raw form data:`, rawBody)
-      const formObj: Record<string, any> = {}
-      const params = new URLSearchParams(rawBody)
-      
-      for (const [key, value] of params.entries()) {
-        if (formObj[key]) {
-          // Convert to array if multiple values
-          if (Array.isArray(formObj[key])) {
-            formObj[key].push(value)
-          } else {
-            formObj[key] = [formObj[key], value]
-          }
-        } else {
-          formObj[key] = value
+      try {
+        rawBody = await request.text()
+        console.log(`[${requestId}] Raw form data:`, rawBody)
+        
+        if (!rawBody || rawBody.trim() === '') {
+          throw new Error('Empty request body')
         }
+        
+        const formObj: Record<string, any> = {}
+        let params: URLSearchParams
+        
+        try {
+          params = new URLSearchParams(rawBody)
+        } catch (e: any) {
+          console.error(`[${requestId}] Failed to create URLSearchParams:`, e.message)
+          console.error(`[${requestId}] Raw body preview:`, rawBody.substring(0, 200))
+          throw new Error(`Invalid form-encoded data: ${e.message}`)
+        }
+        
+        for (const [key, value] of params.entries()) {
+          if (formObj[key]) {
+            // Convert to array if multiple values
+            if (Array.isArray(formObj[key])) {
+              formObj[key].push(value)
+            } else {
+              formObj[key] = [formObj[key], value]
+            }
+          } else {
+            formObj[key] = value
+          }
+        }
+        
+        console.log(`[${requestId}] Parsed form object:`, JSON.stringify(formObj, null, 2))
+        // Parse Micropub format
+        data = parseFormDataToMicropub(formObj)
+      } catch (e: any) {
+        console.error(`[${requestId}] Error parsing form-urlencoded data:`, e.message)
+        console.error(`[${requestId}] Error stack:`, e.stack)
+        return NextResponse.json(
+          { 
+            error: 'invalid_request',
+            error_description: `Failed to parse form data: ${e.message}`,
+            request_id: requestId
+          },
+          { 
+            status: 400,
+            headers: corsHeaders(),
+          }
+        )
       }
-      
-      console.log(`[${requestId}] Parsed form object:`, JSON.stringify(formObj, null, 2))
-      // Parse Micropub format
-      data = parseFormDataToMicropub(formObj)
     } else if (contentTypeLower.includes('multipart/form-data')) {
-      const formData = await request.formData()
-      const formObj: Record<string, any> = {}
-      
-      // Convert FormData to object, handling arrays
-      for (const [key, value] of formData.entries()) {
-        if (formObj[key]) {
-          if (Array.isArray(formObj[key])) {
-            formObj[key].push(value)
+      try {
+        const formData = await request.formData()
+        const formObj: Record<string, any> = {}
+        
+        // Convert FormData to object, handling arrays
+        for (const [key, value] of formData.entries()) {
+          // Handle File objects by converting to string representation
+          const stringValue = value instanceof File ? value.name : String(value)
+          
+          if (formObj[key]) {
+            if (Array.isArray(formObj[key])) {
+              formObj[key].push(stringValue)
+            } else {
+              formObj[key] = [formObj[key], stringValue]
+            }
           } else {
-            formObj[key] = [formObj[key], value]
+            formObj[key] = stringValue
           }
-        } else {
-          formObj[key] = value
         }
+        
+        console.log(`[${requestId}] Parsed form object:`, JSON.stringify(formObj, null, 2))
+        // Parse Micropub format
+        data = parseFormDataToMicropub(formObj)
+      } catch (e: any) {
+        console.error(`[${requestId}] Error parsing multipart/form-data:`, e.message)
+        console.error(`[${requestId}] Error stack:`, e.stack)
+        return NextResponse.json(
+          { 
+            error: 'invalid_request',
+            error_description: `Failed to parse multipart form data: ${e.message}`,
+            request_id: requestId
+          },
+          { 
+            status: 400,
+            headers: corsHeaders(),
+          }
+        )
       }
-      
-      console.log(`[${requestId}] Parsed form object:`, JSON.stringify(formObj, null, 2))
-      // Parse Micropub format
-      data = parseFormDataToMicropub(formObj)
     } else {
       // Try to parse as form-urlencoded even if content-type header is missing/malformed
       try {
         rawBody = await request.text()
         console.log(`[${requestId}] Raw data (fallback):`, rawBody)
+        
+        if (!rawBody || rawBody.trim() === '') {
+          throw new Error('Empty request body')
+        }
+        
         const formObj: Record<string, any> = {}
-        const params = new URLSearchParams(rawBody)
+        let params: URLSearchParams
+        
+        try {
+          params = new URLSearchParams(rawBody)
+        } catch (e: any) {
+          console.error(`[${requestId}] Failed to create URLSearchParams (fallback):`, e.message)
+          console.error(`[${requestId}] Raw body preview:`, rawBody.substring(0, 200))
+          throw new Error(`Invalid form-encoded data: ${e.message}`)
+        }
         
         for (const [key, value] of params.entries()) {
           formObj[key] = value
@@ -298,13 +359,15 @@ export async function POST(request: NextRequest) {
         // Parse Micropub format
         data = parseFormDataToMicropub(formObj)
       } catch (e: any) {
-        console.error(`[${requestId}] Failed to parse request:`, e.message, e.stack)
+        console.error(`[${requestId}] Failed to parse request (fallback):`, e.message)
+        console.error(`[${requestId}] Error stack:`, e.stack)
         return NextResponse.json(
           { 
             error: 'invalid_request', 
-            error_description: `Unsupported content type: ${contentType}`,
+            error_description: `Failed to parse request: ${e.message}`,
             request_id: requestId,
-            received_content_type: contentType
+            received_content_type: contentType,
+            raw_body_preview: rawBody ? rawBody.substring(0, 200) : null
           },
           { 
             status: 400,
@@ -314,14 +377,39 @@ export async function POST(request: NextRequest) {
       }
     }
   } catch (error: any) {
-    console.error(`[${requestId}] Error parsing request:`, error.message)
+    console.error(`[${requestId}] Unexpected error parsing request:`, error.message)
+    console.error(`[${requestId}] Error name:`, error.name)
     console.error(`[${requestId}] Error stack:`, error.stack)
-    console.error(`[${requestId}] Raw body was:`, rawBody?.substring(0, 500))
+    console.error(`[${requestId}] Raw body was:`, rawBody?.substring(0, 500) || 'null')
+    console.error(`[${requestId}] Content-Type was:`, contentType)
+    
+    // Return 500 for unexpected errors, 400 for known parsing errors
+    const isSyntaxError = error.name === 'SyntaxError' || error.message.includes('pattern') || error.message.includes('parse')
+    const statusCode = isSyntaxError ? 400 : 500
+    
     return NextResponse.json(
       { 
-        error: 'invalid_request', 
-        error_description: error.message,
-        request_id: requestId
+        error: isSyntaxError ? 'invalid_request' : 'server_error',
+        error_description: `Request parsing failed: ${error.message}`,
+        request_id: requestId,
+        error_type: error.name
+      },
+      { 
+        status: statusCode,
+        headers: corsHeaders(),
+      }
+    )
+  }
+  
+  // Verify data was parsed successfully
+  if (!data || typeof data !== 'object') {
+    console.error(`[${requestId}] Data parsing failed - data is:`, typeof data, data)
+    return NextResponse.json(
+      { 
+        error: 'invalid_request',
+        error_description: 'Failed to parse request data',
+        request_id: requestId,
+        raw_body_preview: rawBody ? rawBody.substring(0, 200) : null
       },
       { 
         status: 400,
