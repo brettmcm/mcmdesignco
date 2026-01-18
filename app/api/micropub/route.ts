@@ -173,10 +173,16 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   const authHeader = request.headers.get('authorization')
+  const requestId = `req-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
+  
+  console.log(`[${requestId}] Micropub POST request received`)
+  console.log(`[${requestId}] Authorization header present:`, !!authHeader)
+  console.log(`[${requestId}] MICROPUB_TOKEN set:`, !!process.env.MICROPUB_TOKEN)
   
   if (!verifyToken(authHeader)) {
+    console.error(`[${requestId}] Authentication failed`)
     return NextResponse.json(
-      { error: 'Unauthorized' },
+      { error: 'unauthorized', error_description: 'Invalid or missing Bearer token' },
       { 
         status: 401,
         headers: corsHeaders(),
@@ -184,22 +190,61 @@ export async function POST(request: NextRequest) {
     )
   }
 
+  console.log(`[${requestId}] Authentication successful`)
+  
   const contentType = request.headers.get('content-type') || ''
   const contentTypeLower = contentType.toLowerCase()
-  console.log('Micropub POST - Content-Type:', contentType)
-  console.log('Micropub POST - Headers:', Object.fromEntries(request.headers.entries()))
+  console.log(`[${requestId}] Content-Type:`, contentType)
+  console.log(`[${requestId}] All headers:`, Object.fromEntries(request.headers.entries()))
   
   let data: any
+  let rawBody: string | null = null
+  
+  // Check if request body is empty
+  const contentLength = request.headers.get('content-length')
+  console.log(`[${requestId}] Content-Length:`, contentLength)
+  
+  if (contentLength === '0' || (contentLength && parseInt(contentLength) === 0)) {
+    console.error(`[${requestId}] Empty request body`)
+    return NextResponse.json(
+      { 
+        error: 'invalid_request',
+        error_description: 'Request body is empty',
+        request_id: requestId
+      },
+      { 
+        status: 400,
+        headers: corsHeaders(),
+      }
+    )
+  }
   
   try {
     if (contentTypeLower.includes('application/json')) {
-      data = await request.json()
+      rawBody = await request.text()
+      console.log(`[${requestId}] Raw JSON body:`, rawBody)
+      try {
+        data = JSON.parse(rawBody)
+      } catch (e: any) {
+        console.error(`[${requestId}] Failed to parse JSON:`, e.message)
+        return NextResponse.json(
+          { 
+            error: 'invalid_request',
+            error_description: 'Invalid JSON in request body',
+            request_id: requestId
+          },
+          { 
+            status: 400,
+            headers: corsHeaders(),
+          }
+        )
+      }
     } else if (contentTypeLower.includes('application/x-www-form-urlencoded')) {
       // Parse form-urlencoded data manually
-      const text = await request.text()
-      console.log('Raw form data:', text)
+      rawBody = await request.text()
+      console.log(`[${requestId}] Raw form data:`, rawBody)
       const formObj: Record<string, any> = {}
-      const params = new URLSearchParams(text)
+      const params = new URLSearchParams(rawBody)
       
       for (const [key, value] of params.entries()) {
         if (formObj[key]) {
@@ -214,7 +259,7 @@ export async function POST(request: NextRequest) {
         }
       }
       
-      console.log('Parsed form object:', formObj)
+      console.log(`[${requestId}] Parsed form object:`, JSON.stringify(formObj, null, 2))
       // Parse Micropub format
       data = parseFormDataToMicropub(formObj)
     } else if (contentTypeLower.includes('multipart/form-data')) {
@@ -234,28 +279,33 @@ export async function POST(request: NextRequest) {
         }
       }
       
-      console.log('Parsed form object:', formObj)
+      console.log(`[${requestId}] Parsed form object:`, JSON.stringify(formObj, null, 2))
       // Parse Micropub format
       data = parseFormDataToMicropub(formObj)
     } else {
       // Try to parse as form-urlencoded even if content-type header is missing/malformed
       try {
-        const text = await request.text()
-        console.log('Raw data (fallback):', text)
+        rawBody = await request.text()
+        console.log(`[${requestId}] Raw data (fallback):`, rawBody)
         const formObj: Record<string, any> = {}
-        const params = new URLSearchParams(text)
+        const params = new URLSearchParams(rawBody)
         
         for (const [key, value] of params.entries()) {
           formObj[key] = value
         }
         
-        console.log('Parsed form object (fallback):', formObj)
+        console.log(`[${requestId}] Parsed form object (fallback):`, JSON.stringify(formObj, null, 2))
         // Parse Micropub format
         data = parseFormDataToMicropub(formObj)
       } catch (e: any) {
-        console.error('Failed to parse request:', e)
+        console.error(`[${requestId}] Failed to parse request:`, e.message, e.stack)
         return NextResponse.json(
-          { error: 'invalid_request', error_description: `Unsupported content type: ${contentType}` },
+          { 
+            error: 'invalid_request', 
+            error_description: `Unsupported content type: ${contentType}`,
+            request_id: requestId,
+            received_content_type: contentType
+          },
           { 
             status: 400,
             headers: corsHeaders(),
@@ -264,10 +314,15 @@ export async function POST(request: NextRequest) {
       }
     }
   } catch (error: any) {
-    console.error('Error parsing request:', error)
-    console.error('Error stack:', error.stack)
+    console.error(`[${requestId}] Error parsing request:`, error.message)
+    console.error(`[${requestId}] Error stack:`, error.stack)
+    console.error(`[${requestId}] Raw body was:`, rawBody?.substring(0, 500))
     return NextResponse.json(
-      { error: 'invalid_request', error_description: error.message },
+      { 
+        error: 'invalid_request', 
+        error_description: error.message,
+        request_id: requestId
+      },
       { 
         status: 400,
         headers: corsHeaders(),
@@ -275,7 +330,7 @@ export async function POST(request: NextRequest) {
     )
   }
   
-  console.log('Parsed data:', JSON.stringify(data, null, 2))
+  console.log(`[${requestId}] Parsed data:`, JSON.stringify(data, null, 2))
 
   // Handle Micropub create action
   if (data.action === 'create' || !data.action) {
@@ -285,18 +340,28 @@ export async function POST(request: NextRequest) {
     const hasPhoto = data.properties?.photo && data.properties.photo.length > 0
     
     if (!hasContent && !hasSummary && !hasPhoto) {
-      console.error('No content, summary, or photo found in request')
-      console.error('Data structure:', JSON.stringify(data, null, 2))
-      console.error('Data keys:', Object.keys(data))
+      console.error(`[${requestId}] No content, summary, or photo found in request`)
+      console.error(`[${requestId}] Data structure:`, JSON.stringify(data, null, 2))
+      console.error(`[${requestId}] Data keys:`, Object.keys(data))
       if (data.properties) {
-        console.error('Properties keys:', Object.keys(data.properties))
+        console.error(`[${requestId}] Properties keys:`, Object.keys(data.properties))
+        console.error(`[${requestId}] Properties values:`, Object.entries(data.properties).map(([k, v]) => [k, Array.isArray(v) ? v.length : 1]))
       }
       return NextResponse.json(
         { 
           error: 'invalid_request',
           error_description: 'At least one of content, summary, or photo is required',
-          received: Object.keys(data),
-          properties: data.properties ? Object.keys(data.properties) : null,
+          request_id: requestId,
+          received_keys: Object.keys(data),
+          properties_keys: data.properties ? Object.keys(data.properties) : null,
+          debug_info: {
+            has_content: hasContent,
+            has_summary: hasSummary,
+            has_photo: hasPhoto,
+            content_value: data.properties?.content,
+            summary_value: data.properties?.summary,
+            photo_value: data.properties?.photo,
+          }
         },
         { 
           status: 400,
@@ -358,12 +423,20 @@ export async function POST(request: NextRequest) {
     
     // Allow empty content if we have photo
     if (!hasPhoto && (!content || content.trim() === '')) {
-      console.error('No valid content found in request')
-      console.error('Data structure:', JSON.stringify(data, null, 2))
+      console.error(`[${requestId}] No valid content found in request`)
+      console.error(`[${requestId}] Data structure:`, JSON.stringify(data, null, 2))
+      console.error(`[${requestId}] Content value extracted:`, contentValue)
       return NextResponse.json(
         { 
           error: 'invalid_request',
           error_description: 'Content is required when no photo is provided',
+          request_id: requestId,
+          debug_info: {
+            has_photo: hasPhoto,
+            content_extracted: !!contentValue,
+            content_length: content?.length || 0,
+            content_preview: content?.substring(0, 100) || '',
+          }
         },
         { 
           status: 400,
@@ -371,6 +444,8 @@ export async function POST(request: NextRequest) {
         }
       )
     }
+    
+    console.log(`[${requestId}] Content extracted successfully, length:`, content.length)
 
     // Generate ID and URL
     const id = `note-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
@@ -384,6 +459,8 @@ export async function POST(request: NextRequest) {
     }
 
     await saveNote(note)
+    
+    console.log(`[${requestId}] Note saved successfully:`, url)
 
     return NextResponse.json(
       {
@@ -401,8 +478,13 @@ export async function POST(request: NextRequest) {
   }
 
   // Handle other actions (update, delete) if needed
+  console.error(`[${requestId}] Unsupported action:`, data.action)
   return NextResponse.json(
-    { error: 'invalid_request', error_description: `Unsupported action: ${data.action}` },
+    { 
+      error: 'invalid_request', 
+      error_description: `Unsupported action: ${data.action}`,
+      request_id: requestId
+    },
     { 
       status: 400,
       headers: corsHeaders(),
