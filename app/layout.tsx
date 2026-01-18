@@ -29,6 +29,10 @@ export default function RootLayout({
         <link rel="stylesheet" href="https://use.typekit.net/shq4xoc.css" />
         <link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml" />
         <link rel="micropub" href="/api/micropub" />
+        <link rel="authorization_endpoint" href="https://indieauth.com/auth" />
+        <link rel="token_endpoint" href="https://tokens.indieauth.com/token" />
+
+        
       </head>
       <body className={`${inter.className} ${ibmPlexSans.variable}`}>
         <Header />
