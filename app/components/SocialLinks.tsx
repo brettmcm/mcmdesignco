@@ -17,10 +17,10 @@ export default function SocialLinks({ links }: SocialLinksProps) {
         <a key={index} href={link.href}>
           <picture>
             <source 
-              srcSet={`light/${link.iconName}.svg`} 
+              srcSet={`/light/${link.iconName}.svg`} 
               media="(prefers-color-scheme: dark)" 
             />
-            <img src={`light/${link.iconName}.svg`} alt={link.alt || ''} />
+            <img src={`/light/${link.iconName}.svg`} alt={link.alt || ''} />
           </picture>
         </a>
       ))}

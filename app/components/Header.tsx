@@ -34,8 +34,8 @@ export default function Header() {
       />
       <div className={styles.content}>
         <picture>
-          <source srcSet="./dark/m.svg" media="(prefers-color-scheme: dark)" />
-          <img src="./dark/m.svg" alt="" className={styles.logo} />
+          <source srcSet="/dark/m.svg" media="(prefers-color-scheme: dark)" />
+          <img src="/dark/m.svg" alt="" className={styles.logo} />
         </picture>
         <a href="https://app.hellobonsai.com/f/f62c0d827a0da4d" className={styles.email}>
           Contact

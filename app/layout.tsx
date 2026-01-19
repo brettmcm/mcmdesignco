@@ -38,8 +38,8 @@ export default function RootLayout({
         {children}
         <footer>
             <picture>
-              <source srcSet="light/m.svg" media="(prefers-color-scheme: dark)" />
-              <img src="light/m.svg" alt="" className={styles.logo} />
+              <source srcSet="/light/m.svg" media="(prefers-color-scheme: dark)" />
+              <img src="/light/m.svg" alt="" className={styles.logo} />
             </picture>
             <SocialLinks 
               links={[
