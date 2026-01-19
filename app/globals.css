@@ -6,6 +6,7 @@
   --foreground-rgb: 12, 12, 12;
   --background-rgb: 235, 235, 235;
   --bright-rgb: 237, 237, 237;
+  --primary-rgb: 255, 50, 0;
   --dark-rgb: 12, 12, 12;
   --emphasis-rgb: 0, 0, 0;
   }
@@ -79,8 +80,9 @@ h1 {
   letter-spacing: -0.07em;
   margin-bottom: 0.25em;
   margin-left: -0.07em;
-  filter: blur(0.25vw);
+  filter: blur(0.25vw) contrast(1000%);
 }
+
 h2 {
   width: 70%;
   /* font-family: 'scotch-display', serif; */
