@@ -35,19 +35,19 @@ export default async function NotePage({ params }: { params: Promise<{ slug: str
   }
 
   return (
-    <main className={styles.notesPage}>
+    <main className={styles.notePage}>
       <div className={styles.container}>
         <Link href="/notes" className={styles.backLink}>← Back to Notes</Link>
         
         <article className={styles.postArticle}>
           <header className={styles.postHeader}>
-            <h1 className={styles.postTitle}>{post.title}</h1>
+            <h2 className={styles.postTitle}>{post.title}</h2>
             <time className={styles.postDate} dateTime={post.pubDate}>
               {formatDate(post.pubDate)}
             </time>
           </header>
 
-          {post.imageUrl && (
+          {/* {post.imageUrl && (
             <div className={styles.imageContainer}>
               <img 
                 src={post.imageUrl} 
@@ -55,7 +55,7 @@ export default async function NotePage({ params }: { params: Promise<{ slug: str
                 className={styles.postImage}
               />
             </div>
-          )}
+          )} */}
 
           <div 
             className={`${styles.postContent} notesContent`}

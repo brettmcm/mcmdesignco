@@ -1,12 +1,20 @@
-.notesPage {
+.notesPage, .notePage {
   width: 100%;
   min-height: 100vh;
-  padding: calc(2em + 15vw) 0 calc(2em + 5vw) 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
 }
+
+.notesPage {
+  padding: calc(2em + 15vw) 0 calc(2em + 5vw) 0;
+}
+
+.notePage {
+  padding: calc(2em + 5vw) 0;
+}
+
 
 .container {
   width: 100vw;
