@@ -48,7 +48,7 @@ export default function RootLayout({
               ]} 
             />
             <div className={styles.brand}>
-              <h4>Brett McM Design, Co.</h4>
+              <h4>Brett McM Design</h4>
               <p><span>Branding</span><span>Design Systems</span><span>Graphic Design</span></p>
             </div>
         </footer>
