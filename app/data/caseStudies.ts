@@ -63,6 +63,10 @@ export const CASE_STUDIES: CaseStudyData[] = [
       { type: 'image', src: 'dtimes/dt5-snake.jpg' },
       { type: 'image', src: 'dtimes/dtspreads.gif' },
       { type: 'image', src: 'dtimes/dt5-stack.jpg' },
+      { type: 'image', src: 'dtimes/dt7-vip0.jpg' },
+      { type: 'image', src: 'dtimes/dt7-vip1.jpg', className: 'half' },
+      { type: 'image', src: 'dtimes/dt7-vip2.jpg', className: 'half' },
+      { type: 'image', src: 'dtimes/dt7-shipper.jpg' },
       { type: 'image', src: 'dtimes/united-in-dirt.jpg' }
     ]
   },

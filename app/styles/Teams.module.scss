@@ -34,10 +34,10 @@
 
         &:hover {
             p {
-                color: rgb(var(--emphasis-rgb));
+                color: rgb(var(--primary-rgb));
                 opacity: 1;
                 &.desc {
-                    color: rgb(var(--foreground-rgb));
+                    color: rgb(var(--primary-rgb));
                     opacity: 0.4;
                 }
             }
