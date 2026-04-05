@@ -1,0 +1,320 @@
+/* ─── ABOUT: HERO ────────────────────────────────────── */
+.about-hero {
+  width: 100%;
+  overflow: hidden;
+  padding: 180px 0 100px;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.about-hero__inner {
+  display: flex;
+  height: 40svh;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1440px;
+  max-height: 786px;
+  padding: 0 48px;
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+  mix-blend-mode: difference;
+}
+
+.about-hero__left {
+  display: flex;
+  height: 100%;
+  align-items: flex-start;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 2;
+}
+
+.about-hero__do-less {
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: -0.24px;
+  color: var(--white);
+  white-space: nowrap;
+}
+
+.about-hero__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.about-hero__spacer {
+  flex: 1 0 0;
+  height: 100%;
+  min-width: 0;
+  min-height: 1px;
+}
+
+.about-hero__right {
+  display: flex;
+  height: 100%;
+  align-items: flex-end;
+  justify-content: flex-end;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 2;
+}
+
+.about-hero__better {
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 1.32;
+  letter-spacing: -0.48px;
+  color: var(--white);
+  white-space: nowrap;
+}
+
+
+/* ─── ABOUT: BIO ─────────────────────────────────────── */
+.bio {
+  display: flex;
+  gap: 144px;
+  align-items: flex-start;
+}
+
+.bio__content {
+  flex: 2 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+
+.bio__tagline {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: normal;
+  color: var(--dark);
+  width: 100%;
+}
+
+.bio__text {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: normal;
+  color: var(--dark-50);
+  width: 100%;
+}
+
+.bio__photo {
+  flex: 1 0 0;
+  aspect-ratio: 1;
+  flex-shrink: 0;
+  border-radius: 4px;
+  position: relative;
+  mix-blend-mode: normal;
+}
+
+.headshot {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  max-width: none;
+  object-fit: cover;
+}
+
+.cv_ring {
+  position: absolute;
+  bottom: -2em;
+  right: -3em;
+  width: 125px;
+  aspect-ratio: 1;
+  mix-blend-mode: difference;
+  -webkit-animation: rotating 30s linear infinite;
+  -moz-animation: rotating 30s linear infinite;
+  -ms-animation: rotating 30s linear infinite;
+  -o-animation: rotating 30s linear infinite;
+  animation: rotating 30s linear infinite;
+  transition: transform 3s ease-in-out;
+}
+
+@-webkit-keyframes rotating /* Safari and Chrome */ {
+  from {
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes rotating {
+  from {
+    -ms-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -ms-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+/* ─── ABOUT: RED BANNER ──────────────────────────────── */
+.banner {
+  aspect-ratio: 1698 / 736;
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.banner__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-image-wrap {
+  .banner__video {
+    mix-blend-mode: screen;
+    opacity: 0.3;
+  }
+}
+
+.banner__bg {
+  position: absolute;
+  inset: 0;
+  background: var(--red);
+  
+}
+
+.banner__bg-screen {
+  position: absolute;
+  inset: 0;
+  background: var(--red);
+  mix-blend-mode: screen;
+}
+
+.banner__text {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1440px;
+  padding: 0 88px;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: normal;
+  color: var(--white);
+  text-align: center;
+}
+
+.banner__text span {
+  flex: 1 0 0;
+}
+
+
+
+.banner__shapes {
+  position: absolute;
+  display: flex;
+  top:0;
+  left:0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.65;
+  filter: blur(0.5px);
+  z-index: 1;
+}
+
+.banner__shapes img {
+    width: 33.33%;
+    height: 100%;
+}
+
+/* ─── ABOUT: FLOW ────────────────────────────────────── */
+.flow {
+  display: flex;
+  gap: 48px;
+  margin-top: 48px;
+  border-top: 0.5px solid var(--dark-50);
+  padding-top: 48px;
+}
+
+.globe {
+  width: 50px;
+  transform: translateY(50%);
+  mix-blend-mode: difference;
+}
+
+h1 {
+  width: 33.3%;
+}
+
+.flow__heading {
+  flex: 1 0 0;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 1.25;
+  color: var(--dark);
+  max-width: 300px;
+}
+
+.flow__list {
+  flex: 1 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: center;
+  margin-top: 0.9em;
+}
+
+
+.services__cols {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  gap: 144px;
+  margin: 4em 0;
+}
+
+.services__col {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  flex: 1;
+
+  &::before {
+    position: absolute;
+    left: 2em;
+    top: 0em;
+    width: 16px;
+    height: 16px;
+    background: red;
+  }
+}
+
+.services__col ul {
+  list-style: none;
+}
+
+.services__col ul li {
+  margin-bottom: 0.75em;
+  color: var(--dark-50);
+}

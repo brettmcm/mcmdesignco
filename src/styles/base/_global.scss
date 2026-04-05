@@ -1,0 +1,116 @@
+html, body, #root {
+  width: 100%;
+  min-height: 100%;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  background-color: var(--bg);
+  font-family: 'indivisible', sans-serif;
+  color: var(--dark);
+  height: 100vh;
+}
+
+img {
+  display: block;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+h1 {
+  font-size: 3.25em;
+  line-height: 1.1em;
+  letter-spacing: -0.04em;
+  font-weight: 500;
+}
+
+h2 {
+  font-size: 2.25em;
+  line-height: 1.1em;
+  letter-spacing: -0.04em;
+}
+
+h3 {
+  font-size: 1.75em;
+  line-height: 1.1em;
+  letter-spacing: -0.04em;
+}
+
+.link {
+  color: var(--dark);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: color 160ms ease-out;
+}
+
+.link .arrow {
+  transition: transform 160ms ease-out;
+  color: var(--dark-50);
+  margin-top: 1px;
+}
+
+.link:hover {
+  color: var(--red);
+}
+
+.link:hover .arrow {
+  transform: translateX(2px);
+}
+
+.link:hover .arrow__path--default {
+  opacity: 0;
+  transform: translateX(2px);
+}
+
+.link:hover .arrow__path--hover {
+  opacity: 1;
+  transform: translateX(0);
+  color: var(--red);
+}
+
+/* ─── UTILITIES ───────────────────────────────────────── */
+.dim {
+  color: var(--dark-50);
+}
+
+/* ─── SHARED TYPE: QUOTE ──────────────────────────────── */
+.quote {
+  font-size: 34px;
+  font-weight: 400;
+  line-height: 1.45;
+  letter-spacing: -0.02em;
+  color: var(--dark);
+  width: 100%;
+}
+
+/* ─── SHARED: RED ACCENT BAR ──────────────────────────── */
+.overview-accent,
+.bio__accent,
+.cs-ruletext__rule {
+  width: 16px;
+  height: 4px;
+  background: var(--red);
+  border-radius: 999px;
+  flex-shrink: 0;
+}
+
+/* ─── SHARED TYPE: BODY LIST ITEMS ───────────────────────*/
+.flow__item,
+.services__item {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: normal;
+  color: var(--dark);
+  width: 100%;
+}
+
+.flow__item strong,
+.services__item strong {
+  font-weight: 500;
+}

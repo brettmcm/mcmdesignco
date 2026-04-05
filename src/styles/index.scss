@@ -1,0 +1,13 @@
+/* SCSS entrypoint: split from src/index.css */
+
+@use './base/reset';
+@use './settings/tokens';
+@use './base/global';
+@use './layout/page';
+@use './components/header';
+@use './layout/sections';
+@use './components/arrow';
+@use './pages/home';
+@use './pages/about';
+@use './pages/case-studies';
+@use './components/footer';

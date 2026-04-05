@@ -1,0 +1,73 @@
+/* ─── HEADER ─────────────────────────────────────────── */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 48px 24px 48px;
+  mix-blend-mode: difference;
+  z-index: 100;
+}
+
+.header-bg {
+  content: '';
+  position: absolute;
+  inset: 0;
+  // backdrop-filter: blur(70px);
+  // -webkit-backdrop-filter: blur(70px);
+  background: var(--header-before-bg);
+  z-index: -1;
+  pointer-events: none;
+}
+
+.header-logo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  mix-blend-mode: difference;
+}
+
+.header-logo-mark {
+  width: 31px;
+  height: 31px;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.header-logo-mark img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  max-width: none;
+}
+
+.header-logo-name {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.25;
+  color: var(--white);
+  white-space: nowrap;
+}
+
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  // mix-blend-mode: difference;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--white);
+}
+
+.header-nav a,
+.header-nav span {
+  white-space: nowrap;
+  line-height: 1.25;
+  cursor: pointer;
+}
+

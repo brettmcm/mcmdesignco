@@ -1,0 +1,215 @@
+/* ─── CASE STUDIES PAGE ────────────────────────────────── */
+.page--case-study {
+  padding-top: 0;
+}
+
+// .page--case-study.canary { background: var(--bg-canary); }
+// .page--case-study.bloop { background: var(--bg-bloop); }
+
+/* ─── HERO ──────────────────────────────────────────────── */
+.cs-hero {
+  width: 100%;
+  padding-top: 180px;
+  padding-bottom: 100px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.cs-hero__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  max-width: none;
+}
+
+.cs-hero__inner {
+  width: 100%;
+  max-width: 1440px;
+  height: 40svh;
+  padding-left: 120px;
+  padding-right: 120px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cs-hero__mark {
+  width: 100%;
+  max-width: 420px;
+  aspect-ratio: 138 / 55;
+  overflow: hidden;
+  position: relative;
+}
+
+.cs-hero__vector {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  max-width: none;
+}
+
+/* ─── RICH TEXT (overview copy) ──────────────────────────── */
+.cs-richtext {
+  font-size: 26px;
+  font-weight: 400;
+  color: var(--dark);
+  line-height: 1.45;
+}
+
+.cs-richtext p {
+  margin: 0;
+}
+
+.cs-richtext p + p {
+  margin-top: 16px;
+}
+
+
+/* ─── RULE + HEADING TEXT BLOCKS ────────────────────────── */
+.cs-ruletext {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+
+.cs-ruletext__heading {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: normal;
+  color: var(--dark);
+  white-space: nowrap;
+}
+
+.cs-ruletext__body {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: normal;
+  color: var(--dark-50);
+}
+
+.cs-ruletext__body p {
+  margin: 0;
+}
+
+.cs-ruletext__body p + p {
+  margin-top: 16px;
+}
+
+/* ─── MOSAICS ────────────────────────────────────────────── */
+.cs-mosaic {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  display: grid;
+}
+
+.cs-mosaic__tile {
+  position: relative;
+  overflow: hidden;
+}
+
+.cs-mosaic__tile-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.cs-mosaic__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  max-width: none;
+  z-index: 1;
+}
+
+/* ─── IMAGE PANELS ─────────────────────────────────────── */
+.cs-image-panel {
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+  width: 100%;
+}
+
+.cs-image-panel__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  max-width: none;
+}
+
+/* ─── TWO-IMAGE ROW ─────────────────────────────────────── */
+.cs-two-image-row {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cs-two-image-row__tile {
+  flex: 1 0 0;
+}
+
+.cs-two-image-row__frame {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+.cs-two-image-row__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  max-width: none;
+}
+
+/* Ensure testimonial spans full available width on the case-study page */
+.cs-testimonial {
+  width: 100%;
+}
+
+/* ─── LAYOUT MODIFIERS ───────────────────────────────────── */
+.cs-layout--cols {
+  display: flex;
+  gap: 112px;
+  align-items: center;
+}
+
+.cs-layout--stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 88px;
+}
+
+.cs-col {
+  flex: 1 0 0;
+}
+
+/* Inner width constraints (used inside stack/col layouts) */
+.cs-max-900  { width: 100%; max-width: 900px;  }
+.cs-max-1200 { width: 100%; max-width: 1200px; }
+.cs-max-1440 { width: 100%; max-width: 1440px; }
+.cs-max-2000 { width: 100%; max-width: 2000px; }
+
+
