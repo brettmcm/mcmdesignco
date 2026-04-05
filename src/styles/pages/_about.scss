@@ -318,3 +318,62 @@ h1 {
   margin-bottom: 0.75em;
   color: var(--dark-50);
 }
+
+@media (max-width: 1024px) {
+  .bio {
+    gap: 64px;
+  }
+
+  .services__cols {
+    gap: 64px;
+  }
+}
+
+@media (max-width: 768px) {
+  .about-hero {
+    padding: 120px 0 60px;
+  }
+
+  .about-hero__inner {
+    padding: 0 20px;
+    height: 35svh;
+  }
+
+  .bio {
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .bio__photo {
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .cv_ring {
+    width: 80px;
+  }
+
+  .banner__text {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 0 20px;
+  }
+
+  .flow {
+    flex-direction: column;
+    gap: 32px;
+    margin-top: 32px;
+    padding-top: 32px;
+  }
+
+  h1 {
+    width: 100%;
+  }
+
+  .services__cols {
+    flex-direction: column;
+    gap: 40px;
+    margin: 2em 0;
+  }
+}

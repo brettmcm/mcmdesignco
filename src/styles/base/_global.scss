@@ -114,3 +114,21 @@ h3 {
 .services__item strong {
   font-weight: 500;
 }
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2em;
+  }
+
+  h2 {
+    font-size: 1.75em;
+  }
+
+  h3 {
+    font-size: 1.4em;
+  }
+
+  .quote {
+    font-size: 22px;
+  }
+}

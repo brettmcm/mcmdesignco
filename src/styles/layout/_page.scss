@@ -13,3 +13,13 @@
   padding-top: 300px;
 }
 
+@media (max-width: 768px) {
+  .page {
+    gap: 80px;
+  }
+
+  .page--home {
+    padding-top: 100px;
+  }
+}
+

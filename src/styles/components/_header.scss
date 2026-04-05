@@ -71,3 +71,17 @@
   cursor: pointer;
 }
 
+@media (max-width: 768px) {
+  .header {
+    padding: 20px;
+  }
+
+  .header-logo-name {
+    font-size: 17px;
+  }
+
+  .header-nav {
+    gap: 20px;
+    font-size: 15px;
+  }
+}

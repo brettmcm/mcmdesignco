@@ -272,3 +272,67 @@
   max-width: none;
 }
 
+@media (max-width: 1024px) {
+  .case-study {
+    gap: 48px;
+  }
+
+  .case-study__image {
+    width: 400px;
+    height: 280px;
+  }
+}
+
+@media (max-width: 768px) {
+  .overview-body {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .overview-heading {
+    font-size: 28px;
+  }
+
+  .overview-services p {
+    white-space: normal;
+  }
+
+  .case-study {
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .case-study__image {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 568 / 400;
+  }
+
+  .services__row {
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .services__intro {
+    max-width: 100%;
+  }
+
+  .testimonial {
+    padding: 60px 0;
+  }
+
+  .testimonial__content {
+    padding: 0 20px;
+    gap: 32px;
+  }
+
+  .testimonial__footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .testimonial__author {
+    white-space: normal;
+  }
+}

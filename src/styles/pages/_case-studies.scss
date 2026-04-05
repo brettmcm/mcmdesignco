@@ -212,4 +212,43 @@
 .cs-max-1440 { width: 100%; max-width: 1440px; }
 .cs-max-2000 { width: 100%; max-width: 2000px; }
 
+@media (max-width: 1024px) {
+  .cs-layout--cols {
+    gap: 64px;
+  }
 
+  .cs-hero__inner {
+    padding-left: 48px;
+    padding-right: 48px;
+  }
+}
+
+@media (max-width: 768px) {
+  .cs-hero {
+    padding-top: 100px;
+    padding-bottom: 60px;
+  }
+
+  .cs-hero__inner {
+    padding-left: 20px;
+    padding-right: 20px;
+    height: 30svh;
+  }
+
+  .cs-richtext {
+    font-size: 18px;
+  }
+
+  .cs-ruletext__heading {
+    white-space: normal;
+  }
+
+  .cs-layout--cols {
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .cs-layout--stack {
+    gap: 40px;
+  }
+}
