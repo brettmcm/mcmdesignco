@@ -251,4 +251,30 @@
   .cs-layout--stack {
     gap: 40px;
   }
+
+  /* Mosaic: collapse to single column */
+  .cs-mosaic {
+    grid-template-columns: 1fr !important;
+    grid-template-rows: auto !important;
+    height: auto !important;
+    aspect-ratio: auto !important;
+  }
+
+  .cs-mosaic__tile {
+    grid-column: 1 / span 1 !important;
+    grid-row: auto !important;
+  }
+
+  /* Let images flow naturally so tiles size from content */
+  .cs-mosaic__img {
+    position: static !important;
+    width: 100% !important;
+    height: auto !important;
+    inset: auto !important;
+  }
+
+  /* Two-image row: stack vertically */
+  .cs-two-image-row {
+    flex-direction: column;
+  }
 }

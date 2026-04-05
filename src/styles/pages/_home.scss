@@ -134,6 +134,7 @@
   position: relative;
   overflow: hidden;
   mix-blend-mode: normal;
+  pointer-events: none;
 }
 
 .case-study__image img {
@@ -306,6 +307,7 @@
     width: 100%;
     height: auto;
     aspect-ratio: 568 / 400;
+    order: -1;
   }
 
   .services__row {
