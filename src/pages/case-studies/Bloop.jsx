@@ -6,6 +6,7 @@ import CaseStudyRuleTextSection from '../../components/case-studies/blocks/CaseS
 import CaseStudyMosaicGrid from '../../components/case-studies/blocks/CaseStudyMosaicGrid'
 import CaseStudyImagePanel from '../../components/case-studies/blocks/CaseStudyImagePanel'
 import CaseStudyTwoImageRow from '../../components/case-studies/blocks/CaseStudyTwoImageRow'
+import CaseStudyNextTiles from '../../components/case-studies/blocks/CaseStudyNextTiles'
 
 const heroImg      = '/src/assets/bloop/hero.png'
 const bloopLogo    = '/src/assets/bloop/logo-white.svg'
@@ -139,6 +140,11 @@ export default function Bloop() {
           <span>That alignment is the real result.</span>
         </p>
       </CaseStudyRichTextSection>
+
+      <CaseStudyNextTiles tiles={[
+        { to: '/case-studies/canary', label: 'Canary', thumb: '/src/assets/canary/thumb.png' },
+        { to: '/case-studies/dusty-times', label: 'Dusty Times', thumb: '/src/assets/dt/thumb.png' },
+      ]} />
 
       <Footer />
     </div>

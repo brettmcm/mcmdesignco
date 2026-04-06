@@ -47,7 +47,7 @@ export default function About() {
       <div className="section section--expanded">
         <div className="bio">
           <div className="bio__content">
-            <div className="bio__accent" />
+            <div className="accent-bar" />
             <p className="bio__tagline">Built to Last.</p>
             <p className="bio__text">I work with ambitious companies to build brand systems that align identity, product, and story from the start. After years working in agencies, in-house, and independently, I’ve seen a pattern: brands are often delivered as finished work, but rarely carried through with the same level of care. My focus now is more integrated — building the brand and staying close to how it’s applied, ensuring it holds up in the real world.</p>
           </div>

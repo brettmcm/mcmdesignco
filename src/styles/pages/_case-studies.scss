@@ -223,6 +223,88 @@
   }
 }
 
+/* ─── NEXT TILES ─────────────────────────────────────────── */
+.cs-next-tiles-section {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.cs-next-tiles-heading {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: normal;
+  color: var(--dark-50);
+  margin: 0;
+  padding-top: 48px;
+  margin-top: 48px;
+  border-top: 0.5px solid var(--dark-50);
+}
+
+.cs-next-tiles {
+  display: flex;
+  gap: 4px;
+  width: 100%;
+}
+
+.cs-next-tile {
+  flex: 1 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: relative;
+  cursor: pointer;
+}
+
+.cs-next-tile .link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+
+.cs-next-tile:hover .link {
+  color: var(--red);
+}
+
+.cs-next-tile:hover .link .arrow {
+  transform: translateX(2px);
+}
+
+.cs-next-tile:hover .link .arrow__path--default {
+  opacity: 0;
+  transform: translateX(2px);
+}
+
+.cs-next-tile:hover .link .arrow__path--hover {
+  opacity: 1;
+  transform: translateX(0);
+  color: var(--red);
+}
+
+.cs-next-tile__frame {
+  width: 100%;
+  aspect-ratio: 568 / 400;
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+}
+
+.cs-next-tile__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  max-width: none;
+}
+
+@media (max-width: 768px) {
+  .cs-next-tiles {
+    flex-direction: column;
+    gap: 32px;
+  }
+}
+
 @media (max-width: 768px) {
   .cs-hero {
     padding-top: 100px;
@@ -267,7 +349,7 @@
 
   /* Let images flow naturally so tiles size from content */
   .cs-mosaic__img {
-    position: static !important;
+    position: relative !important;
     width: 100% !important;
     height: auto !important;
     inset: auto !important;

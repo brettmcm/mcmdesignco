@@ -24,7 +24,7 @@ export default function Home() {
 
       {/* Overview: Tagline */}
       <div className="section section--narrow overview">
-        <div className="overview-accent" />
+        <div className="accent-bar" />
         <div className="overview-body">
           <p className="overview-heading">Helping ambitious companies build culturally sharp, scalable brand systems.</p>
           <div className="overview-services">
@@ -64,8 +64,8 @@ export default function Home() {
             <div className="case-study__logo" style={{ width: 120, height: 48 }}>
     
             <picture>
-              <source srcset={CANARY_LOGO_DARK} media="(prefers-color-scheme: dark)" />
-              <source srcset={CANARY_LOGO} media="(prefers-color-scheme: light)" />
+              <source srcSet={CANARY_LOGO_DARK} media="(prefers-color-scheme: dark)" />
+              <source srcSet={CANARY_LOGO} media="(prefers-color-scheme: light)" />
               <img src={CANARY_LOGO} alt="Canary Logo" />
             </picture>
 
@@ -85,8 +85,8 @@ export default function Home() {
           <div className="case-study__content">
             <div className="case-study__logo" style={{ width: 247, height: 50, overflow: 'hidden' }}>
               <picture>
-                  <source srcset={DUSTY_LOGO_DARK} media="(prefers-color-scheme: dark)" />
-                <source srcset={DUSTY_LOGO} media="(prefers-color-scheme: light)" />
+                  <source srcSet={DUSTY_LOGO_DARK} media="(prefers-color-scheme: dark)" />
+                <source srcSet={DUSTY_LOGO} media="(prefers-color-scheme: light)" />
                 <img src={DUSTY_LOGO} alt="Dusty Times Logo" />
               </picture>
             </div>
@@ -105,8 +105,8 @@ export default function Home() {
           <div className="case-study__content">
             <div className="case-study__logo" style={{ width: 131, height: 48 }}>
               <picture>
-                <source srcset={BLOOP_LOGO_DARK} media="(prefers-color-scheme: dark)" />
-                <source srcset={BLOOP_LOGO} media="(prefers-color-scheme: light)" />
+                <source srcSet={BLOOP_LOGO_DARK} media="(prefers-color-scheme: dark)" />
+                <source srcSet={BLOOP_LOGO} media="(prefers-color-scheme: light)" />
                 <img src={BLOOP_LOGO} alt="Bloop Logo" />
               </picture>
             </div>

@@ -6,6 +6,7 @@ import CaseStudyRuleTextSection from '../../components/case-studies/blocks/CaseS
 import CaseStudyMosaicGrid from '../../components/case-studies/blocks/CaseStudyMosaicGrid'
 import CaseStudyImagePanel from '../../components/case-studies/blocks/CaseStudyImagePanel'
 import CaseStudyTwoImageRow from '../../components/case-studies/blocks/CaseStudyTwoImageRow'
+import CaseStudyNextTiles from '../../components/case-studies/blocks/CaseStudyNextTiles'
 
 const heroImg     = '/src/assets/canary/hero.png'
 const canaryLogo  = '/src/assets/canary/logo-white.svg'
@@ -192,6 +193,11 @@ export default function Canary() {
           <p>The result is a brand that feels deliberate in everyday life. Not loud. Not careful. Just clear.</p>
         </CaseStudyRuleTextSection>
       </div>
+
+      <CaseStudyNextTiles tiles={[
+        { to: '/case-studies/bloop', label: 'Bloop', thumb: '/src/assets/bloop/thumb.png' },
+        { to: '/case-studies/dusty-times', label: 'Dusty Times', thumb: '/src/assets/dt/thumb.png' },
+      ]} />
 
       <Footer />
     </div>

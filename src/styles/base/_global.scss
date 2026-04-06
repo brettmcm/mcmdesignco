@@ -90,13 +90,11 @@ h3 {
 }
 
 /* ─── SHARED: RED ACCENT BAR ──────────────────────────── */
-.overview-accent,
-.bio__accent,
-.cs-ruletext__rule {
+.accent-bar {
   width: 16px;
   height: 4px;
   background: var(--red);
-  border-radius: 999px;
+  border-radius: 1px;
   flex-shrink: 0;
 }
 
