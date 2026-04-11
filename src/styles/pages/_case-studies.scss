@@ -228,6 +228,12 @@
   display: flex;
   flex-direction: column;
   gap: 32px;
+
+  h2 {
+    padding: 48px 0 16px 0;
+    margin-top: 48px;
+    border-top: 0.5px solid var(--dark-50);
+  }
 }
 
 .cs-next-tiles-heading {
@@ -236,9 +242,6 @@
   line-height: normal;
   color: var(--dark-50);
   margin: 0;
-  padding-top: 48px;
-  margin-top: 48px;
-  border-top: 0.5px solid var(--dark-50);
 }
 
 .cs-next-tiles {

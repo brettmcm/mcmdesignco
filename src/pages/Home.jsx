@@ -147,9 +147,7 @@ export default function Home() {
         <div className="services__row">
           <div className="services__intro">
             <p className="services__heading">Your brand is more than just decorative</p>
-            <a className="case-study__link" href="#">
             <Link to="/about" linkText="More about the approach" />
-            </a>
           </div>
           <div className="services__list">
             <p className="services__item">
