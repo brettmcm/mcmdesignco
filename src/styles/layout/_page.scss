@@ -1,4 +1,32 @@
 /* ─── PAGE WRAPPER ───────────────────────────────────── */
+.route-transition {
+  width: 100%;
+  min-height: 100vh;
+  background: var(--bg);
+  position: relative;
+}
+
+.route-transition__content {
+  width: 100%;
+  min-height: 100vh;
+  background: var(--bg);
+}
+
+.route-transition::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: var(--bg);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 420ms ease-in-out;
+  z-index: 90;
+}
+
+.route-transition--fading::after {
+  opacity: 1;
+}
+
 .page {
   background-color: var(--bg);
   display: flex;
@@ -13,6 +41,12 @@
   padding-top: 300px;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .route-transition::after {
+    transition: none;
+  }
+}
+
 @media (max-width: 768px) {
   .page {
     gap: 80px;
@@ -22,4 +56,3 @@
     padding-top: 100px;
   }
 }
-

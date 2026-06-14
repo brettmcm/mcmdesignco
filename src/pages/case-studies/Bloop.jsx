@@ -1,4 +1,3 @@
-import Header from '../../components/Header'
 import Footer from '../../components/Footer'
 import CaseStudyHero from '../../components/case-studies/blocks/CaseStudyHero'
 import CaseStudyRichTextSection from '../../components/case-studies/blocks/CaseStudyRichTextSection'
@@ -23,14 +22,12 @@ const creative02   = '/src/assets/bloop/creative-02.png'
 export default function Bloop() {
   return (
     <div className="page page--case-study bloop">
-      <Header />
-
       <CaseStudyHero bgSrc={heroImg} markVectorSrc={bloopLogo} />
 
       <CaseStudyRichTextSection>
         <p>
           <span>Bloop was founded on a simple tension. </span>
-          <span className="dim">Most natural laundry soaps feel generic and dated. Most conventional detergents feel artificial and overengineered. The founders believed there was room for something better. A small batch, toxin free laundry soap with crafted scents that feel contemporary and desirable.</span>
+          <span className="dim">Most natural laundry soaps feel generic and dated. Most conventional detergents feel artificial and overengineered. The founders believed there was room for something better: a small-batch, toxin-free laundry soap with crafted scents that feel contemporary and desirable.</span>
         </p>
       </CaseStudyRichTextSection>
 
@@ -72,9 +69,9 @@ export default function Bloop() {
         <CaseStudyImagePanel src={disrupt01} aspectWidth={1904} aspectHeight={1071} borderRadius={12} />
       </div>
 
-      {/* Build the system */}
+      {/* Building the system */}
       <div className="section section--narrow">
-        <CaseStudyRuleTextSection heading="Build the system">
+        <CaseStudyRuleTextSection heading="Building the system">
           <p>The identity needed to feel modern, light, and confident. Not earthy. Not sterile.</p>
           <p>The wordmark balances softness and clarity. Rounded forms reference suds and softness while maintaining structure. Color is used to signal freshness and scent variation without leaning on predictable "eco" palettes.</p>
         </CaseStudyRuleTextSection>
@@ -89,7 +86,7 @@ export default function Bloop() {
       <div className="section section--narrow">
         <CaseStudyRuleTextSection>
           <p>Most importantly, the brand does not overclaim. The voice is honest about imperfection. Bloop commits to continuous improvement rather than purity theater. That stance builds trust in a category where exaggeration is common.</p>
-          <p>The result is a scalable system. Clear architecture. Room for growth across scents, formats, and future extensions.</p>
+          <p>The result is a system with clear architecture and room for growth across scents, formats, and future extensions.</p>
         </CaseStudyRuleTextSection>
       </div>
 

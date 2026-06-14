@@ -1,7 +1,9 @@
-import Header from '../components/Header'
 import Footer from '../components/Footer'
+import AutoPlayVideo from '../components/AutoPlayVideo'
 import leavesVideo from '../assets/leaves.mp4'
 import staticVideo from '../assets/static.mp4'
+import { useLayoutEffect, useRef, useState } from 'react'
+import { animateScrollToElement } from '../utils/scrollAnimation'
 const HEADSHOT      = './src/assets/portrait.png'
 const CV      = './src/assets/resume.svg'
 const DIAMOND_LEFT  = './src/assets/diamond-left.svg'
@@ -9,28 +11,125 @@ const DIAMOND_CENTER= './src/assets/diamond-center.svg'
 const DIAMOND_RIGHT = './src/assets/diamond-right.svg'
 const GLOBE = './src/assets/fluid-globe.svg'
 
+const TEAMS_AND_PROJECTS = [
+  { name: 'Figma', role: 'Designer advocate', dates: 'Current', href: 'https://figma.com' },
+  { name: 'Dusty Times', role: 'Design director', dates: 'Current', href: 'https://dustytimes.com' },
+  { name: 'Experian', role: 'Product Design Manager', dates: '2020-2025', href: 'https://experian.com' },
+  { name: 'Vuori Clothing', role: 'UX consultant', dates: '2020', href: 'https://vuori.com' },
+  { name: 'onX Maps', role: 'Product designer', dates: '2020', href: 'https://onxmaps.com' },
+  { name: 'Stance', role: 'UX designer', dates: '2016-2020', href: 'https://stance.com' },
+  { name: 'Oakley', role: 'Interaction designer', dates: '2016', href: 'https://oakley.com' },
+  { name: 'Fuse Interactive', role: 'Associate creative director', dates: '2011-2016', href: 'https://gofuse.com' },
+  { name: 'NuContext', role: 'Art director', dates: '2006-2011', href: 'https://nucontext.com' },
+]
+
 export default function About() {
+  const heroRef = useRef(null)
+  const doLessRef = useRef(null)
+  const betterRef = useRef(null)
+  const [connector, setConnector] = useState(null)
+
+  const scrollToTeamsAndProjects = (event) => {
+    const target = document.getElementById('teams-and-projects')
+
+    if (!target) return
+
+    event.preventDefault()
+
+    animateScrollToElement(target, {
+      onComplete: () => window.history.pushState(null, '', '#teams-and-projects'),
+    })
+  }
+
+  useLayoutEffect(() => {
+    const updateConnector = () => {
+      const hero = heroRef.current
+      const doLess = doLessRef.current
+      const better = betterRef.current
+
+      if (!hero || !doLess || !better) return
+
+      const heroRect = hero.getBoundingClientRect()
+      const doLessRect = doLess.getBoundingClientRect()
+      const betterRect = better.getBoundingClientRect()
+      const gap = 24
+      const radius = 48
+
+      const start = {
+        x: doLessRect.right - heroRect.left + gap,
+        y: doLessRect.top - heroRect.top + doLessRect.height / 2,
+      }
+      const end = {
+        x: betterRect.left - heroRect.left - gap,
+        y: betterRect.top - heroRect.top + betterRect.height / 2,
+      }
+      const turnX = Math.min(
+        Math.max(start.x + radius * 2, heroRect.width * 0.57),
+        end.x - radius * 2
+      )
+      const turnDirection = end.y >= start.y ? 1 : -1
+      const effectiveRadius = Math.max(
+        0,
+        Math.min(radius, Math.abs(end.y - start.y) / 2, (end.x - start.x) / 4)
+      )
+
+      const path = [
+        `M ${start.x} ${start.y}`,
+        `H ${turnX - effectiveRadius}`,
+        `Q ${turnX} ${start.y} ${turnX} ${start.y + effectiveRadius * turnDirection}`,
+        `V ${end.y - effectiveRadius * turnDirection}`,
+        `Q ${turnX} ${end.y} ${turnX + effectiveRadius} ${end.y}`,
+        `H ${end.x}`,
+      ].join(' ')
+
+      setConnector({
+        width: heroRect.width,
+        height: heroRect.height,
+        path,
+        start,
+        end,
+      })
+    }
+
+    updateConnector()
+
+    const resizeObserver = new ResizeObserver(updateConnector)
+    if (heroRef.current) resizeObserver.observe(heroRef.current)
+    if (doLessRef.current) resizeObserver.observe(doLessRef.current)
+    if (betterRef.current) resizeObserver.observe(betterRef.current)
+
+    window.addEventListener('resize', updateConnector)
+
+    return () => {
+      resizeObserver.disconnect()
+      window.removeEventListener('resize', updateConnector)
+    }
+  }, [])
+
   return (
     <div className="page">
-      <Header />
-
       {/* Hero: Do less / better. */}
       <div className="about-hero">
-      <video className="about-hero__video" autoPlay muted loop playsInline>
-          <source src={leavesVideo} type="video/mp4" />
-        </video>
-        <div className="about-hero__inner">
+        <AutoPlayVideo className="about-hero__video" src={leavesVideo} />
+        <div className="about-hero__inner" ref={heroRef}>
+          {connector && (
+            <svg
+              className="about-hero__connector"
+              width={connector.width}
+              height={connector.height}
+              viewBox={`0 0 ${connector.width} ${connector.height}`}
+              aria-hidden="true"
+            >
+              <path d={connector.path} />
+              <circle cx={connector.start.x} cy={connector.start.y} r="3" />
+              <circle cx={connector.end.x} cy={connector.end.y} r="3" />
+            </svg>
+          )}
           <div className="about-hero__left">
-            <p className="about-hero__do-less">Do less</p>
-          </div>
-          <div className="about-hero__spacer">
-<svg width="1191" height="458" viewBox="0 0 1191 458" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M21.3333 16C21.3333 17.4728 22.5272 18.6667 24 18.6667C25.4728 18.6667 26.6667 17.4728 26.6667 16C26.6667 14.5272 25.4728 13.3333 24 13.3333C22.5272 13.3333 21.3333 14.5272 21.3333 16ZM1164.33 442C1164.33 443.473 1165.53 444.667 1167 444.667C1168.47 444.667 1169.67 443.473 1169.67 442C1169.67 440.527 1168.47 439.333 1167 439.333C1165.53 439.333 1164.33 440.527 1164.33 442ZM24 16V16.5H653.176V16V15.5H24V16ZM713.176 76H712.676V382H713.176H713.676V76H713.176ZM773.176 442V442.5H1167V442V441.5H773.176V442ZM713.176 382H712.676C712.676 415.413 739.763 442.5 773.176 442.5V442V441.5C740.315 441.5 713.676 414.861 713.676 382H713.176ZM653.176 16V16.5C686.037 16.5 712.676 43.1391 712.676 76H713.176H713.676C713.676 42.5868 686.59 15.5 653.176 15.5V16Z" fill="white" fillOpacity="0.3"/>
-</svg>
-
+            <p className="about-hero__do-less" ref={doLessRef}>Do less</p>
           </div>
           <div className="about-hero__right">
-            <p className="about-hero__better">better.</p>
+            <p className="about-hero__better" ref={betterRef}>better.</p>
           </div>
         </div>
       </div>
@@ -48,12 +147,14 @@ export default function About() {
         <div className="bio">
           <div className="bio__content">
             <div className="accent-bar" />
-            <p className="bio__tagline">Built to Last.</p>
-            <p className="bio__text">I work with ambitious companies to build brand systems that align identity, product, and story from the start. After years working in agencies, in-house, and independently, I’ve seen a pattern: brands are often delivered as finished work, but rarely carried through with the same level of care. My focus now is more integrated — building the brand and staying close to how it’s applied, ensuring it holds up in the real world.</p>
+          <p className="bio__tagline">Built to last.</p>
+          <p className="bio__text">After years working in agencies, in-house, independently, and as a Product Design Manager, I’ve learned that the person selling the work is not always the person shaping it. Larger agencies can bring scale, but they also bring layers, overhead, and margin pressure. AI can make execution faster, but it cannot replace the taste, judgment, and experience required to know what to make, what to leave out, and how to protect the standard. Working with me means you get that senior perspective directly, without paying for agency overhead or wondering whether your key brand decisions are being handled by a junior designer with a prompt.</p>
           </div>
           <div className="bio__photo">
             <img src={HEADSHOT} alt="Brett McMillin" className="headshot" />
-            <img src={CV} alt="CV Link" className="cv_ring" />
+            <a className="cv_link" href="#teams-and-projects" aria-label="Jump to teams and projects" onClick={scrollToTeamsAndProjects}>
+              <img src={CV} alt="Read my CV" className="cv_ring" />
+            </a>
           </div>
         </div>
       </div>
@@ -63,9 +164,7 @@ export default function About() {
           <div className="section section--wide">
             <div className="banner">
               <div className="banner__bg" />
-              <video className="banner__video" autoPlay muted loop playsInline>
-                <source src={staticVideo} type="video/mp4" />
-              </video>
+              <AutoPlayVideo className="banner__video" src={staticVideo} />
               <div className="banner__bg-screen" />
               <div className="banner__shapes">
                 <img src={DIAMOND_LEFT} alt="" />
@@ -78,9 +177,9 @@ export default function About() {
           {/* Flow of the work */}
           <div className="section section--expanded">
             <div className="flow">
-              <h1>Fluid by Design</h1>
+              <h1>Fluid by design</h1>
               <div className="flow__list">
-                <p className="bio__text">I operate on a flexible, "fluid" model. I’m your primary partner and handle the majority of the work, but when a project calls for additional disciplines, I bring in a trusted network of collaborators to support specific needs. You still work directly with me, and I remain the single point of contact throughout. The result is a more focused, turnkey experience — with the ability to scale the team up or down depending on what the work requires. At its core, my work is grounded in a set of capabilities that shape how brands are built and carried forward:</p>
+                <p className="bio__text">I operate on a flexible, fluid model. I’m your primary partner and handle the majority of the work, but when a project needs another discipline, I bring in trusted collaborators for that specific need. You still work directly with me, and I remain the single point of contact throughout. The result is a focused experience with enough range to scale the team up or down as the work requires. At its core, my work is grounded in a set of capabilities that shape how brands are built and carried forward:</p>
               </div>
             </div>
           </div>
@@ -95,8 +194,8 @@ export default function About() {
                 <strong>Foundation</strong>
                 <ul>
                 <li>Brand positioning</li>
-                <li>Naming & verbal direction</li>
-                <li>Logo & identity system</li>
+                <li>Naming and verbal direction</li>
+                <li>Logo and identity system</li>
                 <li>Art direction</li>
                 <li>Core brand toolkit</li>
                 </ul> 
@@ -105,10 +204,10 @@ export default function About() {
                 <strong>Scale</strong>
                 <ul>
                   <li>Brand system design</li>
-                  <li>AI & agentic workflow readiness</li>
+                  <li>AI and agentic workflow readiness</li>
                   <li>Product brand integration</li>
                   <li>Design system alignment</li>
-                  <li>Campaign & launch frameworks</li>
+                  <li>Campaign and launch frameworks</li>
                 </ul> 
               </div>
               <div className="services__col">
@@ -128,12 +227,25 @@ export default function About() {
 
       </div>
 
-      {/* Closing quote */}
-      <div className="section section--medium">
-        <p className="quote">
-          <span className="dim">With experience leading product design teams and building scalable design systems, I approach brand with the same rigor as product: </span>
-          <span>structured, intentional, and built to last.</span>
-        </p>
+      <div className="section section--expanded" id="teams-and-projects">
+        <section className="teams-projects" aria-labelledby="teams-projects-heading">
+          <div className="teams-projects__intro">
+            <div className="accent-bar" />
+            <h2 id="teams-projects-heading">Teams and projects</h2>
+            <p>A short record of the companies, studios, and publications that shaped my approach to work.</p>
+          </div>
+          <div className="teams-projects__list">
+            {TEAMS_AND_PROJECTS.map(({ name, role, dates, href }) => (
+              <a className="teams-projects__item" href={href} key={name}>
+                <span className="teams-projects__name">{name}</span>
+                <span className="teams-projects__meta">
+                  <span>{role}</span>
+                  <span>{dates}</span>
+                </span>
+              </a>
+            ))}
+          </div>
+        </section>
       </div>
 
       <Footer />

@@ -1,4 +1,3 @@
-import Header from '../../components/Header'
 import Footer from '../../components/Footer'
 import CaseStudyHero from '../../components/case-studies/blocks/CaseStudyHero'
 import CaseStudyRichTextSection from '../../components/case-studies/blocks/CaseStudyRichTextSection'
@@ -22,17 +21,15 @@ const unitedImg     = '/src/assets/dt/united-in-dirt.jpg'
 export default function DustyTimes() {
   return (
     <div className="page page--case-study dustytimes">
-      <Header />
-
       <CaseStudyHero bgSrc={heroImg} markVectorSrc={dtLogo} />
 
       <CaseStudyRichTextSection>
         <p>
-          <span>Dusty Times was once the primary publication of the off road racing world. </span>
-          <span className="dim">McM Design Co rebuilt it as a new kind of media brand.</span>
+          <span>Dusty Times was once the primary publication of the off-road racing world. </span>
+          <span className="dim">MCM Design Co. rebuilt it as a new kind of media brand.</span>
         </p>
         <p>
-          <span className="dim">As founding partner and Design Director, Brett McMillin led the transformation of a legacy racing newspaper into an annual lifestyle journal with cultural relevance and long term brand equity.</span>
+          <span className="dim">As founding partner and design director, Brett McMillin led the transformation of a legacy racing newspaper into an annual lifestyle journal with cultural relevance and long-term brand equity.</span>
         </p>
       </CaseStudyRichTextSection>
 
@@ -49,7 +46,7 @@ export default function DustyTimes() {
         </div>
         <div className="cs-col">
           <CaseStudyRuleTextSection heading="Context">
-            <p>From 1983 to 2013, Dusty Times served as the connective tissue of the off road community through race coverage and classifieds.</p>
+            <p>From 1983 to 2013, Dusty Times served as the connective tissue of the off-road community through race coverage and classifieds.</p>
             <p>When it shut down, the brand disappeared with it.</p>
             <p>In 2019, Custom Wheel House acquired the rights and set out to revive it. Not as a continuation, but as a redefinition.</p>
             <p>The opportunity was to take a known name and give it a new role in the culture.</p>
@@ -61,7 +58,7 @@ export default function DustyTimes() {
       <div className="section section--narrow">
         <CaseStudyRuleTextSection heading="Tension">
           <p>The category had moved on from print.</p>
-          <p>At the same time, off road culture had not developed a visual or editorial standard that matched its evolution. Most media in the space remained purely functional.</p>
+          <p>At the same time, off-road culture had not developed a visual or editorial standard that matched its evolution. Most media in the space remained purely functional.</p>
           <p>Launching a print publication under these conditions required a clear point of view.</p>
           <p>Dusty Times needed to justify its existence through quality, not frequency.</p>
         </CaseStudyRuleTextSection>
@@ -82,8 +79,8 @@ export default function DustyTimes() {
       <div className="section section--expanded cs-layout--cols">
         <div className="cs-col">
           <CaseStudyRuleTextSection heading="Role">
-            <p>McM Design Co operated as a founding partner, not a vendor.</p>
-            <p>The scope included brand positioning and editorial posture, visual identity and art direction system, publication design and production oversight, and establishing quality standards across all outputs.</p>
+            <p>MCM Design Co. operated as a founding partner, not a vendor.</p>
+            <p>The scope included brand positioning, editorial posture, visual identity, art direction, publication design, production oversight, and quality standards across every output.</p>
             <p>The mandate was to build a brand that could carry forward for years, not just launch an issue.</p>
           </CaseStudyRuleTextSection>
         </div>
@@ -188,7 +185,7 @@ export default function DustyTimes() {
       {/* Impact + Future */}
       <CaseStudyRichTextSection>
         <p>
-          <span>Dusty Times now operates as a cultural object within the off road industry. </span>
+          <span>Dusty Times now operates as a cultural object within the off-road industry. </span>
           <span className="dim">It carries weight beyond its content. The original audience recognizes the legacy. A new audience engages with it as a modern expression of the culture.</span>
         </p>
         <p>

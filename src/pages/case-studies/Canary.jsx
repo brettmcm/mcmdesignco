@@ -1,4 +1,3 @@
-import Header from '../../components/Header'
 import Footer from '../../components/Footer'
 import CaseStudyHero from '../../components/case-studies/blocks/CaseStudyHero'
 import CaseStudyRichTextSection from '../../components/case-studies/blocks/CaseStudyRichTextSection'
@@ -32,8 +31,6 @@ const creative06  = '/src/assets/canary/creative-06.png'
 export default function Canary() {
   return (
     <div className="page page--case-study canary">
-      <Header />
-
       <CaseStudyHero bgSrc={heroImg} markVectorSrc={canaryLogo} />
 
       <CaseStudyRichTextSection>

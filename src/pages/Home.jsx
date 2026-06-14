@@ -1,10 +1,10 @@
-import Header from '../components/Header'
 import Footer from '../components/Footer'
 import Arrow from '../components/Arrow'
 import patternVideo from '../assets/pattern.mp4'
 import staticVideo from '../assets/static.mp4'
 import skyVideo from '../assets/sky.mp4'
 import Link from '../components/Link'
+import AutoPlayVideo from '../components/AutoPlayVideo'
 
 const CANARY_LOGO  = './src/assets/canary/logo.svg'
 const CANARY_LOGO_DARK  = './src/assets/canary/logo-white.svg'
@@ -20,13 +20,11 @@ const TESTIMONIAL_LOGO = './src/assets/canary/icon.svg'
 export default function Home() {
   return (
     <div className="page page--home">
-      <Header />
-
       {/* Overview: Tagline */}
       <div className="section section--narrow overview">
         <div className="accent-bar" />
         <div className="overview-body">
-          <p className="overview-heading">Helping ambitious companies build culturally sharp, scalable brand systems.</p>
+          <p className="overview-heading">Helping ambitious companies build brands with cultural edge, system-level discipline, and room to scale.</p>
           <div className="overview-services">
             <p>Brand strategy</p>
             <p>Visual identity</p>
@@ -39,12 +37,8 @@ export default function Home() {
       {/* Hero Video */}
       <div className="section section--wide">
         <div className="hero-image-wrap">
-          <video autoPlay muted loop playsInline>
-            <source src={patternVideo} type="video/mp4" />
-          </video>
-          <video className="banner__video" autoPlay muted loop playsInline>
-            <source src={staticVideo} type="video/mp4" />
-          </video>
+          <AutoPlayVideo src={patternVideo} />
+          <AutoPlayVideo className="banner__video" src={staticVideo} />
         </div>
       </div>
 
@@ -53,7 +47,7 @@ export default function Home() {
         <p className="quote">
           <span>Execution alone is no longer an advantage.</span>
           {' '}
-          <span className="dim">Speed is table stakes. More than ever you need taste and proven creative judgement to guide your brand to stand out in saturated markets.</span>
+          <span className="dim">Speed is table stakes. Brands need taste, judgment, and a point of view strong enough to cut through saturated markets.</span>
         </p>
       </div>
 
@@ -70,7 +64,7 @@ export default function Home() {
             </picture>
 
             </div>
-            <p className="case-study__desc">Finding the subversive space in an industry saturated with green-washed, minimal brands presenting tired monotony.</p>
+            <p className="case-study__desc">Finding a sharper lane in a category crowded with greenwashed minimalism, soft claims, and interchangeable restraint.</p>
             <Link to="/case-studies/canary" linkText="Read case study" />
           </div>
           <div className="case-study__image">
@@ -90,7 +84,7 @@ export default function Home() {
                 <img src={DUSTY_LOGO} alt="Dusty Times Logo" />
               </picture>
             </div>
-            <p className="case-study__desc">An annual lifestyle journal celebrating the world of desert racing and off-road culture. Spotlighting the spirit of adventure, resilience, and the relentless pursuit of victory by highlighting the stories on the fringes of the spotlight.</p>
+            <p className="case-study__desc">Rebuilding a legacy off-road newspaper as an annual lifestyle journal with stronger photography, sharper editorial standards, and a new cultural role.</p>
             <Link to="/case-studies/dusty-times" linkText="Read case study" />
           </div>
           <div className="case-study__image">
@@ -110,7 +104,7 @@ export default function Home() {
                 <img src={BLOOP_LOGO} alt="Bloop Logo" />
               </picture>
             </div>
-            <p className="case-study__desc">Transforming a once-hidden chore into a household celebration with small-batch, all-natural laundry soap that is free of both harmful chemicals and typical hippy scents.</p>
+            <p className="case-study__desc">Turning a hidden household chore into a sensory ritual for small-batch laundry soap with cleaner ingredients and scents that feel current.</p>
             <Link to="/case-studies/bloop" linkText="Read case study" />
           </div>
           <div className="case-study__image">
@@ -123,9 +117,7 @@ export default function Home() {
 <div className="section section--wide">
   <div className="testimonial">
     <div className="testimonial__bg" aria-hidden="true">
-      <video autoPlay muted loop playsInline>
-        <source src={skyVideo} type="video/mp4" />
-      </video>
+      <AutoPlayVideo src={skyVideo} />
     </div>
     <div className="testimonial__content">
       <div className="testimonial__quote">
@@ -146,18 +138,18 @@ export default function Home() {
       <div className="section section--narrow">
         <div className="services__row">
           <div className="services__intro">
-            <p className="services__heading">Your brand is more than just decorative</p>
+            <p className="services__heading">A brand should carry more than decoration</p>
             <Link to="/about" linkText="More about the approach" />
           </div>
           <div className="services__list">
             <p className="services__item">
-              <strong>Foundation.</strong> <span className="dim">The core identity is established through positioning, voice, and visual language so the brand feels clear and intentional from the start.</span>
+              <strong>Foundation.</strong> <span className="dim">Positioning, voice, and visual language are built together so the brand has a clear center of gravity from the start.</span>
             </p>
             <p className="services__item">
-              <strong>Scale.</strong> <span className="dim">Flexible brand systems are designed to extend across product, marketing, and AI-driven workflows so the brand remains cohesive as complexity increases.</span>
+              <strong>Scale.</strong> <span className="dim">The system is shaped to move across product, marketing, and AI-driven workflows without losing its point of view.</span>
             </p>
             <p className="services__item">
-              <strong>Stewardship.</strong> <span className="dim">Ongoing direction and consultation are provided to support how the brand is applied, adapted, and refined so it stays sharp and aligned as the company grows.</span>
+              <strong>Stewardship.</strong> <span className="dim">Ongoing creative direction keeps the brand sharp as it is applied, adapted, and tested in the real world.</span>
             </p>
           </div>
         </div>

@@ -97,7 +97,7 @@
 .cs-ruletext__body {
   font-size: 20px;
   font-weight: 400;
-  line-height: normal;
+  line-height: var(--paragraph-line-height);
   color: var(--dark-50);
 }
 
