@@ -188,7 +188,7 @@ export default function Home() {
     </div>
     <div className="testimonial__content">
       <div className="testimonial__quote">
-        <p>We used MCM Design Co. when we first launched our brand, not only to create our brand logo, but also to build out our entire brand guide.</p>
+        <p>We used Brett when we first launched our brand, not only to create our brand logo, but also to build out our entire brand guide.</p>
         <p>We use this guidance in all of our packaging, website and marketing efforts and follow it religiously. Doing so has made the brand seem more professional, mature and elevated. We hear positive comments about our branding all of the time.</p>
       </div>
       <div className="testimonial__footer">

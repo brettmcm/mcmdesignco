@@ -22,7 +22,7 @@ export default function Header() {
         <div className="header-logo-mark">
           <img src={LOGO_MARK} alt="MCM logo mark" />
         </div>
-        <span className="header-logo-name">MCM Design Co.</span>
+        <span className="header-logo-name">Brett McM Design</span>
       </Link>
       <nav className="header-nav">
         <NavLink to="/" onClick={scrollToTopOnCurrentPage('/')}>Home</NavLink>

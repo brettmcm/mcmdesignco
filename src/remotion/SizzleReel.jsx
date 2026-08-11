@@ -57,7 +57,7 @@ function SiteHeader({ dark = false }) {
     <div className={`site-header${dark ? ' site-header--dark' : ''}`}>
       <div className="site-header__brand">
         <Img src={asset('logo.svg')} />
-        <span>MCM Design Co.</span>
+        <span>Brett McM Design</span>
       </div>
       <div className="site-header__nav">
         <span>Work</span>
@@ -209,7 +209,7 @@ function IntroOutro({ frame }) {
     <>
       <div className="intro-lockup" style={{ opacity: intro }}>
         <Img src={asset('logo.svg')} />
-        <p>MCM Design Co.</p>
+        <p>Brett McM Design</p>
         <h1>Website sizzle reel</h1>
       </div>
       <div className="outro-lockup" style={{ opacity: outro }}>

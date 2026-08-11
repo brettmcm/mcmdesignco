@@ -26,7 +26,7 @@ export default function DustyTimes() {
       <CaseStudyRichTextSection>
         <p>
           <span>Dusty Times was once the primary publication of the off-road racing world. </span>
-          <span className="dim">MCM Design Co. rebuilt it as a new kind of media brand.</span>
+          <span className="dim">Brett McM Design rebuilt it as a new kind of media brand.</span>
         </p>
         <p>
           <span className="dim">As founding partner and design director, Brett McMillin led the transformation of a legacy racing newspaper into an annual lifestyle journal with cultural relevance and long-term brand equity.</span>
@@ -79,7 +79,7 @@ export default function DustyTimes() {
       <div className="section section--expanded cs-layout--cols">
         <div className="cs-col">
           <CaseStudyRuleTextSection heading="Role">
-            <p>MCM Design Co. operated as a founding partner, not a vendor.</p>
+            <p>Brett McM Design operated as a founding partner, not a vendor.</p>
             <p>The scope included brand positioning, editorial posture, visual identity, art direction, publication design, production oversight, and quality standards across every output.</p>
             <p>The mandate was to build a brand that could carry forward for years, not just launch an issue.</p>
           </CaseStudyRuleTextSection>

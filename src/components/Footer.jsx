@@ -14,7 +14,7 @@ export default function Footer() {
         <a className="footer-cta__btn" href={CONTACT_EMAIL}>Contact</a>
       </div>
       <div className="footer-bar">
-        <span className="footer-bar__name">MCM Design Co.</span>
+        <span className="footer-bar__name">Brett McM Design</span>
         <div className="footer-bar__socials">
           <div className="footer-bar__social">
             <img src={TWITTER} alt="Twitter/X" />
