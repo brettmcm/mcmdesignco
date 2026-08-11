@@ -12,6 +12,9 @@ export default function CaseStudyHero({
         className="cs-hero__bg"
         src={bgSrc}
         alt={bgAlt}
+        loading="eager"
+        decoding="async"
+        fetchPriority="high"
         onError={
           bgFallbackSrc
             ? (e) => {
@@ -27,6 +30,8 @@ export default function CaseStudyHero({
               className="cs-hero__vector"
               src={markVectorSrc}
               alt={markVectorAlt}
+              loading="eager"
+              decoding="async"
               onError={
                 markVectorFallbackSrc
                   ? (e) => {
@@ -41,4 +46,3 @@ export default function CaseStudyHero({
     </div>
   )
 }
-

@@ -2,7 +2,7 @@ import Footer from '../components/Footer'
 import AutoPlayVideo from '../components/AutoPlayVideo'
 import leavesVideo from '../assets/leaves.mp4'
 import staticVideo from '../assets/static.mp4'
-import HEADSHOT from '../assets/portrait.png'
+import HEADSHOT from '../assets/portrait.webp'
 import CV from '../assets/resume.svg'
 import DIAMOND_LEFT from '../assets/diamond-left.svg'
 import DIAMOND_CENTER from '../assets/diamond-center.svg'
@@ -151,9 +151,9 @@ export default function About() {
           <p className="bio__text">After years working in agencies, in-house, independently, and as a Product Design Manager, I’ve learned that the person selling the work is not always the person shaping it. Larger agencies can bring scale, but they also bring layers, overhead, and margin pressure. AI can make execution faster, but it cannot replace the taste, judgment, and experience required to know what to make, what to leave out, and how to protect the standard. Working with me means you get that senior perspective directly, without paying for agency overhead or wondering whether your key brand decisions are being handled by a junior designer with a prompt.</p>
           </div>
           <div className="bio__photo">
-            <img src={HEADSHOT} alt="Brett McMillin" className="headshot" />
+            <img src={HEADSHOT} alt="Brett McMillin" className="headshot" loading="lazy" decoding="async" />
             <a className="cv_link" href="#teams-and-projects" aria-label="Jump to teams and projects" onClick={scrollToTeamsAndProjects}>
-              <img src={CV} alt="Read my CV" className="cv_ring" />
+              <img src={CV} alt="Read my CV" className="cv_ring" loading="lazy" decoding="async" />
             </a>
           </div>
         </div>
@@ -167,9 +167,9 @@ export default function About() {
               <AutoPlayVideo className="banner__video" src={staticVideo} />
               <div className="banner__bg-screen" />
               <div className="banner__shapes">
-                <img src={DIAMOND_LEFT} alt="" />
-                <img src={DIAMOND_CENTER} alt="" />
-                <img src={DIAMOND_RIGHT} alt="" />
+                <img src={DIAMOND_LEFT} alt="" loading="lazy" decoding="async" />
+                <img src={DIAMOND_CENTER} alt="" loading="lazy" decoding="async" />
+                <img src={DIAMOND_RIGHT} alt="" loading="lazy" decoding="async" />
               </div>
             </div>
           </div>

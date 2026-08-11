@@ -15,6 +15,8 @@ export default function CaseStudyTestimonial({
           <img
             src={bgImageSrc}
             alt={bgImageAlt}
+            loading="lazy"
+            decoding="async"
             onError={
               bgImageFallbackSrc
                 ? (e) => {
@@ -43,6 +45,8 @@ export default function CaseStudyTestimonial({
               <img
                 src={authorLogoSrc}
                 alt={authorName}
+                loading="lazy"
+                decoding="async"
                 onError={
                   authorLogoFallbackSrc
                     ? (e) => {
@@ -58,4 +62,3 @@ export default function CaseStudyTestimonial({
     </div>
   )
 }
-

@@ -18,13 +18,13 @@ export default function Footer() {
         <span className="footer-bar__name">Brett McM Design</span>
         <div className="footer-bar__socials">
           <div className="footer-bar__social">
-            <img src={TWITTER} alt="Twitter/X" />
+            <img src={TWITTER} alt="Twitter/X" width="24" height="24" loading="lazy" decoding="async" />
           </div>
           <div className="footer-bar__social">
-            <img src={LINKEDIN} alt="LinkedIn" />
+            <img src={LINKEDIN} alt="LinkedIn" width="24" height="24" loading="lazy" decoding="async" />
           </div>
           <div className="footer-bar__social">
-            <img src={INSTAGRAM} alt="Instagram" />
+            <img src={INSTAGRAM} alt="Instagram" width="24" height="24" loading="lazy" decoding="async" />
           </div>
         </div>
       </div>

@@ -20,7 +20,7 @@ export default function Header() {
     <header className="header">
       <Link to="/" className="header-logo" onClick={scrollToTopOnCurrentPage('/')}>
         <div className="header-logo-mark">
-          <img src={LOGO_MARK} alt="MCM logo mark" />
+          <img src={LOGO_MARK} alt="MCM logo mark" width="31" height="31" decoding="async" />
         </div>
         <span className="header-logo-name">Brett McM Design</span>
       </Link>

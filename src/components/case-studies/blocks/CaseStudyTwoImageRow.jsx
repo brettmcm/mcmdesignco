@@ -20,6 +20,10 @@ export default function CaseStudyTwoImageRow({
               className="cs-two-image-row__img"
               src={img.src}
               alt={img.alt ?? ''}
+              width={aspectWidth}
+              height={aspectHeight}
+              loading="lazy"
+              decoding="async"
               onError={
                 img.fallbackSrc
                   ? (e) => {
@@ -34,4 +38,3 @@ export default function CaseStudyTwoImageRow({
     </div>
   )
 }
-

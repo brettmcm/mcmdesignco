@@ -46,6 +46,8 @@ export default function CaseStudyMosaicGrid({
               className="cs-mosaic__img"
               src={img.src}
               alt={img.alt ?? ''}
+              loading="lazy"
+              decoding="async"
               onError={
                 img.fallbackSrc
                   ? (e) => {
@@ -60,4 +62,3 @@ export default function CaseStudyMosaicGrid({
     </div>
   )
 }
-

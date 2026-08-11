@@ -4,11 +4,11 @@ import patternVideo from '../assets/pattern.mp4'
 import staticVideo from '../assets/static.mp4'
 import skyVideo from '../assets/sky.mp4'
 import testimonialLogo from '../assets/canary/icon.svg'
-import bgRestraint from '../assets/bloop/creative-01.png'
-import bgTension from '../assets/dt/united-in-dirt.jpg'
-import bgTexture from '../assets/canary/creative-01.png'
-import bgPrecision from '../assets/dt/dt7-vip1.jpg'
-import bgTaste from '../assets/dt/dt5-stack.jpg'
+import bgRestraint from '../assets/bloop/creative-01.webp'
+import bgTension from '../assets/dt/united-in-dirt.webp'
+import bgTexture from '../assets/canary/creative-01.webp'
+import bgPrecision from '../assets/dt/dt7-vip1.webp'
+import bgTaste from '../assets/dt/dt5-stack.webp'
 import Link from '../components/Link'
 import AutoPlayVideo from '../components/AutoPlayVideo'
 
@@ -139,6 +139,8 @@ export default function Home() {
                   className={index === activeStep && isSignalBackgroundActive ? 'is-active' : undefined}
                   src={step.image}
                   alt=""
+                  loading="lazy"
+                  decoding="async"
                   key={step.label}
                 />
               ))}
@@ -200,7 +202,7 @@ export default function Home() {
       <div className="testimonial__footer">
         <p className="testimonial__author"><strong>Luke</strong>, <em>Canary Founder</em></p>
         <div className="testimonial__logo">
-          <img src={TESTIMONIAL_LOGO} alt="Canary" />
+          <img src={TESTIMONIAL_LOGO} alt="Canary" loading="lazy" decoding="async" />
         </div>
       </div>
     </div>

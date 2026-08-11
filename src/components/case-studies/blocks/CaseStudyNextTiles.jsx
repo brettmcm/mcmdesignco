@@ -8,7 +8,15 @@ export default function CaseStudyNextTiles({ tiles }) {
         {tiles.map(({ to, label, thumb }) => (
           <div key={to} className="cs-next-tile">
             <div className="cs-next-tile__frame">
-              <img src={thumb} alt={label} className="cs-next-tile__img" />
+              <img
+                src={thumb}
+                alt={label}
+                className="cs-next-tile__img"
+                width="568"
+                height="400"
+                loading="lazy"
+                decoding="async"
+              />
             </div>
             <Link to={to} linkText={label} />
           </div>

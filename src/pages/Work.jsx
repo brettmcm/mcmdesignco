@@ -2,13 +2,13 @@ import Footer from '../components/Footer'
 import Link from '../components/Link'
 import CANARY_LOGO from '../assets/canary/logo.svg'
 import CANARY_LOGO_DARK from '../assets/canary/logo-white.svg'
-import CANARY_IMG from '../assets/canary/thumb.png'
+import CANARY_IMG from '../assets/canary/thumb.webp'
 import DUSTY_LOGO from '../assets/dt/logo.svg'
 import DUSTY_LOGO_DARK from '../assets/dt/logo-white.svg'
-import DUSTY_IMG from '../assets/dt/thumb.png'
+import DUSTY_IMG from '../assets/dt/thumb.webp'
 import BLOOP_LOGO from '../assets/bloop/logo.svg'
 import BLOOP_LOGO_DARK from '../assets/bloop/logo-white.svg'
-import BLOOP_IMG from '../assets/bloop/thumb.png'
+import BLOOP_IMG from '../assets/bloop/thumb.webp'
 
 const PROJECTS = [
   {
@@ -60,14 +60,14 @@ export default function Work() {
                 <picture>
                   <source srcSet={logoDark} media="(prefers-color-scheme: dark)" />
                   <source srcSet={logo} media="(prefers-color-scheme: light)" />
-                  <img src={logo} alt={`${name} Logo`} />
+                  <img src={logo} alt={`${name} Logo`} loading="lazy" decoding="async" />
                 </picture>
               </div>
               <p className="case-study__desc">{description}</p>
               <Link to={href} linkText="Read case study" />
             </div>
             <div className="case-study__image">
-              <img src={image} alt={`${name} case study`} />
+              <img src={image} alt={`${name} case study`} loading="lazy" decoding="async" />
             </div>
           </div>
         </div>

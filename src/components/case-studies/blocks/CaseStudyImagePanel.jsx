@@ -20,6 +20,10 @@ export default function CaseStudyImagePanel({
         className="cs-image-panel__img"
         src={src}
         alt={alt}
+        width={aspectWidth}
+        height={aspectHeight}
+        loading="lazy"
+        decoding="async"
         onError={
           fallbackSrc
             ? (e) => {
@@ -31,4 +35,3 @@ export default function CaseStudyImagePanel({
     </div>
   )
 }
-
