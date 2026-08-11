@@ -25,7 +25,8 @@ export default function Header() {
         <span className="header-logo-name">MCM Design Co.</span>
       </Link>
       <nav className="header-nav">
-        <NavLink to="/" onClick={scrollToTopOnCurrentPage('/')}>Work</NavLink>
+        <NavLink to="/" onClick={scrollToTopOnCurrentPage('/')}>Home</NavLink>
+        <NavLink to="/work" onClick={scrollToTopOnCurrentPage('/work')}>Work</NavLink>
         <NavLink to="/about" onClick={scrollToTopOnCurrentPage('/about')}>About</NavLink>
         <a href={CONTACT_EMAIL}>Contact</a>
       </nav>

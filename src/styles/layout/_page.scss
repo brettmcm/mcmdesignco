@@ -41,6 +41,10 @@
   padding-top: 300px;
 }
 
+.page--work {
+  padding-top: 240px;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .route-transition::after {
     transition: none;
@@ -54,5 +58,9 @@
 
   .page--home {
     padding-top: 100px;
+  }
+
+  .page--work {
+    padding-top: 120px;
   }
 }
