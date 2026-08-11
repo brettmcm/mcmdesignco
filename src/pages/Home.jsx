@@ -3,15 +3,21 @@ import { useEffect, useRef, useState } from 'react'
 import patternVideo from '../assets/pattern.mp4'
 import staticVideo from '../assets/static.mp4'
 import skyVideo from '../assets/sky.mp4'
+import testimonialLogo from '../assets/canary/icon.svg'
+import bgRestraint from '../assets/bloop/creative-01.png'
+import bgTension from '../assets/dt/united-in-dirt.jpg'
+import bgTexture from '../assets/canary/creative-01.png'
+import bgPrecision from '../assets/dt/dt7-vip1.jpg'
+import bgTaste from '../assets/dt/dt5-stack.jpg'
 import Link from '../components/Link'
 import AutoPlayVideo from '../components/AutoPlayVideo'
 
-const TESTIMONIAL_LOGO = './src/assets/canary/icon.svg'
-const BG_RESTRAINT = './src/assets/bloop/creative-01.png'
-const BG_TENSION = './src/assets/dt/united-in-dirt.jpg'
-const BG_TEXTURE = './src/assets/canary/creative-01.png'
-const BG_PRECISION = './src/assets/dt/dt7-vip1.jpg'
-const BG_TASTE = './src/assets/dt/dt5-stack.jpg'
+const TESTIMONIAL_LOGO = testimonialLogo
+const BG_RESTRAINT = bgRestraint
+const BG_TENSION = bgTension
+const BG_TEXTURE = bgTexture
+const BG_PRECISION = bgPrecision
+const BG_TASTE = bgTaste
 
 const WORKFLOW_STEPS = [
   {

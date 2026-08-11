@@ -6,18 +6,19 @@ import CaseStudyMosaicGrid from '../../components/case-studies/blocks/CaseStudyM
 import CaseStudyImagePanel from '../../components/case-studies/blocks/CaseStudyImagePanel'
 import CaseStudyTwoImageRow from '../../components/case-studies/blocks/CaseStudyTwoImageRow'
 import CaseStudyNextTiles from '../../components/case-studies/blocks/CaseStudyNextTiles'
-
-const heroImg      = '/src/assets/bloop/hero.png'
-const bloopLogo    = '/src/assets/bloop/logo-white.svg'
-const challenge01  = '/src/assets/bloop/photoshoot-00.png'
-const disrupt01    = '/src/assets/bloop/disrupt-01.png'
-const disrupt02    = '/src/assets/bloop/disrupt-02.png'
-const photoshoot01 = '/src/assets/bloop/photoshoot-01.png'
-const photoshoot02 = '/src/assets/bloop/photoshoot-02.png'
-const photoshoot03 = '/src/assets/bloop/photoshoot-03.png'
-const photoshoot04 = '/src/assets/bloop/photoshoot-04.png'
-const creative01   = '/src/assets/bloop/creative-01.png'
-const creative02   = '/src/assets/bloop/creative-02.png'
+import heroImg from '../../assets/bloop/hero.png'
+import bloopLogo from '../../assets/bloop/logo-white.svg'
+import challenge01 from '../../assets/bloop/photoshoot-00.png'
+import disrupt01 from '../../assets/bloop/disrupt-01.png'
+import disrupt02 from '../../assets/bloop/disrupt-02.png'
+import photoshoot01 from '../../assets/bloop/photoshoot-01.png'
+import photoshoot02 from '../../assets/bloop/photoshoot-02.png'
+import photoshoot03 from '../../assets/bloop/photoshoot-03.png'
+import photoshoot04 from '../../assets/bloop/photoshoot-04.png'
+import creative01 from '../../assets/bloop/creative-01.png'
+import creative02 from '../../assets/bloop/creative-02.png'
+import canaryThumb from '../../assets/canary/thumb.png'
+import dustyThumb from '../../assets/dt/thumb.png'
 
 export default function Bloop() {
   return (
@@ -139,8 +140,8 @@ export default function Bloop() {
       </CaseStudyRichTextSection>
 
       <CaseStudyNextTiles tiles={[
-        { to: '/case-studies/canary', label: 'Canary', thumb: '/src/assets/canary/thumb.png' },
-        { to: '/case-studies/dusty-times', label: 'Dusty Times', thumb: '/src/assets/dt/thumb.png' },
+        { to: '/case-studies/canary', label: 'Canary', thumb: canaryThumb },
+        { to: '/case-studies/dusty-times', label: 'Dusty Times', thumb: dustyThumb },
       ]} />
 
       <Footer />

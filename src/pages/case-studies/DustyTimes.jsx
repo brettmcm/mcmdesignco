@@ -6,17 +6,18 @@ import CaseStudyImagePanel from '../../components/case-studies/blocks/CaseStudyI
 import CaseStudyTwoImageRow from '../../components/case-studies/blocks/CaseStudyTwoImageRow'
 import CaseStudyMosaicGrid from '../../components/case-studies/blocks/CaseStudyMosaicGrid'
 import CaseStudyNextTiles from '../../components/case-studies/blocks/CaseStudyNextTiles'
-
-const heroImg       = '/src/assets/dt/dt7-vip0.jpg'
-const dtLogo        = '/src/assets/dt/logo-white.svg'
-const stackImg      = '/src/assets/dt/dt-stack.jpg'
-const stack5Img     = '/src/assets/dt/dt5-stack.jpg'
-const snake5Img     = '/src/assets/dt/dt5-snake.jpg'
-const vip1Img       = '/src/assets/dt/dt7-vip1.jpg'
-const vip2Img       = '/src/assets/dt/dt7-vip2.jpg'
-const shipperImg    = '/src/assets/dt/dt7-shipper.jpg'
-const spreadsImg    = '/src/assets/dt/dtspreads.gif'
-const unitedImg     = '/src/assets/dt/united-in-dirt.jpg'
+import heroImg from '../../assets/dt/dt7-vip0.jpg'
+import dtLogo from '../../assets/dt/logo-white.svg'
+import stackImg from '../../assets/dt/dt-stack.jpg'
+import stack5Img from '../../assets/dt/dt5-stack.jpg'
+import snake5Img from '../../assets/dt/dt5-snake.jpg'
+import vip1Img from '../../assets/dt/dt7-vip1.jpg'
+import vip2Img from '../../assets/dt/dt7-vip2.jpg'
+import shipperImg from '../../assets/dt/dt7-shipper.jpg'
+import spreadsImg from '../../assets/dt/dtspreads.gif'
+import unitedImg from '../../assets/dt/united-in-dirt.jpg'
+import canaryThumb from '../../assets/canary/thumb.png'
+import bloopThumb from '../../assets/bloop/thumb.png'
 
 export default function DustyTimes() {
   return (
@@ -194,8 +195,8 @@ export default function DustyTimes() {
       </CaseStudyRichTextSection>
 
       <CaseStudyNextTiles tiles={[
-        { to: '/case-studies/canary', label: 'Canary', thumb: '/src/assets/canary/thumb.png' },
-        { to: '/case-studies/bloop', label: 'Bloop', thumb: '/src/assets/bloop/thumb.png' },
+        { to: '/case-studies/canary', label: 'Canary', thumb: canaryThumb },
+        { to: '/case-studies/bloop', label: 'Bloop', thumb: bloopThumb },
       ]} />
 
       <Footer />

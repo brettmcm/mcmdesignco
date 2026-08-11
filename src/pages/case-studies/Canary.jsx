@@ -6,27 +6,28 @@ import CaseStudyMosaicGrid from '../../components/case-studies/blocks/CaseStudyM
 import CaseStudyImagePanel from '../../components/case-studies/blocks/CaseStudyImagePanel'
 import CaseStudyTwoImageRow from '../../components/case-studies/blocks/CaseStudyTwoImageRow'
 import CaseStudyNextTiles from '../../components/case-studies/blocks/CaseStudyNextTiles'
-
-const heroImg     = '/src/assets/canary/hero.png'
-const canaryLogo  = '/src/assets/canary/logo-white.svg'
-const challenge01 = '/src/assets/canary/challenge-01.png'
-const challenge02 = '/src/assets/canary/challenge-02.png'
-const challenge03 = '/src/assets/canary/challenge-03.png'
-const challenge04 = '/src/assets/canary/challenge-04.png'
-const disrupt01   = '/src/assets/canary/disrupt-01.png'
-const disrupt02   = '/src/assets/canary/disrupt-02.png'
-const photoshoot01 = '/src/assets/canary/photoshoot-01.png'
-const photoshoot02 = '/src/assets/canary/photoshoot-02.png'
-const photoshoot03 = '/src/assets/canary/photoshoot-03.png'
-const photoshoot04 = '/src/assets/canary/photoshoot-04.png'
-const scout01     = '/src/assets/canary/scout-01.png'
-const scout02     = '/src/assets/canary/scout-02.png'
-const creative01  = '/src/assets/canary/creative-01.png'
-const creative02  = '/src/assets/canary/creative-02.png'
-const creative03  = '/src/assets/canary/brush.gif'
-const creative04  = '/src/assets/canary/creative-04.png'
-const creative05  = '/src/assets/canary/creative-05.png'
-const creative06  = '/src/assets/canary/creative-06.png'
+import heroImg from '../../assets/canary/hero.png'
+import canaryLogo from '../../assets/canary/logo-white.svg'
+import challenge01 from '../../assets/canary/challenge-01.png'
+import challenge02 from '../../assets/canary/challenge-02.png'
+import challenge03 from '../../assets/canary/challenge-03.png'
+import challenge04 from '../../assets/canary/challenge-04.png'
+import disrupt01 from '../../assets/canary/disrupt-01.png'
+import disrupt02 from '../../assets/canary/disrupt-02.png'
+import photoshoot01 from '../../assets/canary/photoshoot-01.png'
+import photoshoot02 from '../../assets/canary/photoshoot-02.png'
+import photoshoot03 from '../../assets/canary/photoshoot-03.png'
+import photoshoot04 from '../../assets/canary/photoshoot-04.png'
+import scout01 from '../../assets/canary/scout-01.png'
+import scout02 from '../../assets/canary/scout-02.png'
+import creative01 from '../../assets/canary/creative-01.png'
+import creative02 from '../../assets/canary/creative-02.png'
+import creative03 from '../../assets/canary/brush.gif'
+import creative04 from '../../assets/canary/creative-04.png'
+import creative05 from '../../assets/canary/creative-05.png'
+import creative06 from '../../assets/canary/creative-06.png'
+import bloopThumb from '../../assets/bloop/thumb.png'
+import dustyThumb from '../../assets/dt/thumb.png'
 
 export default function Canary() {
   return (
@@ -192,8 +193,8 @@ export default function Canary() {
       </div>
 
       <CaseStudyNextTiles tiles={[
-        { to: '/case-studies/bloop', label: 'Bloop', thumb: '/src/assets/bloop/thumb.png' },
-        { to: '/case-studies/dusty-times', label: 'Dusty Times', thumb: '/src/assets/dt/thumb.png' },
+        { to: '/case-studies/bloop', label: 'Bloop', thumb: bloopThumb },
+        { to: '/case-studies/dusty-times', label: 'Dusty Times', thumb: dustyThumb },
       ]} />
 
       <Footer />

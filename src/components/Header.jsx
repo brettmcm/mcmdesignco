@@ -1,7 +1,7 @@
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { animateScrollTo } from '../utils/scrollAnimation'
+import LOGO_MARK from '../assets/logo.svg'
 
-const LOGO_MARK = '/src/assets/logo.svg'
 const CONTACT_EMAIL = 'mailto:hello@brettmcm.com'
 
 export default function Header() {

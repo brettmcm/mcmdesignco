@@ -1,15 +1,14 @@
 import Footer from '../components/Footer'
 import Link from '../components/Link'
-
-const CANARY_LOGO = './src/assets/canary/logo.svg'
-const CANARY_LOGO_DARK = './src/assets/canary/logo-white.svg'
-const CANARY_IMG = './src/assets/canary/thumb.png'
-const DUSTY_LOGO = './src/assets/dt/logo.svg'
-const DUSTY_LOGO_DARK = './src/assets/dt/logo-white.svg'
-const DUSTY_IMG = './src/assets/dt/thumb.png'
-const BLOOP_LOGO = './src/assets/bloop/logo.svg'
-const BLOOP_LOGO_DARK = './src/assets/bloop/logo-white.svg'
-const BLOOP_IMG = './src/assets/bloop/thumb.png'
+import CANARY_LOGO from '../assets/canary/logo.svg'
+import CANARY_LOGO_DARK from '../assets/canary/logo-white.svg'
+import CANARY_IMG from '../assets/canary/thumb.png'
+import DUSTY_LOGO from '../assets/dt/logo.svg'
+import DUSTY_LOGO_DARK from '../assets/dt/logo-white.svg'
+import DUSTY_IMG from '../assets/dt/thumb.png'
+import BLOOP_LOGO from '../assets/bloop/logo.svg'
+import BLOOP_LOGO_DARK from '../assets/bloop/logo-white.svg'
+import BLOOP_IMG from '../assets/bloop/thumb.png'
 
 const PROJECTS = [
   {

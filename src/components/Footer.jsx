@@ -1,6 +1,7 @@
-const TWITTER  = '/src/assets/icons/twitterx.svg'
-const LINKEDIN  = '/src/assets/icons/linkedin.svg'
-const INSTAGRAM = '/src/assets/icons/instagram.svg'
+import TWITTER from '../assets/icons/twitterx.svg'
+import LINKEDIN from '../assets/icons/linkedin.svg'
+import INSTAGRAM from '../assets/icons/instagram.svg'
+
 const CONTACT_EMAIL = 'mailto:hello@brettmcm.com'
 
 export default function Footer() {
