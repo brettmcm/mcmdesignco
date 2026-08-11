@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { Routes, Route, useLocation, useNavigate } from 'react-router-dom'
 import Header from './components/Header'
 import Home from './pages/Home'
+import Work from './pages/Work'
 import About from './pages/About'
 import Canary from './pages/case-studies/Canary'
 import Bloop from './pages/case-studies/Bloop'
@@ -75,6 +76,7 @@ export default function App() {
         <div className="route-transition__content">
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/work" element={<Work />} />
             <Route path="/about" element={<About />} />
             <Route path="/case-studies/canary" element={<Canary />} />
             <Route path="/case-studies/bloop" element={<Bloop />} />

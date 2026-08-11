@@ -1,23 +1,99 @@
 import Footer from '../components/Footer'
-import Arrow from '../components/Arrow'
+import { useEffect, useRef, useState } from 'react'
 import patternVideo from '../assets/pattern.mp4'
 import staticVideo from '../assets/static.mp4'
 import skyVideo from '../assets/sky.mp4'
 import Link from '../components/Link'
 import AutoPlayVideo from '../components/AutoPlayVideo'
 
-const CANARY_LOGO  = './src/assets/canary/logo.svg'
-const CANARY_LOGO_DARK  = './src/assets/canary/logo-white.svg'
-const CANARY_IMG  = './src/assets/canary/thumb.png'
-const DUSTY_LOGO   = './src/assets/dt/logo.svg'
-const DUSTY_LOGO_DARK   = './src/assets/dt/logo-white.svg'
-const DUSTY_IMG   = './src/assets/dt/thumb.png'
-const BLOOP_LOGO   = './src/assets/bloop/logo.svg'
-const BLOOP_LOGO_DARK   = './src/assets/bloop/logo-white.svg'
-const BLOOP_IMG    = './src/assets/bloop/thumb.png'
 const TESTIMONIAL_LOGO = './src/assets/canary/icon.svg'
+const BG_RESTRAINT = './src/assets/bloop/creative-01.png'
+const BG_TENSION = './src/assets/dt/united-in-dirt.jpg'
+const BG_TEXTURE = './src/assets/canary/creative-01.png'
+const BG_PRECISION = './src/assets/dt/dt7-vip1.jpg'
+const BG_TASTE = './src/assets/dt/dt5-stack.jpg'
+
+const WORKFLOW_STEPS = [
+  {
+    label: 'Restraint',
+    sentence: 'Use less, but make every choice carry more weight.',
+    image: BG_RESTRAINT,
+  },
+  {
+    label: 'Tension',
+    sentence: 'Let classic structure hold a few deliberately subversive moves.',
+    image: BG_TENSION,
+  },
+  {
+    label: 'Texture',
+    sentence: 'Keep the work human, tactile, and just imperfect enough to feel alive.',
+    image: BG_TEXTURE,
+  },
+  {
+    label: 'Precision',
+    sentence: 'Treat details as strategy, not decoration.',
+    image: BG_PRECISION,
+  },
+  {
+    label: 'Taste',
+    sentence: 'Build a point of view strong enough to guide what belongs and what does not.',
+    image: BG_TASTE,
+  },
+]
 
 export default function Home() {
+  const signalSectionRef = useRef(null)
+  const [activeStep, setActiveStep] = useState(0)
+  const [isSignalBackgroundActive, setIsSignalBackgroundActive] = useState(false)
+  const signal = WORKFLOW_STEPS[activeStep]
+
+  useEffect(() => {
+    const section = signalSectionRef.current
+
+    if (!section) return
+
+    const updateSignal = () => {
+      const rect = section.getBoundingClientRect()
+      const scrollWindow = Math.max(rect.height - window.innerHeight, 1)
+      const rawProgress = -rect.top / scrollWindow
+      const progress = Math.min(Math.max(rawProgress, 0), 1)
+      const fadeIn = Math.min(Math.max((window.innerHeight - rect.top) / (window.innerHeight * 0.75), 0), 1)
+      const fadeOut = Math.min(Math.max((rect.bottom - window.innerHeight * 0.2) / (window.innerHeight * 0.8), 0), 1)
+      const backgroundProgress = Math.min(fadeIn, fadeOut)
+      const backgroundBlur = (1 - backgroundProgress) * 3
+      const activeLine = window.innerHeight * (window.innerWidth <= 1024 ? 0.58 : 0.52)
+      const cards = Array.from(section.querySelectorAll('.home-signal__card'))
+      const closestCard = cards.reduce((closest, card, index) => {
+        const rect = card.getBoundingClientRect()
+        const distance = Math.abs(rect.top + rect.height / 2 - activeLine)
+
+        return distance < closest.distance ? { index, distance } : closest
+      }, { index: 0, distance: Infinity })
+      const nextStep = Math.min(
+        WORKFLOW_STEPS.length - 1,
+        closestCard.index
+      )
+
+      section.style.setProperty('--scroll-progress', `${progress * 100}%`)
+      section.style.setProperty('--background-progress', backgroundProgress)
+      section.style.setProperty('--background-blur', `${backgroundBlur}px`)
+      section.style.setProperty('--stack-offset', `${progress * -760}px`)
+      setActiveStep(nextStep)
+      setIsSignalBackgroundActive(backgroundProgress > 0.01)
+    }
+
+    const interval = window.setInterval(updateSignal, 80)
+    updateSignal()
+    window.addEventListener('scroll', updateSignal, { passive: true })
+    window.addEventListener('resize', updateSignal)
+
+    return () => {
+      window.clearInterval(interval)
+      window.removeEventListener('scroll', updateSignal)
+      window.removeEventListener('resize', updateSignal)
+    }
+  }, [])
+
   return (
     <div className="page page--home">
       {/* Overview: Tagline */}
@@ -42,75 +118,66 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Quote */}
-      <div className="section section--medium">
-        <p className="quote">
-          <span>Execution alone is no longer an advantage.</span>
-          {' '}
-          <span className="dim">Speed is table stakes. Brands need taste, judgment, and a point of view strong enough to cut through saturated markets.</span>
-        </p>
-      </div>
-
-      {/* Case Study: Canary */}
-      <div className="section section--expanded">
-        <div className="case-study">
-          <div className="case-study__content">
-            <div className="case-study__logo" style={{ width: 120, height: 48 }}>
-    
-            <picture>
-              <source srcSet={CANARY_LOGO_DARK} media="(prefers-color-scheme: dark)" />
-              <source srcSet={CANARY_LOGO} media="(prefers-color-scheme: light)" />
-              <img src={CANARY_LOGO} alt="Canary Logo" />
-            </picture>
-
+      {/* Brand signal */}
+      <div className="section section--wide home-signal-section">
+        <section
+          className={`home-signal${isSignalBackgroundActive ? ' is-background-active' : ''}`}
+          ref={signalSectionRef}
+          style={{ '--scroll-progress': '0%', '--background-progress': 0, '--background-blur': '10px', '--stack-offset': '0px' }}
+          aria-labelledby="home-signal-heading"
+        >
+          <div className="home-signal__fixed-layer">
+            <div className="home-signal__background" aria-hidden="true">
+              {WORKFLOW_STEPS.map((step, index) => (
+                <img
+                  className={index === activeStep && isSignalBackgroundActive ? 'is-active' : undefined}
+                  src={step.image}
+                  alt=""
+                  key={step.label}
+                />
+              ))}
             </div>
-            <p className="case-study__desc">Finding a sharper lane in a category crowded with greenwashed minimalism, soft claims, and interchangeable restraint.</p>
-            <Link to="/case-studies/canary" linkText="Read case study" />
-          </div>
-          <div className="case-study__image">
-            <img src={CANARY_IMG} alt="Canary case study" style={{ zIndex: 1 }} />
-          </div>
-        </div>
-      </div>
-
-      {/* Case Study: Dusty Times */}
-      <div className="section section--expanded">
-        <div className="case-study">
-          <div className="case-study__content">
-            <div className="case-study__logo" style={{ width: 247, height: 50, overflow: 'hidden' }}>
-              <picture>
-                  <source srcSet={DUSTY_LOGO_DARK} media="(prefers-color-scheme: dark)" />
-                <source srcSet={DUSTY_LOGO} media="(prefers-color-scheme: light)" />
-                <img src={DUSTY_LOGO} alt="Dusty Times Logo" />
-              </picture>
+            <div className="home-signal__content">
+              <div>
+                <h1 id="home-signal-heading">Make the brand feel inevitable.</h1>
+              </div>
+              <div className="home-signal__active" aria-live="polite">
+                <p>{signal.sentence}</p>
+              </div>
+              <div className="home-signal__link">
+                <Link to="/work" linkText="See the work" />
+              </div>
             </div>
-            <p className="case-study__desc">Rebuilding a legacy off-road newspaper as an annual lifestyle journal with stronger photography, sharper editorial standards, and a new cultural role.</p>
-            <Link to="/case-studies/dusty-times" linkText="Read case study" />
           </div>
-          <div className="case-study__image">
-            <img src={DUSTY_IMG} alt="Dusty Times case study" style={{ zIndex: 1 }} />
-          </div>
-        </div>
-      </div>
-
-      {/* Case Study: Bloop */}
-      <div className="section section--expanded">
-        <div className="case-study">
-          <div className="case-study__content">
-            <div className="case-study__logo" style={{ width: 131, height: 48 }}>
-              <picture>
-                <source srcSet={BLOOP_LOGO_DARK} media="(prefers-color-scheme: dark)" />
-                <source srcSet={BLOOP_LOGO} media="(prefers-color-scheme: light)" />
-                <img src={BLOOP_LOGO} alt="Bloop Logo" />
-              </picture>
+          <div className="home-signal__pin">
+            <div className="home-signal__mobile-intro">
+              <h1>Make the brand feel inevitable.</h1>
+              <div className="home-signal__mobile-link">
+                <Link to="/work" linkText="View Work" />
+              </div>
             </div>
-            <p className="case-study__desc">Turning a hidden household chore into a sensory ritual for small-batch laundry soap with cleaner ingredients and scents that feel current.</p>
-            <Link to="/case-studies/bloop" linkText="Read case study" />
+            <div className="home-signal__spacer" aria-hidden="true" />
+            <div
+              className="home-signal__stage"
+              aria-hidden="true"
+            >
+              <div className="home-signal__stack">
+                {WORKFLOW_STEPS.map((step, index) => (
+                  <div
+                    className={`home-signal__card${index === activeStep ? ' is-active' : ''}`}
+                  key={step.label}
+                >
+                  <p className="home-signal__card-copy">
+                    <strong className="home-signal__card-title">{step.label}.</strong>
+                    {' '}
+                    <span className="home-signal__card-desc">{step.sentence}</span>
+                  </p>
+                </div>
+                ))}
+              </div>
+            </div>
           </div>
-          <div className="case-study__image">
-            <img src={BLOOP_IMG} alt="Bloop case study" />
-          </div>
-        </div>
+        </section>
       </div>
 
 {/* Testimonial */}
