@@ -48,6 +48,8 @@ export default function CaseStudyMosaicGrid({
               className="cs-mosaic__img"
               src={img.src}
               alt={img.alt ?? ''}
+              width={img.width}
+              height={img.height}
               loading="lazy"
               decoding="async"
               sizes="(max-width: 768px) 100vw, 50vw"

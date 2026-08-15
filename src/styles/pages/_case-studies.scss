@@ -333,6 +333,13 @@
     gap: 40px;
   }
 
+  /* Row children use a zero flex basis on desktop. Once the layout stacks,
+     give every column a real width so image-only columns cannot collapse. */
+  .cs-layout--cols > .cs-col {
+    flex: none;
+    width: 100%;
+  }
+
   .cs-layout--stack {
     gap: 40px;
   }
@@ -361,5 +368,10 @@
   /* Two-image row: stack vertically */
   .cs-two-image-row {
     flex-direction: column;
+  }
+
+  .cs-two-image-row__tile {
+    flex: none;
+    width: 100%;
   }
 }

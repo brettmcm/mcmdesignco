@@ -97,10 +97,10 @@ export default function DustyTimes() {
             height={560}
             borderRadius={2}
             tiles={[
-              { key: 'r11', colStart: 1, rowStart: 1, images: [{ src: snake5Img, alt: '' }] },
-              { key: 'r21', colStart: 2, rowStart: 1, images: [{ src: dt3back, alt: '' }] },
-              { key: 'r12', colStart: 1, rowStart: 2, images: [{ src: dtcoin, alt: '' }] },
-              { key: 'r22', colStart: 2, rowStart: 2, images: [{ src: shipperImg, alt: '' }] },
+              { key: 'r11', colStart: 1, rowStart: 1, images: [{ src: snake5Img, alt: '', width: 2000, height: 1333 }] },
+              { key: 'r21', colStart: 2, rowStart: 1, images: [{ src: dt3back, alt: '', width: 5568, height: 3712 }] },
+              { key: 'r12', colStart: 1, rowStart: 2, images: [{ src: dtcoin, alt: '', width: 864, height: 1184 }] },
+              { key: 'r22', colStart: 2, rowStart: 2, images: [{ src: shipperImg, alt: '', width: 1800, height: 1013 }] },
             ]}
           />
         </div>
