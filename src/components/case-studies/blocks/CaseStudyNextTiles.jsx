@@ -1,4 +1,5 @@
 import Link from '../../Link'
+import ResponsiveImage from '../../ResponsiveImage'
 
 export default function CaseStudyNextTiles({ tiles }) {
   return (
@@ -8,7 +9,7 @@ export default function CaseStudyNextTiles({ tiles }) {
         {tiles.map(({ to, label, thumb }) => (
           <div key={to} className="cs-next-tile">
             <div className="cs-next-tile__frame">
-              <img
+              <ResponsiveImage
                 src={thumb}
                 alt={label}
                 className="cs-next-tile__img"
@@ -16,6 +17,7 @@ export default function CaseStudyNextTiles({ tiles }) {
                 height="400"
                 loading="lazy"
                 decoding="async"
+                sizes="(max-width: 768px) 100vw, 50vw"
               />
             </div>
             <Link to={to} linkText={label} />

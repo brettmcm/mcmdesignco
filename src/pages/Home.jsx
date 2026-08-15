@@ -11,6 +11,7 @@ import bgPrecision from '../assets/dt/dt7-vip1.webp'
 import bgTaste from '../assets/dt/dt5-stack.webp'
 import Link from '../components/Link'
 import AutoPlayVideo from '../components/AutoPlayVideo'
+import ResponsiveImage from '../components/ResponsiveImage'
 
 const TESTIMONIAL_LOGO = testimonialLogo
 const BG_RESTRAINT = bgRestraint
@@ -135,12 +136,13 @@ export default function Home() {
           <div className="home-signal__fixed-layer">
             <div className="home-signal__background" aria-hidden="true">
               {WORKFLOW_STEPS.map((step, index) => (
-                <img
+                <ResponsiveImage
                   className={index === activeStep && isSignalBackgroundActive ? 'is-active' : undefined}
                   src={step.image}
                   alt=""
                   loading="lazy"
                   decoding="async"
+                  sizes="100vw"
                   key={step.label}
                 />
               ))}

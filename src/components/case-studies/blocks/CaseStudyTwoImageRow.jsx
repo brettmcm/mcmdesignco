@@ -1,3 +1,5 @@
+import ResponsiveImage from '../../ResponsiveImage'
+
 export default function CaseStudyTwoImageRow({
   images,
   gap = 8,
@@ -16,7 +18,7 @@ export default function CaseStudyTwoImageRow({
               borderRadius: `${borderRadius}px`,
             }}
           >
-            <img
+            <ResponsiveImage
               className="cs-two-image-row__img"
               src={img.src}
               alt={img.alt ?? ''}
@@ -24,13 +26,8 @@ export default function CaseStudyTwoImageRow({
               height={aspectHeight}
               loading="lazy"
               decoding="async"
-              onError={
-                img.fallbackSrc
-                  ? (e) => {
-                      e.currentTarget.src = img.fallbackSrc
-                    }
-                  : undefined
-              }
+              sizes="(max-width: 768px) 100vw, 50vw"
+              fallbackSrc={img.fallbackSrc}
             />
           </div>
         </div>

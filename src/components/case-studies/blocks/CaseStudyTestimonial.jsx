@@ -1,3 +1,5 @@
+import ResponsiveImage from '../../ResponsiveImage'
+
 export default function CaseStudyTestimonial({
   quoteParagraphs,
   authorName,
@@ -12,18 +14,12 @@ export default function CaseStudyTestimonial({
     <div className="testimonial cs-testimonial">
       <div className="testimonial__bg" aria-hidden="true">
         {bgImageSrc ? (
-          <img
+          <ResponsiveImage
             src={bgImageSrc}
             alt={bgImageAlt}
             loading="lazy"
             decoding="async"
-            onError={
-              bgImageFallbackSrc
-                ? (e) => {
-                    e.currentTarget.src = bgImageFallbackSrc
-                  }
-                : undefined
-            }
+            fallbackSrc={bgImageFallbackSrc}
           />
         ) : null}
       </div>
@@ -42,18 +38,12 @@ export default function CaseStudyTestimonial({
 
           {authorLogoSrc ? (
             <div className="testimonial__logo">
-              <img
+              <ResponsiveImage
                 src={authorLogoSrc}
                 alt={authorName}
                 loading="lazy"
                 decoding="async"
-                onError={
-                  authorLogoFallbackSrc
-                    ? (e) => {
-                        e.currentTarget.src = authorLogoFallbackSrc
-                      }
-                    : undefined
-                }
+                fallbackSrc={authorLogoFallbackSrc}
               />
             </div>
           ) : null}

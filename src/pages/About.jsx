@@ -8,6 +8,7 @@ import DIAMOND_LEFT from '../assets/diamond-left.svg'
 import DIAMOND_CENTER from '../assets/diamond-center.svg'
 import DIAMOND_RIGHT from '../assets/diamond-right.svg'
 import GLOBE from '../assets/fluid-globe.svg'
+import ResponsiveImage from '../components/ResponsiveImage'
 import { useLayoutEffect, useRef, useState } from 'react'
 import { animateScrollToElement } from '../utils/scrollAnimation'
 
@@ -151,7 +152,16 @@ export default function About() {
           <p className="bio__text">After years working in agencies, in-house, independently, and as a Product Design Manager, I’ve learned that the person selling the work is not always the person shaping it. Larger agencies can bring scale, but they also bring layers, overhead, and margin pressure. AI can make execution faster, but it cannot replace the taste, judgment, and experience required to know what to make, what to leave out, and how to protect the standard. Working with me means you get that senior perspective directly, without paying for agency overhead or wondering whether your key brand decisions are being handled by a junior designer with a prompt.</p>
           </div>
           <div className="bio__photo">
-            <img src={HEADSHOT} alt="Brett McMillin" className="headshot" loading="lazy" decoding="async" />
+            <ResponsiveImage
+              src={HEADSHOT}
+              alt="Brett McMillin"
+              className="headshot"
+              width="918"
+              height="885"
+              loading="lazy"
+              decoding="async"
+              sizes="(max-width: 768px) 100vw, 50vw"
+            />
             <a className="cv_link" href="#teams-and-projects" aria-label="Jump to teams and projects" onClick={scrollToTeamsAndProjects}>
               <img src={CV} alt="Read my CV" className="cv_ring" loading="lazy" decoding="async" />
             </a>

@@ -9,6 +9,7 @@ import DUSTY_IMG from '../assets/dt/thumb.webp'
 import BLOOP_LOGO from '../assets/bloop/logo.svg'
 import BLOOP_LOGO_DARK from '../assets/bloop/logo-white.svg'
 import BLOOP_IMG from '../assets/bloop/thumb.webp'
+import ResponsiveImage from '../components/ResponsiveImage'
 
 const PROJECTS = [
   {
@@ -67,7 +68,15 @@ export default function Work() {
               <Link to={href} linkText="Read case study" />
             </div>
             <div className="case-study__image">
-              <img src={image} alt={`${name} case study`} loading="lazy" decoding="async" />
+              <ResponsiveImage
+                src={image}
+                alt={`${name} case study`}
+                width="1704"
+                height="1200"
+                loading="lazy"
+                decoding="async"
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
             </div>
           </div>
         </div>

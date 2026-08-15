@@ -1,3 +1,5 @@
+import ResponsiveImage from '../../ResponsiveImage'
+
 export default function CaseStudyHero({
   bgSrc,
   bgAlt = '',
@@ -8,37 +10,25 @@ export default function CaseStudyHero({
 }) {
   return (
     <div className="cs-hero">
-      <img
+      <ResponsiveImage
         className="cs-hero__bg"
         src={bgSrc}
         alt={bgAlt}
         loading="eager"
         decoding="async"
-        fetchPriority="high"
-        onError={
-          bgFallbackSrc
-            ? (e) => {
-                e.currentTarget.src = bgFallbackSrc
-              }
-            : undefined
-        }
+        fetchpriority="high"
+        fallbackSrc={bgFallbackSrc}
       />
       <div className="cs-hero__inner">
         <div className="cs-hero__mark">
           {markVectorSrc ? (
-            <img
+            <ResponsiveImage
               className="cs-hero__vector"
               src={markVectorSrc}
               alt={markVectorAlt}
               loading="eager"
               decoding="async"
-              onError={
-                markVectorFallbackSrc
-                  ? (e) => {
-                      e.currentTarget.src = markVectorFallbackSrc
-                    }
-                  : undefined
-              }
+              fallbackSrc={markVectorFallbackSrc}
             />
           ) : null}
         </div>

@@ -6,7 +6,7 @@ import CaseStudyImagePanel from '../../components/case-studies/blocks/CaseStudyI
 import CaseStudyTwoImageRow from '../../components/case-studies/blocks/CaseStudyTwoImageRow'
 import CaseStudyMosaicGrid from '../../components/case-studies/blocks/CaseStudyMosaicGrid'
 import CaseStudyNextTiles from '../../components/case-studies/blocks/CaseStudyNextTiles'
-import heroImg from '../../assets/dt/dt7-vip0.webp'
+import heroImg from '../../assets/dt/dt6-book.jpg'
 import dtLogo from '../../assets/dt/logo-white.svg'
 import stackImg from '../../assets/dt/dt-stack.webp'
 import stack5Img from '../../assets/dt/dt5-stack.webp'
@@ -16,18 +16,21 @@ import vip2Img from '../../assets/dt/dt7-vip2.webp'
 import shipperImg from '../../assets/dt/dt7-shipper.webp'
 import spreadsImg from '../../assets/dt/dtspreads.gif'
 import unitedImg from '../../assets/dt/united-in-dirt.webp'
+import dt3back from '../../assets/dt/dt3-back.jpg'
+import dt4spread from '../../assets/dt/dt4-spread.jpg'
+import dtcoin from '../../assets/dt/dt-coin.jpg'
 import canaryThumb from '../../assets/canary/thumb.webp'
 import bloopThumb from '../../assets/bloop/thumb.webp'
 
 export default function DustyTimes() {
   return (
     <div className="page page--case-study dustytimes">
-      <CaseStudyHero bgSrc={heroImg} markVectorSrc={dtLogo} />
+      <CaseStudyHero bgSrc={heroImg} />
 
       <CaseStudyRichTextSection>
         <p>
           <span>Dusty Times was once the primary publication of the off-road racing world. </span>
-          <span className="dim">Brett McM Design rebuilt it as a new kind of media brand.</span>
+          <span className="dim">Brett McM Design helped rebuild it as a new kind of media brand.</span>
         </p>
         <p>
           <span className="dim">As founding partner and design director, Brett McMillin led the transformation of a legacy racing newspaper into an annual lifestyle journal with cultural relevance and long-term brand equity.</span>
@@ -94,10 +97,10 @@ export default function DustyTimes() {
             height={560}
             borderRadius={2}
             tiles={[
-              { key: 'r11', colStart: 1, rowStart: 1, images: [{ src: stack5Img, alt: '' }] },
-              { key: 'r21', colStart: 2, rowStart: 1, images: [{ src: snake5Img, alt: '' }] },
-              { key: 'r12', colStart: 1, rowStart: 2, images: [{ src: shipperImg, alt: '' }] },
-              { key: 'r22', colStart: 2, rowStart: 2, images: [{ src: spreadsImg, alt: '' }] },
+              { key: 'r11', colStart: 1, rowStart: 1, images: [{ src: snake5Img, alt: '' }] },
+              { key: 'r21', colStart: 2, rowStart: 1, images: [{ src: dt3back, alt: '' }] },
+              { key: 'r12', colStart: 1, rowStart: 2, images: [{ src: dtcoin, alt: '' }] },
+              { key: 'r22', colStart: 2, rowStart: 2, images: [{ src: shipperImg, alt: '' }] },
             ]}
           />
         </div>

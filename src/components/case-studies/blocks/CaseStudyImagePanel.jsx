@@ -1,3 +1,5 @@
+import ResponsiveImage from '../../ResponsiveImage'
+
 export default function CaseStudyImagePanel({
   src,
   fallbackSrc,
@@ -16,7 +18,7 @@ export default function CaseStudyImagePanel({
         mixBlendMode: mixBlendMode,
       }}
     >
-      <img
+      <ResponsiveImage
         className="cs-image-panel__img"
         src={src}
         alt={alt}
@@ -24,13 +26,8 @@ export default function CaseStudyImagePanel({
         height={aspectHeight}
         loading="lazy"
         decoding="async"
-        onError={
-          fallbackSrc
-            ? (e) => {
-                e.currentTarget.src = fallbackSrc
-              }
-            : undefined
-        }
+        sizes="(max-width: 768px) 100vw, min(100vw, 1904px)"
+        fallbackSrc={fallbackSrc}
       />
     </div>
   )

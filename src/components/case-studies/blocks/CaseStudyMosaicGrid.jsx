@@ -1,3 +1,5 @@
+import ResponsiveImage from '../../ResponsiveImage'
+
 export default function CaseStudyMosaicGrid({
   templateColumns,
   templateRows,
@@ -41,20 +43,15 @@ export default function CaseStudyMosaicGrid({
             />
           ) : null}
           {tile.images?.map((img, idx) => (
-            <img
+            <ResponsiveImage
               key={`${tile.key}-img-${idx}`}
               className="cs-mosaic__img"
               src={img.src}
               alt={img.alt ?? ''}
               loading="lazy"
               decoding="async"
-              onError={
-                img.fallbackSrc
-                  ? (e) => {
-                      e.currentTarget.src = img.fallbackSrc
-                    }
-                  : undefined
-              }
+              sizes="(max-width: 768px) 100vw, 50vw"
+              fallbackSrc={img.fallbackSrc}
             />
           ))}
         </div>
